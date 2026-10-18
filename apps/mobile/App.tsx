@@ -33,6 +33,7 @@ import { topicForAlert } from './src/guidance';
 import { useChecklistState } from './src/state/checklistStore';
 import { ChecklistDetail, ChecklistIndex } from './src/ui/Checklists';
 import { MapScreen } from './src/ui/MapScreen';
+import { RegionsScreen } from './src/ui/RegionsScreen';
 import { colors, radius, space } from './src/ui/theme';
 
 type Screen =
@@ -42,6 +43,7 @@ type Screen =
   | { name: 'guide'; id: string; from: Screen }
   | { name: 'tool'; tool: 'cpr' | 'tourniquet'; from: Screen }
   | { name: 'map'; target: PackPlace | null; from: Screen }
+  | { name: 'regions'; from: Screen }
   | { name: 'checklists' }
   | { name: 'checklist'; id: string };
 
@@ -202,7 +204,22 @@ function Main() {
   if (screen.name === 'map' && pack.ok) {
     return (
       <SafeAreaView style={styles.root}>
-        <MapScreen places={pack.places} store={pack.store} t={t} from={pos} target={screen.target} onBack={() => setScreen(screen.from)} />
+        <MapScreen
+          places={pack.places}
+          store={pack.store}
+          t={t}
+          from={pos}
+          target={screen.target}
+          onBack={() => setScreen(screen.from)}
+          onRegions={() => setScreen({ name: 'regions', from: screen })}
+        />
+      </SafeAreaView>
+    );
+  }
+  if (screen.name === 'regions' && pack.ok) {
+    return (
+      <SafeAreaView style={styles.root}>
+        <RegionsScreen store={pack.store} t={t} online={online} position={pos} onBack={() => setScreen(screen.from)} />
       </SafeAreaView>
     );
   }

@@ -6,7 +6,7 @@ import type { Strings } from '../i18n';
 import { colors, space } from './theme';
 
 /** The offline map needs the native MapLibre engine; the web build shows a notice instead. */
-export function MapScreen(props: { places: readonly PackPlace[]; store: TrustStore; t: Strings; from: LatLon | null; target: PackPlace | null; onBack: () => void }) {
+export function MapScreen(props: { places: readonly PackPlace[]; store: TrustStore; t: Strings; from: LatLon | null; target: PackPlace | null; onBack: () => void; onRegions: () => void }) {
   return (
     <View style={styles.root}>
       <Pressable onPress={props.onBack} accessibilityRole="button" hitSlop={12}>

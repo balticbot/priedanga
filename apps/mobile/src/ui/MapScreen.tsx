@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import { formatDistance, type LatLon } from '../geo';
 import { fmt, type Strings } from '../i18n';
-import { availableRegions, installGlyphs, installRegion, loadRegionGraph, type InstalledRegion } from '../map/region';
+import { installGlyphs, listInstalled, loadRegionGraph, pickRegion, verifyInstalled, type InstalledRegion } from '../map/region';
 import { offlineStyle } from '../map/style';
 import { colors, radius, space } from './theme';
 
@@ -19,6 +19,7 @@ export function MapScreen(props: {
   from: LatLon | null;
   target: PackPlace | null;
   onBack: () => void;
+  onRegions: () => void;
 }) {
   const { t } = props;
   const [region, setRegion] = useState<InstalledRegion | null>(null);
@@ -31,9 +32,10 @@ export function MapScreen(props: {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const ids = availableRegions();
-      if (ids.length === 0) throw new Error('none');
-      const r = await installRegion(ids[0]!, props.store);
+      const { regions } = await listInstalled(props.store);
+      const picked = pickRegion(regions, props.target ?? props.from);
+      if (!picked) throw new Error('none');
+      const r = await verifyInstalled(picked.manifest.id, props.store);
       const g = await installGlyphs();
       if (cancelled) return;
       setRegion(r);
@@ -74,14 +76,22 @@ export function MapScreen(props: {
         <Pressable onPress={props.onBack} accessibilityRole="button" hitSlop={12}>
           <Text style={styles.back}>{t.back}</Text>
         </Pressable>
-        <Text style={styles.title} accessibilityRole="header">
-          {region ? `${t.map} · ${region.manifest.name}` : t.map}
-        </Text>
+        <View style={styles.titleRow}>
+          <Text style={styles.title} accessibilityRole="header">
+            {region ? `${t.map} · ${region.manifest.name}` : t.map}
+          </Text>
+          <Pressable onPress={props.onRegions} accessibilityRole="button" hitSlop={8}>
+            <Text style={styles.regionsLink}>{t.regions}</Text>
+          </Pressable>
+        </View>
       </View>
 
       {error ? (
         <View style={styles.message}>
           <Text style={styles.messageText}>{error.includes('none') ? t.regionMissing : `${t.regionError} (${error})`}</Text>
+          <Pressable style={styles.getMaps} onPress={props.onRegions} accessibilityRole="button">
+            <Text style={styles.getMapsText}>{t.getMaps}</Text>
+          </Pressable>
         </View>
       ) : !style || !center ? (
         <View style={styles.message}>
@@ -172,7 +182,9 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   header: { paddingHorizontal: space(4), paddingTop: space(2), paddingBottom: space(2) },
   back: { fontSize: 17, color: colors.accent, fontWeight: '600', marginBottom: space(1) },
-  title: { fontSize: 22, fontWeight: '900', color: colors.ink },
+  titleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: space(2) },
+  title: { fontSize: 22, fontWeight: '900', color: colors.ink, flexShrink: 1 },
+  regionsLink: { fontSize: 15, color: colors.accent, fontWeight: '700' },
   map: { flex: 1 },
   message: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: space(6), gap: space(3) },
   messageText: { fontSize: 16, color: colors.muted, textAlign: 'center' },
@@ -181,6 +193,8 @@ const styles = StyleSheet.create({
   cardSub: { fontSize: 14, color: colors.muted },
   route: { fontSize: 20, fontWeight: '900', color: colors.accent, marginTop: space(1) },
   warn: { fontSize: 13, color: colors.warn },
+  getMaps: { backgroundColor: colors.accent, borderRadius: radius, paddingVertical: space(3), paddingHorizontal: space(5) },
+  getMapsText: { color: '#fff', fontWeight: '800', fontSize: 16 },
   attribution: { fontSize: 11, color: colors.muted, marginTop: space(1) },
   radius: { borderRadius: radius },
 });

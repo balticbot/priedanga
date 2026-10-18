@@ -24,7 +24,9 @@ console.log(`synced ${FILES.length} pack files -> assets/pack/*.bin`);
 // Region packs (map tiles + walking network) are large and git-ignored. Copy the
 // ones that exist and generate the module that requires them, so the app builds
 // with or without them.
-const REGIONS = ['kaunas'];
+// Bundling regions makes the app ~15 MB larger per region; off by default (regions are
+// downloaded in the app). Set PRIEDANGA_BUNDLE_REGIONS=1 to bundle for offline demos.
+const REGIONS = process.env.PRIEDANGA_BUNDLE_REGIONS === '1' ? ['kaunas'] : [];
 const REGION_FILES = ['manifest.json', 'manifest.sig', 'tiles.pmtiles', 'walk.json'];
 const regionDst = join(here, '../assets/region');
 rmSync(regionDst, { recursive: true, force: true });
@@ -58,4 +60,4 @@ const lines = [
 ];
 mkdirSync(join(here, '../src/map'), { recursive: true });
 writeFileSync(join(here, '../src/map/regionAssets.generated.ts'), lines.join('\n'));
-console.log(`regions bundled: ${available.length ? available.join(', ') : 'none (run npm run region -- build kaunas)'}`);
+console.log(`regions bundled: ${available.length ? available.join(', ') : 'none (downloaded in the app)'}`);
