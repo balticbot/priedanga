@@ -78,6 +78,8 @@ Living list of feature ideas. Each entry: the idea as given, then the design con
 
 **Proposed phase:** 1 (MVP), if the feed latency turns out acceptable.
 
+**Status (2026-10-18):** implemented for development. `packages/relay` reads the PAGD feed, classifies the level from the official wording, maps the free-text area to municipality codes (75% of 400 recent messages resolved; the rest fall back to nationwide) and signs each message with a dev relay key. The app verifies the feed, shows the current air alert for the user's municipality with a "relayed, not signed by PAGD" note, and lists recent messages. Still open: hosting the feed, and measuring the feed's latency against cell broadcast (the relay's `serve` mode logs it, but needs to run during real alerts).
+
 ---
 
 ## I-4. Locked-shelter reports and community shelters

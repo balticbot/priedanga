@@ -20,7 +20,8 @@ Status: early development. Not affiliated with or endorsed by any government bod
 | `packages/alert-format` | Trust core: signed alerts, certificates, revocation, manifests ([SPEC](packages/alert-format/SPEC.md)) |
 | `packages/content-builder` | Builds signed content packs from official open data (PAGD registers, Address Register) |
 | `packs/dev` | Current dev content pack (12k+ shelters, KAS, evacuation points, sirens), signed with a dev key |
-| `apps/mobile` | Expo (React Native) app: offline shelter finder, LT/EN/RU/PL/UK |
+| `packages/relay` | Relays official PAGD warning messages as signed alerts (relay role), with a dev feed server |
+| `apps/mobile` | Expo (React Native) app: offline shelter finder, live alerts from the relay feed, LT/EN/RU/PL/UK |
 
 ## Development
 
@@ -30,7 +31,11 @@ npm run build:packages     # build alert-format + content-builder
 npm test                   # all workspaces
 npm run pack               # refresh packs/dev from data.gov.lt (creates dev keys in secrets/dev on first run)
 npm run web -w @priedanga/mobile    # run the app in a browser
+npm run relay -- serve              # serve the signed PAGD relay feed at http://localhost:8787/feed.json
+npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labelled TEST alert
 ```
+
+The app reads the feed from `EXPO_PUBLIC_FEED_URL` (default `http://localhost:8787/feed.json`, reachable from the iOS Simulator).
 
 Dev keys live in `secrets/dev/` and are never committed. If you rebuild the pack with new dev keys, update `apps/mobile/src/trust/root.ts` with the new root public key (`packs/dev/DEV_ROOT_PUBLIC_KEY.txt`); a test checks they match.
 

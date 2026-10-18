@@ -18,6 +18,9 @@ import { fmt, LANGUAGE_NAMES, LANGUAGES, STRINGS, type Lang } from './src/i18n';
 import { loadBundledPack, type PackTimings } from './src/pack/loadPack';
 import type { VerifyPackResult } from './src/pack/verifyPack';
 import { ROOT_IS_DEV } from './src/trust/root';
+import { currentAirAlert, isDanger } from './src/alerts/alerts';
+import { useAlertFeed } from './src/alerts/useAlertFeed';
+import { AlertPanel, RecentMessages } from './src/ui/AlertPanel';
 import { Banner } from './src/ui/Banner';
 import { MunicipalityPicker } from './src/ui/MunicipalityPicker';
 import { PlaceDetail } from './src/ui/PlaceDetail';
@@ -105,6 +108,21 @@ function Main() {
   );
   const siren = useMemo(() => (pos === null ? null : sirenCoverage(places, pos)), [places, pos]);
 
+  // The user's municipality: picked manually, or that of the nearest register entry to the GPS fix.
+  const areaCode = useMemo(() => {
+    if (position.status === 'manual') return position.municipality;
+    if (position.status === 'gps') return nearest(places, position.pos, 1, () => true)[0]?.place.m ?? null;
+    return null;
+  }, [position, places]);
+  const feedState = useAlertFeed(pack?.ok ? pack.store : null, online);
+  const feedAlerts = feedState.status === 'ok' ? feedState.feed.alerts : feedState.status === 'error' ? (feedState.last?.alerts ?? []) : [];
+  const current = useMemo(() => currentAirAlert(feedAlerts, areaCode), [feedAlerts, areaCode]);
+  // During an alert the nearest shelter goes straight under the banner, whatever the filters say.
+  const nearestShelter = useMemo(
+    () => (pos === null || !isDanger(current) ? null : (nearest(places, pos, 1, (p) => p.k === 0 || p.k === 1)[0] ?? null)),
+    [places, pos, current],
+  );
+
   if (pack === null) {
     return (
       <SafeAreaView style={[styles.root, styles.centered]}>
@@ -151,7 +169,21 @@ function Main() {
 
       {!online ? <Banner tone="warn" title={t.offline} /> : null}
 
-      <Banner tone="info" title={t.noAlerts} body={ROOT_IS_DEV ? t.alertsNotLive : undefined} />
+      <AlertPanel
+        state={feedState}
+        current={current}
+        hasArea={areaCode !== null}
+        online={online}
+        municipalities={pack.ok ? pack.municipalities : []}
+        t={t}
+        lang={lang}
+      />
+      {nearestShelter ? (
+        <View style={styles.urgent}>
+          <Text style={styles.urgentTitle}>{t.goToShelter}</Text>
+          <PlaceRow item={nearestShelter} t={t} onPress={() => setSelected(nearestShelter)} />
+        </View>
+      ) : null}
 
       {pack.ok ? (
         <Pressable disabled={!ROOT_IS_DEV} onPress={runConformance} accessibilityHint={ROOT_IS_DEV ? 'Runs the native Ed25519 conformance check' : undefined}>
@@ -220,11 +252,14 @@ function Main() {
   );
 
   const footer = (
-    <View style={styles.footer}>
-      <Text style={styles.footerTitle}>{t.about}</Text>
-      <Text style={styles.footerText}>{t.disclaimer}</Text>
-      <Text style={styles.footerText}>{t.attribution}</Text>
-      {pack.ok ? <Text style={styles.footerText}>{fmt(t.signedBy, { name: pack.signerName })}</Text> : null}
+    <View>
+      <RecentMessages state={feedState} municipalities={pack.ok ? pack.municipalities : []} t={t} />
+      <View style={styles.footer}>
+        <Text style={styles.footerTitle}>{t.about}</Text>
+        <Text style={styles.footerText}>{t.disclaimer}</Text>
+        <Text style={styles.footerText}>{t.attribution}</Text>
+        {pack.ok ? <Text style={styles.footerText}>{fmt(t.signedBy, { name: pack.signerName })}</Text> : null}
+      </View>
     </View>
   );
 
@@ -345,6 +380,8 @@ const styles = StyleSheet.create({
   rowArrow: { fontSize: 28, fontWeight: '800', color: colors.accent },
   rowDistanceText: { fontSize: 17, fontWeight: '800', color: colors.ink },
   rowDirection: { fontSize: 13, color: colors.muted },
+  urgent: { marginTop: space(3), marginBottom: space(2) },
+  urgentTitle: { fontSize: 19, fontWeight: '900', color: colors.ink, marginBottom: space(2) },
   footer: { marginTop: space(6), paddingTop: space(4), borderTopWidth: 1, borderColor: colors.line, gap: space(2) },
   footerTitle: { fontSize: 15, fontWeight: '800', color: colors.ink },
   footerText: { fontSize: 13, color: colors.muted, lineHeight: 19 },

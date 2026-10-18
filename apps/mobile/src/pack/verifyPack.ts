@@ -14,6 +14,7 @@ import {
   verifyEd25519,
   verifyManifestAsync,
   type Ed25519Verifier,
+  type TrustStore,
   type ManifestFailure,
 } from '@priedanga/alert-format';
 import type {
@@ -42,6 +43,8 @@ export interface VerifiedPack {
   places: PackPlace[];
   municipalities: Municipality[];
   signerName: string;
+  /** Root-verified certificates from the pack; used to verify alerts too. */
+  store: TrustStore;
 }
 
 export type VerifyPackResult = ({ ok: true } & VerifiedPack) | ({ ok: false } & PackFailure);
@@ -129,6 +132,7 @@ export async function verifyPack(
       places: places.places,
       municipalities: municipalities.municipalities,
       signerName: sig.signer.name,
+      store,
     };
   } catch (e) {
     return { ok: false, reason: 'BAD_CONTENT', detail: String(e) };

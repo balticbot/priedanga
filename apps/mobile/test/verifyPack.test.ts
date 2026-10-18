@@ -77,7 +77,9 @@ describe('native Ed25519 injection', () => {
       return verifyEd25519(s, m, p);
     });
     expect(ok.ok).toBe(true);
-    expect(calls).toEqual(['priedanga/v1/cert', 'priedanga/v1/manifest']);
+    // One check per certificate in trust.json (content + relay), then the manifest.
+    const certCount = (JSON.parse(new TextDecoder().decode(load()['trust.json'])) as { certificates: string[] }).certificates.length;
+    expect(calls).toEqual([...Array<string>(certCount).fill('priedanga/v1/cert'), 'priedanga/v1/manifest']);
   });
 
   it('rejects the pack when the injected verifier rejects', async () => {
