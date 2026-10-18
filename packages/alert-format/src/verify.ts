@@ -5,6 +5,8 @@ import { Context, verifyWithContext } from './crypto.js';
 import { FormatError } from './fields.js';
 import {
   FORMAT_VERSION,
+  isRelayRole,
+  isTestRole,
   NATIONWIDE,
   PUBLIC_KEY_BYTES,
   Role,
@@ -129,6 +131,7 @@ export const VerifyFailure = {
   BAD_SIGNATURE: 'BAD_SIGNATURE',
   ISSUER_REVOKED: 'ISSUER_REVOKED',
   ROLE_NOT_ALLOWED: 'ROLE_NOT_ALLOWED',
+  RELAY_MISMATCH: 'RELAY_MISMATCH',
   TEST_MISMATCH: 'TEST_MISMATCH',
   ISSUER_NOT_VALID: 'ISSUER_NOT_VALID',
   AREA_NOT_ALLOWED: 'AREA_NOT_ALLOWED',
@@ -141,7 +144,17 @@ export const VerifyFailure = {
 export type VerifyFailure = (typeof VerifyFailure)[keyof typeof VerifyFailure];
 
 export type VerifyResult =
-  | { ok: true; alert: Alert; issuer: Certificate; hops: number }
+  | {
+      ok: true;
+      alert: Alert;
+      issuer: Certificate;
+      hops: number;
+      /**
+       * True if signed by a relay: the content was copied from `alert.source`
+       * and is NOT signed by that authority. UIs must label it as relayed.
+       */
+      relayed: boolean;
+    }
   | { ok: false; reason: VerifyFailure; detail?: string };
 
 function reject(reason: VerifyFailure, detail?: string): VerifyResult {
@@ -196,8 +209,9 @@ export function verifyAlert(
   // 5. Issuer authorisation.
   if (store.revokedKeyIds.has(bytesToHex(issuer.keyId))) return reject('ISSUER_REVOKED');
   if (issuer.role === Role.Content) return reject('ROLE_NOT_ALLOWED');
-  const expectedRole = alert.test ? Role.TestIssuer : Role.LiveIssuer;
-  if (issuer.role !== expectedRole) return reject('TEST_MISMATCH');
+  const relayed = isRelayRole(issuer.role);
+  if (relayed !== (alert.source !== undefined)) return reject('RELAY_MISMATCH');
+  if (alert.test !== isTestRole(issuer.role)) return reject('TEST_MISMATCH');
   if (alert.issued < issuer.validFrom || alert.issued > issuer.validTo) return reject('ISSUER_NOT_VALID');
   if (!areasAllowed(alert.areas, issuer.areas ?? [])) return reject('AREA_NOT_ALLOWED');
 
@@ -210,7 +224,7 @@ export function verifyAlert(
   if (store.revokedAlertIds.has(bytesToHex(alert.id))) return reject('ALERT_REVOKED');
   if (env.hops > policy.maxHops) return reject('HOPS_EXCEEDED');
 
-  return { ok: true, alert, issuer, hops: env.hops };
+  return { ok: true, alert, issuer, hops: env.hops, relayed };
 }
 
 /** True if every alert area is covered by the issuer's allowed areas. */

@@ -14,8 +14,31 @@ export type Level = (typeof Level)[keyof typeof Level];
 export const Category = { Air: 1, Chemical: 2, Radiation: 3, Flood: 4, Other: 5 } as const;
 export type Category = (typeof Category)[keyof typeof Category];
 
-export const Role = { LiveIssuer: 1, TestIssuer: 2, Content: 3 } as const;
+/**
+ * Certificate roles.
+ * - Issuers sign alerts they author (the authority, or a test issuer).
+ * - Relays sign alerts they COPIED from an official public source. A relay
+ *   signature attests "this is what the source published", never "the source
+ *   signed this". Relayed alerts must carry `source` and `sourceRef`.
+ * - Content keys sign content-pack manifests only and can never sign alerts.
+ */
+export const Role = { LiveIssuer: 1, TestIssuer: 2, Content: 3, LiveRelay: 4, TestRelay: 5 } as const;
 export type Role = (typeof Role)[keyof typeof Role];
+
+export function isRelayRole(role: Role): boolean {
+  return role === Role.LiveRelay || role === Role.TestRelay;
+}
+
+export function isTestRole(role: Role): boolean {
+  return role === Role.TestIssuer || role === Role.TestRelay;
+}
+
+/** Official public sources a relay may copy from. Values are part of the wire contract. */
+export const Source = {
+  /** PAGD public warning messages (data.gov.lt `datasets/gov/pagd/pranesimai`). */
+  PagdWarningFeed: 1,
+} as const;
+export type Source = (typeof Source)[keyof typeof Source];
 
 export const LANGS = ['lt', 'en', 'ru', 'pl', 'uk'] as const;
 export type Lang = (typeof LANGS)[number];
@@ -35,6 +58,7 @@ export const SIGNATURE_BYTES = 64;
 export const MAX_TEMPLATE_ID = 0xffff;
 export const MAX_TEXT_BYTES = 512;
 export const MAX_NAME_BYTES = 128;
+export const MAX_SOURCE_REF_BYTES = 64;
 
 export interface Alert {
   /** 16 random bytes; unique per message, used for deduplication. */
@@ -48,15 +72,22 @@ export interface Alert {
   msgType: MsgType;
   /** ID of the alert this one updates or cancels. Required for Update and Cancel. */
   ref?: Uint8Array;
-  /** Required for Alert and Update; absent for Cancel. */
+  /** Required for Alert and Update; absent for Cancel. For relayed alerts this is the relay's classification. */
   level?: Level;
   /** Required for Alert and Update; absent for Cancel. */
   category?: Category;
-  /** Template ID in the offline template pack. Required for Alert and Update; absent for Cancel. */
+  /**
+   * Template ID in the offline template pack. Absent for Cancel. Required for
+   * authored Alert/Update; optional for relayed ones (verbatim text is primary).
+   */
   template?: number;
+  /** Official source this alert was copied from. Present if and only if the alert is relayed. */
+  source?: Source;
+  /** The source's own identifier for the message. Present if and only if `source` is. */
+  sourceRef?: string;
   /** Sorted, unique area codes; [NATIONWIDE] for the whole country. */
   areas: number[];
-  /** Optional free text per language. */
+  /** Optional free text per language. Relayed Alert/Update must carry the source's verbatim text in `lt`. */
   text?: Partial<Record<Lang, string>>;
   /** TEST alerts must be signed by a TestIssuer certificate, live alerts by a LiveIssuer. */
   test: boolean;
@@ -101,6 +132,8 @@ export const AlertKey = {
   template: 10,
   text: 11,
   test: 12,
+  source: 13,
+  sourceRef: 14,
 } as const;
 
 export const CertKey = {

@@ -17,7 +17,9 @@
       "825857a700010148d3d3b82eed0fa9fb025820503bfaf2eb1eabd6fffbe1cc15134f45de9cfe112a758ff64e3dfa98f68b22150303041a69689e80051a6d2b058007775445535420564543544f5220636f6e74656e74206b6579584010b977b72266641f6c1fd6de22dce520fc44247a985209360dab14c6e5302e63b8f03ceee2190329affa38695ae713380f94bb43849af84828f63113bef00705",
       "82586da80001014836c50a466029458302582064d3299ce0b28948235c44e6d3d116adfa668117e9ba52d6624ff50d2cfab1f90302041a69689e80051a6d2b058006820d130778285445535420564543544f522073636f70656420697373756572202861726561732031332c2031392958405a52a3cddb20fcdf66f70ad32aa313750383a631a460c9efb8184a9a92ee9db48e70964600a876d9dcadaa42f5de7af5e4c736f72050adb24ae18681b3c6740d",
       "82585ea80001014811e2dd2f19ea760f02582075e622dfc4bbb2f622809493213a328e2f73b24418e5632cd8899eb822bcf9750302041a693a7a00051a6b22450006810007781a5445535420564543544f522065787069726564206973737565725840682cec3286b05cbabea215bbf3024f8c72169b63e15cfe1e8a1924a1e1bcbc33af0f95b7f2e14e74bc0d556c2bfb5dfb45caac2a0775e81ccffa78190b413a05",
-      "82585ea800010148b260682ac30a3ec8025820978a0cc4c97a5e3693a429919df6ddf1d63356ba05c77f6ee8c8e18fd73844fd0302041a69689e80051a6d2b058006810007781a5445535420564543544f52207265766f6b65642069737375657258408c1f5124d41da01250216ad61c1a0664a3124bb02a66d5fea5067a43e7664401cda126b7fe0e5a05c21e43d10e73b8e7e6f35bbf0a710671877be90c277b4a0f"
+      "82585ea800010148b260682ac30a3ec8025820978a0cc4c97a5e3693a429919df6ddf1d63356ba05c77f6ee8c8e18fd73844fd0302041a69689e80051a6d2b058006810007781a5445535420564543544f52207265766f6b65642069737375657258408c1f5124d41da01250216ad61c1a0664a3124bb02a66d5fea5067a43e7664401cda126b7fe0e5a05c21e43d10e73b8e7e6f35bbf0a710671877be90c277b4a0f",
+      "825866a8000101485d85fa4f4459f2ed025820b5d7124b88919bc164b5fa9aef7a47e808ad0ef3fd837dbc3b532886320016ce0304041a69689e80051a6d2b05800681000778225445535420564543544f52206c6976652072656c6179202850414744206665656429584003256517bf2eb378fd0861262abdc03043fef2bd3554cb1d6f3f5c85b864a381de4e9504b40def293176bd1c7af79450bd5ebe2bb549b0420c5e6e215f0db40e",
+      "825859a8000101484c1f2c96d6f43d88025820c0fab9167b708eaaa22ec5520cac0332e6e474f71d467674eb93afc03c297dc00305041a69689e80051a6d2b058006810007765445535420564543544f5220746573742072656c6179584022f953a2a528c429436e8ee5df36d91662dc976578470334e5aff688e00772bb4c8fb18ebf6c3c16e931c10842426f3cc42ee0abbf6ffb1de774a72a4e0dea00"
     ],
     "revocation": "825829a500010101021a6b488080038148b260682ac30a3ec80481507976c10fff4e40aacc3bd939612905985840c71b6fd89be0a7579cff6759ab4c56b54a95ea28ed8db6df00e08ae260a4a5d63225e49d55392189e3886540526e53f40fe3167a3dc87ac88bf86d4619c32309"
   },
@@ -70,6 +72,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -91,6 +94,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1,
@@ -119,6 +123,7 @@
         ],
         "test": false,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -140,6 +145,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 3,
         "category": 1,
         "template": 1
@@ -161,6 +167,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 4,
         "category": 1,
         "template": 1
@@ -182,6 +189,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "ref": "022a6a381f5babcd08c8f554743a285f",
         "level": 1,
         "category": 1,
@@ -204,6 +212,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "ref": "022a6a381f5babcd08c8f554743a285f"
       }
     },
@@ -223,6 +232,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -245,6 +255,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -266,6 +277,7 @@
         ],
         "test": true,
         "hops": 5,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -287,6 +299,7 @@
         ],
         "test": true,
         "hops": 16,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -308,6 +321,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -329,6 +343,7 @@
         ],
         "test": true,
         "hops": 0,
+        "relayed": false,
         "level": 2,
         "category": 1,
         "template": 1
@@ -423,6 +438,153 @@
       "description": "Lifetime one second over maxLifetimeSeconds",
       "envelope": "84015838ab0001015095d1a264ded89405342972871b18c0a50248016622e17552da5f031a6b49d1c4041a6b530c450500070208010981000a010cf55840a4ea24999d9a2e99563b5a5e997e3097cb71e02f83f9a1e96f72c12eeafdd83c43118453e027ab74dc5ba8044ffacc23bb256e3269ef87b7105aeba79a7b690100",
       "expect": "LIFETIME_TOO_LONG"
+    },
+    {
+      "name": "valid_relay_live",
+      "description": "Live relay copies a PAGD feed message: verbatim lt text, no template",
+      "envelope": "840158a9ad0001015083bb8f32e0d173fb94d3b8c72a32943e02485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf40d010e6531383231305840ab4cae3d32e4109e8aafc4893d51d14721e67a329ff8b0fcdc9ca2f9d66d8edf4c8cb8cd8da314b85c1abd1d43d8c5afe3e058025af1b8e95811f9e8f039ca0800",
+      "expect": "OK",
+      "relayed": true,
+      "decoded": {
+        "id": "83bb8f32e0d173fb94d3b8c72a32943e",
+        "issuerKeyId": "5d85fa4f4459f2ed",
+        "issued": 1799999940,
+        "expires": 1800003600,
+        "msgType": 0,
+        "areas": [
+          0
+        ],
+        "test": false,
+        "hops": 0,
+        "relayed": true,
+        "level": 1,
+        "category": 1,
+        "text": {
+          "lt": "LK / NKVC: TIKĖTINAS ORO PAVOJUS (GELTONA). Galimai fiksuotas dronas. Nusimatykite saugią vietą."
+        },
+        "source": 1,
+        "sourceRef": "18210"
+      }
+    },
+    {
+      "name": "valid_relay_with_template",
+      "description": "Relayed alert that also maps to a guidance template",
+      "envelope": "840158abae0001015029281f75e4bbf46c3763e2cd7a9dc55202485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070108010981000a010ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf40d010e653138323131584026f488f4e8a70fa12158c2da7c003873181a9663b3433f06ece46bc9b747b9a719702bf52ff447492316ab81c471154e7b41af81a827728f223a64acd8a01f0f00",
+      "expect": "OK",
+      "relayed": true,
+      "decoded": {
+        "id": "29281f75e4bbf46c3763e2cd7a9dc552",
+        "issuerKeyId": "5d85fa4f4459f2ed",
+        "issued": 1799999940,
+        "expires": 1800003600,
+        "msgType": 0,
+        "areas": [
+          0
+        ],
+        "test": false,
+        "hops": 0,
+        "relayed": true,
+        "level": 1,
+        "category": 1,
+        "template": 1,
+        "text": {
+          "lt": "LK / NKVC: TIKĖTINAS ORO PAVOJUS (GELTONA). Galimai fiksuotas dronas. Nusimatykite saugią vietą."
+        },
+        "source": 1,
+        "sourceRef": "18211"
+      }
+    },
+    {
+      "name": "valid_relay_test",
+      "description": "Test relay, test alert",
+      "envelope": "840158a9ad000101504cc060b96aaba48b1c67980cf883cb4a02484c1f2c96d6f43d88031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf50d010e65313832313258407d1d64f8241f8e1087dec891f8215040c67f81977fea5aefba61056abfbf414b55cfb41a424a984bbc3ee44115c33fe52a5a97c4614c4c87e9a12de3af78ed0200",
+      "expect": "OK",
+      "relayed": true,
+      "decoded": {
+        "id": "4cc060b96aaba48b1c67980cf883cb4a",
+        "issuerKeyId": "4c1f2c96d6f43d88",
+        "issued": 1799999940,
+        "expires": 1800003600,
+        "msgType": 0,
+        "areas": [
+          0
+        ],
+        "test": true,
+        "hops": 0,
+        "relayed": true,
+        "level": 1,
+        "category": 1,
+        "text": {
+          "lt": "LK / NKVC: TIKĖTINAS ORO PAVOJUS (GELTONA). Galimai fiksuotas dronas. Nusimatykite saugią vietą."
+        },
+        "source": 1,
+        "sourceRef": "18212"
+      }
+    },
+    {
+      "name": "valid_relay_cancel",
+      "description": "Relayed cancel (no text required)",
+      "envelope": "8401584dab0001015030b0a49723c5dc65e6816073447354ae02485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100502065083bb8f32e0d173fb94d3b8c72a32943e0981000cf40d010e653138323133584020004239f3f14ce977f3999a874a08bcfb3b4ae4eae479c4c752fee10c98defc1c8c186407c50e70d8d8dd4009ddbf82b183376c3a8238dee0be1c51d240390600",
+      "expect": "OK",
+      "relayed": true,
+      "decoded": {
+        "id": "30b0a49723c5dc65e6816073447354ae",
+        "issuerKeyId": "5d85fa4f4459f2ed",
+        "issued": 1799999940,
+        "expires": 1800003600,
+        "msgType": 2,
+        "areas": [
+          0
+        ],
+        "test": false,
+        "hops": 0,
+        "relayed": true,
+        "ref": "83bb8f32e0d173fb94d3b8c72a32943e",
+        "source": 1,
+        "sourceRef": "18213"
+      }
+    },
+    {
+      "name": "relay_without_source",
+      "description": "Relay key signs an alert that claims no source",
+      "envelope": "84015838ab00010150882fbc32163642560d042411129e766202485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070208010981000a010cf45840651eea82651ceefb8780c7560cd27cd7c701ac5d0aec8aa3064b886ff6cee14adb5f716fe98d478c953947786bfe81d111e41141d30020d8e6076bdc2370020d00",
+      "expect": "RELAY_MISMATCH"
+    },
+    {
+      "name": "issuer_claims_source",
+      "description": "Issuer key signs an alert that claims a source (only relays may)",
+      "envelope": "840158a9ad00010150950c64b580b5480f22bb29beb490e28e02489484ddf1d27b685f031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf40d010e653138323134584016d898efbb6a796c7096fa5301ad4aa75503153f692313a2cac287de89af1758fb59920bbca68259591a3d995073982bbf7f6fcc9ca34c0466837b08fb77f40500",
+      "expect": "RELAY_MISMATCH"
+    },
+    {
+      "name": "live_relay_signs_test",
+      "description": "Live relay signs a test alert",
+      "envelope": "840158a9ad00010150ec8cf17f6a4f2053197b030dde24cf1d02485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf50d010e65313832313558409e5a33b2a11b5c8a381c106ec8888e248aebf6ff42807fe41e4644c0f0be7ed972fb8f982f1854bd81758dd12e5d8ac878f86bf88f0fbc0954a98eacc7df560a00",
+      "expect": "TEST_MISMATCH"
+    },
+    {
+      "name": "test_relay_signs_live",
+      "description": "Test relay signs a live alert",
+      "envelope": "840158a9ad00010150d65234f5f0bcfcb8b7ad82ac4b65c0bf02484c1f2c96d6f43d88031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf40d010e65313832313658407f91e472e07f5b658cbc268d74969445150817f86d121e0491fd5e65de6f72a9a95dad36052482480473ffc312a3b7155af2dbb32a41c7f04d77371239e08b0000",
+      "expect": "TEST_MISMATCH"
+    },
+    {
+      "name": "relay_without_lt_text",
+      "description": "Relayed alert with English text only",
+      "envelope": "84015853ad000101505dce482c79f6c2c8c8798a698668916e02485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070108010981000ba162656e6e416972207261696420616c6572740cf40d010e65313832313758405391e3863a36d89c3ffab665eaa5717a50ef8cb416da6ec18a44da53e43712c4c46cdba041e02ebc4b6efd08a91c52c9368baa1c720604e2ad664449d036930300",
+      "expect": "MALFORMED"
+    },
+    {
+      "name": "source_without_source_ref",
+      "description": "source present, sourceRef missing",
+      "envelope": "840158a2ac00010150cd8c904ab08ea2759d33085eb8c02da602485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf40d015840d230a4c23a910f34575a1e184b8be257a97f70930645763692c0cd43d58f350ba6a6a342858a5f3e0edcfcef7df6bcc34b714b23924d5868995362ed706ccc0900",
+      "expect": "MALFORMED"
+    },
+    {
+      "name": "unknown_source",
+      "description": "source value not in the registry",
+      "envelope": "840158aaad00010150de35bfcafa9196fbfb4b63be624087de02485d85fa4f4459f2ed031a6b49d1c4041a6b49e0100500070108010981000ba1626c7478634c4b202f204e4b56433a2054494bc49654494e4153204f524f205041564f4a5553202847454c544f4e41292e2047616c696d61692066696b73756f7461732064726f6e61732e204e7573696d6174796b697465207361756769c4852076696574c4852e0cf40d18630e653138323139584086212c6c37ae73cf80b873fa4b0a23fe5ce383103d6802ed2e9be3263cd1853dca274b1cce26b6503d0fed647159d1c601819ed4f754f89761566d9226e2660100",
+      "expect": "MALFORMED"
     },
     {
       "name": "revoked_alert_id",

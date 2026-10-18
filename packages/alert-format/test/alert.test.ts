@@ -157,3 +157,45 @@ describe('appliesToArea', () => {
     expect(appliesToArea(a([13, 19]), 20)).toBe(false);
   });
 });
+
+describe('relay', () => {
+  it('derives the same alert ID for the same source message', async () => {
+    const { relayAlertId, Source } = await import('../src/index.js');
+    const a = relayAlertId(Source.PagdWarningFeed, '18210');
+    expect(a).toEqual(relayAlertId(Source.PagdWarningFeed, '18210'));
+    expect(a).not.toEqual(relayAlertId(Source.PagdWarningFeed, '18211'));
+    expect(a.length).toBe(16);
+  });
+
+  it('marks relay-signed alerts as relayed and issuer-signed ones as not', async () => {
+    const { relayAlertId, Source } = await import('../src/index.js');
+    const rootSk = generateSecretKey();
+    const relaySk = generateSecretKey();
+    const issuerSk = generateSecretKey();
+    const window = { validFrom: NOW - 1000, validTo: NOW + 100_000, areas: [NATIONWIDE] };
+    const { store } = buildTrustStore({
+      rootPublicKey: getPublicKey(rootSk),
+      certificates: [
+        createCertificate(rootSk, { publicKey: getPublicKey(relaySk), role: Role.TestRelay, ...window, name: 'relay' }),
+        createCertificate(rootSk, { publicKey: getPublicKey(issuerSk), role: Role.TestIssuer, ...window, name: 'issuer' }),
+      ],
+    });
+    const relayedFields = alertFields({
+      id: relayAlertId(Source.PagdWarningFeed, 'x1'),
+      source: Source.PagdWarningFeed,
+      sourceRef: 'x1',
+      text: { lt: 'Oro pavojus' },
+    });
+    delete relayedFields.template;
+    const r1 = verifyAlert(signAlert(relaySk, relayedFields), store, NOW);
+    const r2 = verifyAlert(signAlert(issuerSk, alertFields()), store, NOW);
+    expect(r1.ok && r1.relayed).toBe(true);
+    expect(r2.ok && !r2.relayed).toBe(true);
+  });
+
+  it('requires verbatim lt text on relayed alerts', async () => {
+    const { Source } = await import('../src/index.js');
+    const a = { ...alertFields({ source: Source.PagdWarningFeed, sourceRef: 'x', text: { en: 'Air raid' } }), issuerKeyId: new Uint8Array(8) };
+    expect(() => encodeAlertBody(a)).toThrow(/verbatim source text/);
+  });
+});

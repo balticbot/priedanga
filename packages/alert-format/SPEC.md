@@ -10,7 +10,8 @@ The key words MUST, MUST NOT, SHOULD are used as in RFC 2119.
 - An alert is shown to a user **only** if it verifies against a root key pinned in the app.
 - Every path (push, mesh, content pack) is untrusted; verification is identical regardless of how bytes arrived.
 - Each valid object has **exactly one** byte encoding, so independent implementations cannot disagree about what was signed.
-- A typical alert fits in ~130 bytes (measured: 127 bytes for a template alert with no free text).
+- A typical alert fits in ~130 bytes (measured: 127 bytes for a template alert with no free text; ~240 bytes for a relayed alert carrying a short verbatim message).
+- **Honest provenance:** an alert copied from an official public source by a relay is cryptographically distinguishable from one signed by the authority itself, and can never be presented as authority-signed.
 
 ## 2. Encoding: deterministic CBOR profile
 
@@ -49,6 +50,14 @@ message = UTF-8(context) || 0x00 || body
 | `priedanga/v1/cert` | certificate bodies | root key |
 | `priedanga/v1/revocation` | revocation list bodies | root key |
 
+### 3.3 Relay alert IDs
+
+Relays SHOULD derive alert IDs deterministically, so independent relay instances copying the same source message produce the same ID and phones deduplicate them:
+
+```
+id = SHA-256( UTF-8("priedanga/v1/relay-id") || 0x00 || CBOR([source, sourceRef]) )[0..16]
+```
+
 A signature made under one context MUST NOT verify under another.
 
 ### 3.2 Key IDs
@@ -72,12 +81,14 @@ Integer map keys are part of the wire contract and MUST NOT be renumbered. Unkno
 | 4 | expires | uint | Unix seconds; MUST be > issued |
 | 5 | msgType | uint | 0 alert, 1 update, 2 cancel |
 | 6 | ref | bstr(16) | REQUIRED for update and cancel; FORBIDDEN for alert |
-| 7 | level | uint | 1 yellow, 2 red, 3 yellow-after-red, 4 white. REQUIRED for alert/update; FORBIDDEN for cancel |
+| 7 | level | uint | 1 yellow, 2 red, 3 yellow-after-red, 4 white. REQUIRED for alert/update; FORBIDDEN for cancel. For relayed alerts this is the relay's classification of the source message |
 | 8 | category | uint | 1 air, 2 chemical, 3 radiation, 4 flood, 5 other. Same presence rule as level |
 | 9 | areas | array of uint | non-empty, strictly ascending, each 0–255. `0` = nationwide and MUST then be the only entry |
-| 10 | template | uint | 0–65535. Same presence rule as level |
-| 11 | text | map tstr → tstr | OPTIONAL. Keys from {`lt`,`en`,`ru`,`pl`,`uk`}; values non-empty, ≤ 512 UTF-8 bytes; map non-empty if present |
+| 10 | template | uint | 0–65535. FORBIDDEN for cancel. For alert/update: REQUIRED unless the alert is relayed, then OPTIONAL |
+| 11 | text | map tstr → tstr | OPTIONAL, except relayed alert/update MUST include `lt` with the source's verbatim text. Keys from {`lt`,`en`,`ru`,`pl`,`uk`}; values non-empty, ≤ 512 UTF-8 bytes; map non-empty if present |
 | 12 | test | bool | REQUIRED |
+| 13 | source | uint | Present if and only if the alert is relayed. Registry: 1 = PAGD public warning messages (data.gov.lt `datasets/gov/pagd/pranesimai`). Unknown values MUST be rejected |
+| 14 | sourceRef | tstr | The source's own message identifier; non-empty, ≤ 64 UTF-8 bytes. Present if and only if `source` is |
 
 ### 4.2 Certificate body
 
@@ -86,10 +97,12 @@ Integer map keys are part of the wire contract and MUST NOT be renumbered. Unkno
 | 0 | v | uint | MUST be 1 |
 | 1 | keyId | bstr(8) | MUST equal keyId(publicKey) |
 | 2 | publicKey | bstr(32) | Ed25519 public key |
-| 3 | role | uint | 1 live issuer, 2 test issuer, 3 content |
+| 3 | role | uint | 1 live issuer, 2 test issuer, 3 content, 4 live relay, 5 test relay |
 | 4 | validFrom | uint | Unix seconds, inclusive |
 | 5 | validTo | uint | Unix seconds, inclusive; MUST be > validFrom |
-| 6 | areas | array of uint | REQUIRED for issuer roles, FORBIDDEN for content; same rules as alert areas |
+| 6 | areas | array of uint | REQUIRED for issuer and relay roles, FORBIDDEN for content; same rules as alert areas |
+
+**Roles.** *Issuers* sign alerts they author. *Relays* sign alerts they copied from an official public source; a relay signature attests "this is what the source published", never "the source signed this". *Content* keys sign content-pack manifests only.
 | 7 | name | tstr | non-empty, ≤ 128 UTF-8 bytes |
 
 ### 4.3 Revocation list body
@@ -133,14 +146,17 @@ Checks MUST run in this order; the **first** failing check determines the reason
 | 6 | signature verifies under `priedanga/v1/alert` with that certificate's key | `BAD_SIGNATURE` |
 | 7 | issuer key ID not revoked | `ISSUER_REVOKED` |
 | 8 | issuer role is not content | `ROLE_NOT_ALLOWED` |
-| 9 | `test == true` ⇔ role is test issuer; `test == false` ⇔ role is live issuer | `TEST_MISMATCH` |
-| 10 | validFrom ≤ issued ≤ validTo | `ISSUER_NOT_VALID` |
-| 11 | alert areas allowed by certificate areas (cert `[0]` allows all; otherwise alert MUST NOT be nationwide and every alert area MUST be listed) | `AREA_NOT_ALLOWED` |
-| 12 | issued ≤ now + clockSkewSeconds | `NOT_YET_VALID` |
-| 13 | expires > now | `EXPIRED` |
-| 14 | expires − issued ≤ maxLifetimeSeconds | `LIFETIME_TOO_LONG` |
-| 15 | alert ID not revoked | `ALERT_REVOKED` |
-| 16 | hops ≤ maxHops | `HOPS_EXCEEDED` |
+| 9 | role is a relay role (4, 5) ⇔ alert has `source` | `RELAY_MISMATCH` |
+| 10 | `test == true` ⇔ role is a test role (2, 5) | `TEST_MISMATCH` |
+| 11 | validFrom ≤ issued ≤ validTo | `ISSUER_NOT_VALID` |
+| 12 | alert areas allowed by certificate areas (cert `[0]` allows all; otherwise alert MUST NOT be nationwide and every alert area MUST be listed) | `AREA_NOT_ALLOWED` |
+| 13 | issued ≤ now + clockSkewSeconds | `NOT_YET_VALID` |
+| 14 | expires > now | `EXPIRED` |
+| 15 | expires − issued ≤ maxLifetimeSeconds | `LIFETIME_TOO_LONG` |
+| 16 | alert ID not revoked | `ALERT_REVOKED` |
+| 17 | hops ≤ maxHops | `HOPS_EXCEEDED` |
+
+A successful verification also reports whether the alert is **relayed** (signed by a relay role).
 
 ### 6.3 Default policy
 
@@ -159,7 +175,12 @@ The lifetime cap also bounds the damage of a leaked issuer key after its certifi
 - **Deduplication:** keep a store of seen alert IDs until their expiry; show each ID once, but relays MAY keep advertising it.
 - **Update / cancel:** an update supersedes the alert named in `ref`; a cancel withdraws it. Both are verified exactly like an alert.
 - **Clock sanity:** `now` comes from the device clock. Where available, compare against GNSS time and treat large disagreement as a warning.
-- **Mesh relays** MUST verify before storing or relaying, and MUST relay with `hops + 1`.
+- **Mesh relays** MUST verify before storing or relaying, and MUST relay with `hops + 1`. (Mesh relaying is unrelated to the *relay* certificate role.)
+- **Relayed alerts — display rules:**
+  - MUST be labelled as relayed, naming the source and the relay, e.g. "Relayed from PAGD by Priedanga — not signed by PAGD".
+  - MUST NOT use the visual treatment reserved for authority-signed alerts.
+  - MUST show the verbatim `text.lt` from the source. Translations, if shown, MUST be marked as translations.
+  - The level shown is the relay's classification; the source text is authoritative if they disagree.
 
 ## 8. Conformance
 

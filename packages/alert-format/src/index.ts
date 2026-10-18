@@ -26,6 +26,7 @@ export {
   deriveKeyId,
   generateSecretKey,
   getPublicKey,
+  relayAlertId,
   signWithContext,
   verifyWithContext,
 } from './crypto.js';

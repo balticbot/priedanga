@@ -21,11 +21,13 @@ import {
   LANGS,
   Level,
   MAX_AREA_CODE,
+  MAX_SOURCE_REF_BYTES,
   MAX_TEMPLATE_ID,
   MAX_TEXT_BYTES,
   MsgType,
   NATIONWIDE,
   SIGNATURE_BYTES,
+  Source,
   type Alert,
   type Lang,
 } from './model.js';
@@ -51,6 +53,13 @@ export function validateAlert(alert: Alert): void {
     fail('ref is only allowed for update and cancel');
   }
 
+  const relayed = alert.source !== undefined;
+  if (relayed !== (alert.sourceRef !== undefined)) fail('source and sourceRef must be present together');
+  if (relayed) {
+    oneOf(alert.source!, Source, 'source');
+    text(alert.sourceRef, 'sourceRef', MAX_SOURCE_REF_BYTES);
+  }
+
   if (isCancel) {
     if (alert.level !== undefined || alert.category !== undefined || alert.template !== undefined) {
       fail('cancel must not carry level, category or template');
@@ -58,12 +67,16 @@ export function validateAlert(alert: Alert): void {
   } else {
     if (alert.level === undefined) fail('level is required');
     if (alert.category === undefined) fail('category is required');
-    if (alert.template === undefined) fail('template is required');
+    if (alert.template === undefined && !relayed) fail('template is required');
     oneOf(alert.level, Level, 'level');
     oneOf(alert.category, Category, 'category');
-    if (!Number.isInteger(alert.template) || alert.template < 0 || alert.template > MAX_TEMPLATE_ID) {
+    if (
+      alert.template !== undefined &&
+      (!Number.isInteger(alert.template) || alert.template < 0 || alert.template > MAX_TEMPLATE_ID)
+    ) {
       fail('template out of range');
     }
+    if (relayed && alert.text?.lt === undefined) fail('relayed alerts must carry the verbatim source text in lt');
   }
 
   validateAreas(alert.areas, 'areas', MAX_AREA_CODE, NATIONWIDE);
@@ -100,6 +113,8 @@ export function encodeAlertBody(alert: Alert): Uint8Array {
   if (alert.level !== undefined) m.set(AlertKey.level, alert.level);
   if (alert.category !== undefined) m.set(AlertKey.category, alert.category);
   if (alert.template !== undefined) m.set(AlertKey.template, alert.template);
+  if (alert.source !== undefined) m.set(AlertKey.source, alert.source);
+  if (alert.sourceRef !== undefined) m.set(AlertKey.sourceRef, alert.sourceRef);
   if (alert.text !== undefined) {
     const t: CborMap = new Map();
     for (const [lang, value] of Object.entries(alert.text)) {
@@ -133,6 +148,8 @@ export function decodeAlertBody(body: Uint8Array): Alert {
     alert.category = oneOf(uint(m.get(AlertKey.category), 'category'), Category, 'category');
   }
   if (m.has(AlertKey.template)) alert.template = uint(m.get(AlertKey.template), 'template', MAX_TEMPLATE_ID);
+  if (m.has(AlertKey.source)) alert.source = oneOf(uint(m.get(AlertKey.source), 'source'), Source, 'source');
+  if (m.has(AlertKey.sourceRef)) alert.sourceRef = text(m.get(AlertKey.sourceRef), 'sourceRef', MAX_SOURCE_REF_BYTES);
   if (m.has(AlertKey.text)) {
     const t = asMap(m.get(AlertKey.text)!, 'text');
     const out: Partial<Record<Lang, string>> = {};

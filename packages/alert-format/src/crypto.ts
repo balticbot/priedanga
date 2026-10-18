@@ -1,7 +1,8 @@
 import { ed25519 } from '@noble/curves/ed25519.js';
 import { sha256 } from '@noble/hashes/sha2.js';
 import { concatBytes } from '@noble/hashes/utils.js';
-import { KEY_ID_BYTES, PUBLIC_KEY_BYTES, SIGNATURE_BYTES } from './model.js';
+import { encode } from './cbor.js';
+import { ALERT_ID_BYTES, KEY_ID_BYTES, PUBLIC_KEY_BYTES, SIGNATURE_BYTES, type Source } from './model.js';
 import { encodeUtf8 } from './utf8.js';
 
 /**
@@ -15,6 +16,7 @@ export const Context = {
   cert: 'priedanga/v1/cert',
   revocation: 'priedanga/v1/revocation',
   keyId: 'priedanga/v1/keyid',
+  relayId: 'priedanga/v1/relay-id',
 } as const;
 export type Context = (typeof Context)[keyof typeof Context];
 
@@ -48,6 +50,16 @@ export function verifyWithContext(
 /** Key ID = first 8 bytes of SHA-256(UTF-8("priedanga/v1/keyid") || 0x00 || publicKey). */
 export function deriveKeyId(publicKey: Uint8Array): Uint8Array {
   return sha256(contextMessage(Context.keyId, publicKey)).slice(0, KEY_ID_BYTES);
+}
+
+/**
+ * Deterministic alert ID for a relayed message:
+ *   SHA-256(UTF-8("priedanga/v1/relay-id") || 0x00 || CBOR([source, sourceRef]))[0..16]
+ * Independent relay instances copying the same source message therefore produce
+ * the same ID, so phones and the mesh deduplicate them.
+ */
+export function relayAlertId(source: Source, sourceRef: string): Uint8Array {
+  return sha256(contextMessage(Context.relayId, encode([source, sourceRef]))).slice(0, ALERT_ID_BYTES);
 }
 
 export function getPublicKey(secretKey: Uint8Array): Uint8Array {

@@ -117,6 +117,7 @@ Based on the **OASIS Common Alerting Protocol (CAP 1.2)**, the standard used by 
 Root key (offline, never on a networked machine; split between custodians)
  ├── signs → Issuer certificate: LIVE   (role, valid-from/to, allowed areas)
  ├── signs → Issuer certificate: TEST
+ ├── signs → Relay certificate: LIVE / TEST  (copies official public alerts; labelled "relayed")
  └── signs → Content certificate        (signs pack manifests only)
 ```
 
@@ -124,6 +125,7 @@ Root key (offline, never on a networked machine; split between custodians)
 - Issuer and content certificates are delivered in the content pack and can be rotated without an app update.
 - **Revocation:** a signed revocation list in the content pack, plus a signed "revoke" message that can be pushed or relayed over the mesh.
 - **Separation of roles:** the content key cannot sign alerts, the test key cannot sign live alerts, and a live alert outside the issuer's allowed areas is rejected.
+- **Relay role:** before a state agreement, a relay key signs verbatim copies of official PAGD warning messages. Relayed alerts must name their source and source message ID, and the app labels them "Relayed from PAGD — not signed by PAGD". A relay key can never produce an alert that verifies as authority-signed.
 - **Until a state agreement exists**, only the TEST issuer certificate is created. The LIVE certificate is generated together with the authority, which holds its key.
 
 ## 7. Tiltas mesh protocol (v0)

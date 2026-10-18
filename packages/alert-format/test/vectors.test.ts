@@ -66,8 +66,11 @@ describe('alert vectors', () => {
       expect(a.template).toBe(d.template);
       expect(a.areas).toEqual(d.areas);
       expect(a.text).toEqual(d.text);
+      expect(a.source).toBe(d.source);
+      expect(a.sourceRef).toBe(d.sourceRef);
       expect(a.test).toBe(d.test);
       expect(result.hops).toBe(d.hops);
+      expect(result.relayed).toBe(d.relayed);
     } else {
       expect(result.ok).toBe(false);
       if (!result.ok) expect(result.reason).toBe(v.expect);

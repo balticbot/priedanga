@@ -13,7 +13,7 @@ import { bytesToHex } from '@noble/hashes/utils.js';
 import { decodeAlertBody, decodeAlertEnvelope, encodeAlertBody, encodeAlertEnvelope, withHops } from '../src/alert.js';
 import { encodeSignedObject } from '../src/cert.js';
 import { decode, encode, type CborMap } from '../src/cbor.js';
-import { Context, deriveKeyId, generateSecretKey, getPublicKey, signWithContext } from '../src/crypto.js';
+import { Context, deriveKeyId, generateSecretKey, getPublicKey, relayAlertId, signWithContext } from '../src/crypto.js';
 import { createCertificate, createRevocationList, signAlert } from '../src/issue.js';
 import {
   AlertKey,
@@ -24,6 +24,7 @@ import {
   MsgType,
   NATIONWIDE,
   Role,
+  Source,
   type Alert,
 } from '../src/model.js';
 import type { VerifyFailure } from '../src/verify.js';
@@ -60,8 +61,11 @@ export interface AlertVector {
     template?: number;
     areas: number[];
     text?: Record<string, string>;
+    source?: number;
+    sourceRef?: string;
     test: boolean;
     hops: number;
+    relayed: boolean;
   };
 }
 
@@ -93,6 +97,8 @@ export function buildVectors(): VectorFile {
   const expired = testKey('expired-test-issuer');
   const revoked = testKey('revoked-test-issuer');
   const unknown = testKey('uncertified-issuer');
+  const liveRelay = testKey('live-relay');
+  const testRelay = testKey('test-relay');
 
   const window = { validFrom: NOW - 365 * DAY, validTo: NOW + 365 * DAY };
   const certificates = [
@@ -102,6 +108,8 @@ export function buildVectors(): VectorFile {
     createCertificate(root.sk, { publicKey: scoped.pk, role: Role.TestIssuer, ...window, areas: [13, 19], name: 'TEST VECTOR scoped issuer (areas 13, 19)' }),
     createCertificate(root.sk, { publicKey: expired.pk, role: Role.TestIssuer, validFrom: NOW - 400 * DAY, validTo: NOW - 30 * DAY, areas: [NATIONWIDE], name: 'TEST VECTOR expired issuer' }),
     createCertificate(root.sk, { publicKey: revoked.pk, role: Role.TestIssuer, ...window, areas: [NATIONWIDE], name: 'TEST VECTOR revoked issuer' }),
+    createCertificate(root.sk, { publicKey: liveRelay.pk, role: Role.LiveRelay, ...window, areas: [NATIONWIDE], name: 'TEST VECTOR live relay (PAGD feed)' }),
+    createCertificate(root.sk, { publicKey: testRelay.pk, role: Role.TestRelay, ...window, areas: [NATIONWIDE], name: 'TEST VECTOR test relay' }),
   ];
 
   const revokedAlertId = vectorId('revoked-alert');
@@ -163,9 +171,9 @@ export function buildVectors(): VectorFile {
     ...over,
   });
 
-  const vectors: { name: string; description: string; envelope: Uint8Array; expect: AlertVector['expect'] }[] = [];
-  const add = (name: string, description: string, envelope: Uint8Array, expect: AlertVector['expect']) =>
-    vectors.push({ name, description, envelope, expect });
+  const vectors: { name: string; description: string; envelope: Uint8Array; expect: AlertVector['expect']; relayed?: boolean }[] = [];
+  const add = (name: string, description: string, envelope: Uint8Array, expect: AlertVector['expect'], relayed?: boolean) =>
+    vectors.push(relayed === undefined ? { name, description, envelope, expect } : { name, description, envelope, expect, relayed });
 
   const validRed = signAlert(test.sk, base('valid_red_nationwide'));
 
@@ -235,7 +243,44 @@ export function buildVectors(): VectorFile {
     issued: NOW - 60, expires: NOW - 60 + 7 * DAY + 1,
   })), 'LIFETIME_TOO_LONG');
 
-  // Revocation / relay
+  // Relay (copied from an official public source; signed by a relay, not by the source)
+  const pagdText = 'LK / NKVC: TIKĖTINAS ORO PAVOJUS (GELTONA). Galimai fiksuotas dronas. Nusimatykite saugią vietą.';
+  const relayed = (name: string, sourceRef: string, over: Partial<Omit<Alert, 'issuerKeyId'>> = {}): Omit<Alert, 'issuerKeyId'> => {
+    const a = base(name, {
+      id: relayAlertId(Source.PagdWarningFeed, sourceRef),
+      source: Source.PagdWarningFeed,
+      sourceRef,
+      level: Level.Yellow,
+      test: false,
+      text: { lt: pagdText },
+      ...over,
+    });
+    if (!('template' in over)) delete a.template;
+    return a;
+  };
+  add('valid_relay_live', 'Live relay copies a PAGD feed message: verbatim lt text, no template', signAlert(liveRelay.sk, relayed('valid_relay_live', '18210')), 'OK', true);
+  add('valid_relay_with_template', 'Relayed alert that also maps to a guidance template', signAlert(liveRelay.sk, relayed('valid_relay_with_template', '18211', { template: 1 })), 'OK', true);
+  add('valid_relay_test', 'Test relay, test alert', signAlert(testRelay.sk, relayed('valid_relay_test', '18212', { test: true })), 'OK', true);
+  const relayCancel = relayed('valid_relay_cancel', '18213', { msgType: MsgType.Cancel, ref: relayAlertId(Source.PagdWarningFeed, '18210') });
+  delete relayCancel.level;
+  delete relayCancel.category;
+  delete relayCancel.text;
+  add('valid_relay_cancel', 'Relayed cancel (no text required)', signAlert(liveRelay.sk, relayCancel), 'OK', true);
+  add('relay_without_source', 'Relay key signs an alert that claims no source', signAlert(liveRelay.sk, base('relay_without_source', { test: false })), 'RELAY_MISMATCH');
+  add('issuer_claims_source', 'Issuer key signs an alert that claims a source (only relays may)', signAlert(live.sk, relayed('issuer_claims_source', '18214')), 'RELAY_MISMATCH');
+  add('live_relay_signs_test', 'Live relay signs a test alert', signAlert(liveRelay.sk, relayed('live_relay_signs_test', '18215', { test: true })), 'TEST_MISMATCH');
+  add('test_relay_signs_live', 'Test relay signs a live alert', signAlert(testRelay.sk, relayed('test_relay_signs_live', '18216')), 'TEST_MISMATCH');
+  add('relay_without_lt_text', 'Relayed alert with English text only', signRawBody(liveRelay.sk, mapEdit(encodeAlertBody({
+    ...relayed('relay_without_lt_text', '18217'), issuerKeyId: liveRelay.keyId,
+  }), (m) => m.set(AlertKey.text, new Map([['en', 'Air raid alert']])))), 'MALFORMED');
+  add('source_without_source_ref', 'source present, sourceRef missing', signRawBody(liveRelay.sk, mapEdit(encodeAlertBody({
+    ...relayed('source_without_source_ref', '18218'), issuerKeyId: liveRelay.keyId,
+  }), (m) => m.delete(AlertKey.sourceRef))), 'MALFORMED');
+  add('unknown_source', 'source value not in the registry', signRawBody(liveRelay.sk, mapEdit(encodeAlertBody({
+    ...relayed('unknown_source', '18219'), issuerKeyId: liveRelay.keyId,
+  }), (m) => m.set(AlertKey.source, 99))), 'MALFORMED');
+
+  // Revocation / relay limits
   add('revoked_alert_id', 'Alert ID is on the revocation list', signAlert(test.sk, base('revoked_alert_id', { id: revokedAlertId })), 'ALERT_REVOKED');
   add('hops_exceeded', 'Hop counter above maxHops', withHops(validRed, 17), 'HOPS_EXCEEDED');
 
@@ -279,13 +324,13 @@ export function buildVectors(): VectorFile {
     certificateVectors,
     alertVectors: vectors.map((v) => {
       const out: AlertVector = { ...v, envelope: hex(v.envelope) };
-      if (v.expect === 'OK') out.decoded = summarize(v.envelope);
+      if (v.expect === 'OK') out.decoded = summarize(v.envelope, v.relayed ?? false);
       return out;
     }),
   };
 }
 
-function summarize(envelope: Uint8Array): NonNullable<AlertVector['decoded']> {
+function summarize(envelope: Uint8Array, relayed: boolean): NonNullable<AlertVector['decoded']> {
   const env = decodeAlertEnvelope(envelope);
   const a = decodeAlertBody(env.body);
   const d: NonNullable<AlertVector['decoded']> = {
@@ -297,12 +342,15 @@ function summarize(envelope: Uint8Array): NonNullable<AlertVector['decoded']> {
     areas: a.areas,
     test: a.test,
     hops: env.hops,
+    relayed,
   };
   if (a.ref !== undefined) d.ref = hex(a.ref);
   if (a.level !== undefined) d.level = a.level;
   if (a.category !== undefined) d.category = a.category;
   if (a.template !== undefined) d.template = a.template;
   if (a.text !== undefined) d.text = a.text as Record<string, string>;
+  if (a.source !== undefined) d.source = a.source;
+  if (a.sourceRef !== undefined) d.sourceRef = a.sourceRef;
   return d;
 }
 
