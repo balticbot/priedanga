@@ -19,3 +19,7 @@ apps/mobile/assets/pack/
 .expo/
 web-build/
 expo-env.d.ts
+
+# Expo prebuild output (generated from app.json)
+apps/mobile/ios/
+apps/mobile/android/

@@ -33,7 +33,9 @@
         {
           "locationWhenInUsePermission": "Priedanga uses your location on this phone only, to find the nearest shelters. It is never sent anywhere."
         }
-      ]
+      ],
+      "./plugins/withQuotedBundleScript",
+      "expo-status-bar"
     ]
   }
 }
