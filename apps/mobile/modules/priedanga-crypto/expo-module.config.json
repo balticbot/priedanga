@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["PriedangaCryptoModule"]
+  },
+  "android": {
+    "modules": ["com.balticbot.priedanga.crypto.PriedangaCryptoModule"]
+  }
+}

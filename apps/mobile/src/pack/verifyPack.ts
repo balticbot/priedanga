@@ -3,15 +3,17 @@
  *   1. certificates in trust.json are checked against the pinned root
  *   2. manifest.json signature must come from a valid Content-role key
  *   3. every file listed in the manifest must match its length and SHA-256
- * No I/O, so it runs identically in the app and in tests. The hash function is
- * injectable so the app can use native SHA-256.
+ * No I/O, so it runs identically in the app and in tests. SHA-256 and Ed25519
+ * are injectable so the app can use native implementations.
  */
 
 import {
-  buildTrustStore,
+  buildTrustStoreAsync,
   decodeUtf8,
   sha256Hex,
-  verifyManifest,
+  verifyEd25519,
+  verifyManifestAsync,
+  type Ed25519Verifier,
   type ManifestFailure,
 } from '@priedanga/alert-format';
 import type {
@@ -60,6 +62,7 @@ export async function verifyPack(
   nowSeconds: number,
   onTiming?: (stage: PackStage, ms: number) => void,
   hash: Sha256Hex = sha256Hex,
+  ed25519: Ed25519Verifier = verifyEd25519,
 ): Promise<VerifyPackResult> {
   let mark = now();
   const lap = (stage: PackStage) => {
@@ -79,14 +82,17 @@ export async function verifyPack(
   } catch (e) {
     return { ok: false, reason: 'BAD_TRUST_FILE', detail: String(e) };
   }
-  const { store } = buildTrustStore({
-    rootPublicKey: hexToBytes(rootPublicKeyHex),
-    certificates: trust.certificates.map(hexToBytes),
-    ...(trust.revocation !== undefined ? { revocation: hexToBytes(trust.revocation) } : {}),
-  });
+  const { store } = await buildTrustStoreAsync(
+    {
+      rootPublicKey: hexToBytes(rootPublicKeyHex),
+      certificates: trust.certificates.map(hexToBytes),
+      ...(trust.revocation !== undefined ? { revocation: hexToBytes(trust.revocation) } : {}),
+    },
+    ed25519,
+  );
 
   lap('trust');
-  const sig = verifyManifest(f['manifest.json'], f['manifest.sig'], store, nowSeconds);
+  const sig = await verifyManifestAsync(f['manifest.json'], f['manifest.sig'], store, nowSeconds, ed25519);
   if (!sig.ok) return { ok: false, reason: 'MANIFEST_SIGNATURE', detail: sig.reason };
   lap('signature');
 

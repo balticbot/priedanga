@@ -67,3 +67,24 @@ describe('native hash injection', () => {
     expect(bad).toMatchObject({ ok: false, reason: 'FILE_MISMATCH' });
   });
 });
+
+describe('native Ed25519 injection', () => {
+  it('uses the injected verifier for the certificate and the manifest', async () => {
+    const { verifyEd25519 } = await import('@priedanga/alert-format');
+    const calls: string[] = [];
+    const ok = await verifyPack(load(), ROOT_PUBLIC_KEY_HEX, now, undefined, undefined, async (s, m, p) => {
+      calls.push(new TextDecoder().decode(m.slice(0, m.indexOf(0))));
+      return verifyEd25519(s, m, p);
+    });
+    expect(ok.ok).toBe(true);
+    expect(calls).toEqual(['priedanga/v1/cert', 'priedanga/v1/manifest']);
+  });
+
+  it('rejects the pack when the injected verifier rejects', async () => {
+    expect(await verifyPack(load(), ROOT_PUBLIC_KEY_HEX, now, undefined, undefined, async () => false)).toMatchObject({
+      ok: false,
+      reason: 'MANIFEST_SIGNATURE',
+      detail: 'UNKNOWN_KEY',
+    });
+  });
+});

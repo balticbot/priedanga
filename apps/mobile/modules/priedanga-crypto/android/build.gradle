@@ -1,0 +1,20 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.balticbot.priedanga'
+version = '0.1.0'
+
+android {
+  namespace "com.balticbot.priedanga.crypto"
+  defaultConfig {
+    versionCode 1
+    versionName "0.1.0"
+  }
+}
+
+dependencies {
+  // Only org.bouncycastle.math.ec.rfc8032 is used; R8 strips the rest.
+  implementation 'org.bouncycastle:bcprov-jdk18on:1.80'
+}
