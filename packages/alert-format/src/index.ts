@@ -44,3 +44,4 @@ export {
   type VerifyPolicy,
   type VerifyResult,
 } from './verify.js';
+export { sha256Hex, signManifest, verifyManifest, type ManifestFailure, type ManifestResult } from './manifest.js';

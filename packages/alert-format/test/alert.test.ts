@@ -199,3 +199,28 @@ describe('relay', () => {
     expect(() => encodeAlertBody(a)).toThrow(/verbatim source text/);
   });
 });
+
+describe('content manifests', () => {
+  it('verifies a manifest signed by a content key and rejects tampering and wrong roles', async () => {
+    const { signManifest, verifyManifest, encodeUtf8 } = { ...(await import('../src/index.js')), ...(await import('../src/utf8.js')) };
+    const rootSk = generateSecretKey();
+    const contentSk = generateSecretKey();
+    const issuerSk = generateSecretKey();
+    const window = { validFrom: NOW - 1000, validTo: NOW + 100_000 };
+    const { store } = buildTrustStore({
+      rootPublicKey: getPublicKey(rootSk),
+      certificates: [
+        createCertificate(rootSk, { publicKey: getPublicKey(contentSk), role: Role.Content, ...window, name: 'content' }),
+        createCertificate(rootSk, { publicKey: getPublicKey(issuerSk), role: Role.TestIssuer, ...window, areas: [NATIONWIDE], name: 'issuer' }),
+      ],
+    });
+    const manifest = encodeUtf8('{"files":[]}');
+    const sig = signManifest(contentSk, manifest);
+    expect(verifyManifest(manifest, sig, store, NOW).ok).toBe(true);
+    expect(verifyManifest(encodeUtf8('{"files":[1]}'), sig, store, NOW)).toEqual({ ok: false, reason: 'BAD_SIGNATURE' });
+    expect(verifyManifest(manifest, signManifest(issuerSk, manifest), store, NOW)).toEqual({ ok: false, reason: 'ROLE_NOT_ALLOWED' });
+    expect(verifyManifest(manifest, signManifest(generateSecretKey(), manifest), store, NOW)).toEqual({ ok: false, reason: 'UNKNOWN_KEY' });
+    expect(verifyManifest(manifest, sig, store, NOW + 200_000)).toEqual({ ok: false, reason: 'KEY_NOT_VALID' });
+    expect(verifyManifest(manifest, Uint8Array.of(0x80), store, NOW)).toEqual({ ok: false, reason: 'MALFORMED' });
+  });
+});

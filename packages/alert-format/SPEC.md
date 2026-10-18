@@ -49,6 +49,7 @@ message = UTF-8(context) || 0x00 || body
 | `priedanga/v1/alert` | alert bodies | issuer key |
 | `priedanga/v1/cert` | certificate bodies | root key |
 | `priedanga/v1/revocation` | revocation list bodies | root key |
+| `priedanga/v1/manifest` | content-pack manifests (exact bytes) | content key |
 
 ### 3.3 Relay alert IDs
 
@@ -182,7 +183,14 @@ The lifetime cap also bounds the damage of a leaked issuer key after its certifi
   - MUST show the verbatim `text.lt` from the source. Translations, if shown, MUST be marked as translations.
   - The level shown is the relay's classification; the source text is authoritative if they disagree.
 
-## 8. Conformance
+## 8. Content-pack manifests
+
+- A manifest is an arbitrary byte string (the pack builder writes JSON) listing each pack file with its SHA-256 hash.
+- The signature covers the **exact manifest bytes** under `priedanga/v1/manifest`. No canonical form is required.
+- Signature file: CBOR `[keyId: bstr(8), signature: bstr(64)]`.
+- Verifiers MUST: find the certificate by key ID; verify the signature; reject revoked keys; require role Content (3); require `validFrom ≤ now ≤ validTo`. Then check every file's length and SHA-256 against the manifest before using any of them, and keep the last good pack on any failure.
+
+## 9. Conformance
 
 `test-vectors/v1.json` contains:
 
@@ -192,6 +200,6 @@ The lifetime cap also bounds the damage of a leaked issuer key after its certifi
 
 An implementation is conformant when it returns the expected outcome and reason code for every vector. All vector keys are derived from public seeds and are for tests only.
 
-## 9. Versioning
+## 10. Versioning
 
 Any change to field semantics, keys, contexts or the CBOR profile requires a new version number in envelopes and bodies, a new set of context strings (`priedanga/v2/...`) and a new vector file. v1 verifiers MUST reject v2 objects (`UNSUPPORTED_VERSION` / `MALFORMED`).

@@ -15,6 +15,7 @@ export const Context = {
   alert: 'priedanga/v1/alert',
   cert: 'priedanga/v1/cert',
   revocation: 'priedanga/v1/revocation',
+  manifest: 'priedanga/v1/manifest',
   keyId: 'priedanga/v1/keyid',
   relayId: 'priedanga/v1/relay-id',
 } as const;

@@ -8,3 +8,6 @@ coverage/
 *.key
 *.pem
 secrets/
+
+# content-builder download cache
+.cache/

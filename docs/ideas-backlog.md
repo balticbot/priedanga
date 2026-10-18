@@ -77,3 +77,50 @@ Living list of feature ideas. Each entry: the idea as given, then the design con
 - **Mesh.** Relayed alerts are signed, so they travel over Tiltas like any other alert.
 
 **Proposed phase:** 1 (MVP), if the feed latency turns out acceptable.
+
+---
+
+## I-4. Locked-shelter reports and community shelters
+
+*Added 2026-10-18.*
+
+**Idea, part A:** many official shelters are locked when they should be open. Users report "locked" or "open" when they check a shelter. Each shelter keeps a history of these reports, and shelters that keep being found locked are marked as unreliable.
+
+**Idea, part B:** add unofficial, community-added shelters: strong structures with accessible places to hide, and private shelters that owners are willing to open to others as a last resort.
+
+**Why it matters:** the official register says where a shelter *should* be. It cannot say whether the door will open at 3 a.m. during a red alert. Ground truth from users is the missing layer, and an aggregated record of locked shelters is valuable to PAGD and municipalities as accountability data.
+
+### A. Lock reports and reliability
+
+- **Report types:** "open", "locked", "no access / sign missing", with time, optional photo of the door, and a flag for whether an alert was active at the time (reports made during alerts count most).
+- **History per shelter:** a visible timeline of reports, not just a score.
+- **Transparent reliability label** instead of an opaque score, e.g. "Found locked 3 times in the last 30 days (2 during alerts). Last confirmed open 12 days ago."
+- **Never hide official shelters.** An unreliable shelter gets a warning badge and drops lower in the nearest list; it is not removed, because someone nearby may have the key.
+- **Abuse resistance:** a hostile actor could mass-report shelters as locked to push people away from them. Mitigations:
+  - a "locked" label needs several independent reports
+  - reports are only accepted within ~100 m of the shelter (GPS can be spoofed, but this raises the cost)
+  - device attestation and contributor reputation, as in I-2
+  - "open" reports count against "locked" ones; labels decay over time
+- **Escalation:** aggregated lock reports go to the shelter's manager (the `op` field in the register), the municipality and PAGD. This becomes part of the pitch to the state.
+- **Offline:** reports are queued until a network is available; reliability labels ship in the daily content pack so phones see them in a blackout.
+
+### B. Community shelters
+
+- **A separate, clearly labelled kind:** "Community shelter — not official, not inspected". Its icon and colour are visibly different from official shelters.
+- **Owner consent:** a private shelter can only be added by its owner or with the owner's confirmation. No one can publish someone else's private basement.
+- **Privacy option for owners:** show the exact location only during an active alert, or only to people nearby.
+- **Required details:** type of structure, capacity, access conditions ("open during red alerts", "knock", a contact), accessibility, photos.
+- **Moderation** before publication, and guidance for owners on what makes a structure suitable (based on PAGD criteria).
+- **Lock reports apply here too**, so a community shelter that is never actually open also gets marked unreliable.
+- **Liability:** a clear disclaimer that community shelters are not inspected and come with no guarantee; legal review needed before launch.
+
+### Ordering in the nearest-shelter list (to decide)
+
+A proposed default, sorted by distance within each group: reliable official shelters → official shelters with no recent reports → community shelters with confirmed access → unreliable shelters. Always show distance, so a nearby "unreliable" shelter is still visible.
+
+### Data model notes
+
+- New place kind `community` (index 4) in `places.json`.
+- New pack file `reliability.json`: per place ID, counts of open/locked reports over 30/90 days, during-alert counts, last confirmed open, last reported locked, and the label.
+
+**Proposed phase:** 2, together with I-1 (both need the moderation backend).
