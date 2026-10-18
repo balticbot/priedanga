@@ -1,0 +1,70 @@
+{
+  "format": "priedanga-content-pack",
+  "version": 1,
+  "packVersion": 202610180704,
+  "created": "2026-10-18T07:04:12.954Z",
+  "files": [
+    {
+      "path": "places.json",
+      "bytes": 4236847,
+      "sha256": "0371c6f77f2f39c3d4e5de3678c0d8e498d06daf825c54d755f5fac4f0252475"
+    },
+    {
+      "path": "municipalities.json",
+      "bytes": 2570,
+      "sha256": "7cd284c75ce6c5b2fd47cb2539d62e6eebd646c6e91cbc808e93f649130cb970"
+    }
+  ],
+  "sources": [
+    {
+      "id": "rc/ar/savivaldybe",
+      "url": "https://get.data.gov.lt/datasets/gov/rc/ar/savivaldybe/Savivaldybe",
+      "license": "CC BY 4.0",
+      "attribution": "Registrų centras, Adresų registras (data.gov.lt)",
+      "rows": 60,
+      "fetched": "2026-10-18T07:04:13.271Z"
+    },
+    {
+      "id": "pagd/priedangos",
+      "url": "https://get.data.gov.lt/datasets/gov/pagd/priedangos/Priedanga",
+      "license": "CC BY 4.0",
+      "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
+      "rows": 6583,
+      "fetched": "2026-10-18T07:04:16.896Z"
+    },
+    {
+      "id": "pagd/kas",
+      "url": "https://get.data.gov.lt/datasets/gov/pagd/kas/KAS",
+      "license": "CC BY 4.0",
+      "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
+      "rows": 2517,
+      "fetched": "2026-10-18T07:04:18.372Z"
+    },
+    {
+      "id": "pagd/evakuacijos_punktai",
+      "url": "https://get.data.gov.lt/datasets/gov/pagd/evakuacijos_punktai/EvakuacijosPunktas",
+      "license": "CC BY 4.0",
+      "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
+      "rows": 1960,
+      "fetched": "2026-10-18T07:04:19.286Z"
+    },
+    {
+      "id": "pagd/sirenos",
+      "url": "https://get.data.gov.lt/datasets/gov/pagd/sirenos/Sirena",
+      "license": "CC BY 4.0",
+      "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
+      "rows": 1180,
+      "fetched": "2026-10-18T07:04:20.012Z"
+    }
+  ],
+  "stats": {
+    "shelter.source_rows": 6583,
+    "shelter.kept": 6583,
+    "kas.source_rows": 2517,
+    "kas.kept": 2517,
+    "evacuation.source_rows": 1960,
+    "evacuation.kept": 1960,
+    "siren.source_rows": 1180,
+    "siren.kept": 1180
+  }
+}

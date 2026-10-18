@@ -107,7 +107,7 @@ Based on the **OASIS Common Alerting Protocol (CAP 1.2)**, the standard used by 
 
 - **Encoding:** CBOR with fixed integer keys (compact and deterministic).
 - **Signature:** Ed25519 over the canonical CBOR bytes of the signed fields.
-- **Size:** a template-based alert with 3 municipalities is about 150 bytes including the 64-byte signature. That fits in a push payload (4 KB limit) and in one short Bluetooth read.
+- **Size:** a template-based alert is 127 bytes including the 64-byte signature (measured; see `packages/alert-format/SPEC.md`). That fits in a push payload (4 KB limit) and in one short Bluetooth read.
 - **Mutable envelope** (outside the signature): `hops` counter for the mesh, receive path. Changing it cannot change the alert content.
 - **Test vectors:** the `alert-format` package ships a set of valid and invalid encoded alerts; JS, Kotlin and Swift implementations must all agree on every one.
 
@@ -117,6 +117,7 @@ Based on the **OASIS Common Alerting Protocol (CAP 1.2)**, the standard used by 
 Root key (offline, never on a networked machine; split between custodians)
  ├── signs → Issuer certificate: LIVE   (role, valid-from/to, allowed areas)
  ├── signs → Issuer certificate: TEST
+ ├── signs → Relay certificate: LIVE / TEST  (copies official public alerts; labelled "relayed")
  └── signs → Content certificate        (signs pack manifests only)
 ```
 
@@ -124,6 +125,7 @@ Root key (offline, never on a networked machine; split between custodians)
 - Issuer and content certificates are delivered in the content pack and can be rotated without an app update.
 - **Revocation:** a signed revocation list in the content pack, plus a signed "revoke" message that can be pushed or relayed over the mesh.
 - **Separation of roles:** the content key cannot sign alerts, the test key cannot sign live alerts, and a live alert outside the issuer's allowed areas is rejected.
+- **Relay role:** before a state agreement, a relay key signs verbatim copies of official PAGD warning messages. Relayed alerts must name their source and source message ID, and the app labels them "Relayed from PAGD — not signed by PAGD". A relay key can never produce an alert that verifies as authority-signed.
 - **Until a state agreement exists**, only the TEST issuer certificate is created. The LIVE certificate is generated together with the authority, which holds its key.
 
 ## 7. Tiltas mesh protocol (v0)
@@ -141,7 +143,7 @@ Goal: carry a few small signed alerts across a crowd of phones with no infrastru
 **Platform limits (honest):**
 - **Android:** a foreground service (with a persistent notification) allows continuous scanning and advertising. Full relay node.
 - **iOS:** reliable while the app is open. In the background, CoreBluetooth still runs but is throttled: slow scanning, and advertising of the service UUID only. iPhones therefore act mostly as receivers while closed, and as full relays while open. Multipeer Connectivity is not used because it stops in the background.
-- Throughput is irrelevant here: alerts are ~150 bytes.
+- Throughput is irrelevant here: alerts are ~130 bytes.
 
 ## 8. Threat model (summary)
 
