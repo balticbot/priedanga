@@ -58,3 +58,22 @@ Living list of feature ideas. Each entry: the idea as given, then the design con
 - **"No accounts"** becomes **"no accounts needed"**: reading, alerts and shelters stay anonymous; contributing may use an optional pseudonymous account (needed for reputation and abuse control).
 - **"No location upload"** stays true for passive use. Location is uploaded only when the user explicitly submits a report or contribution.
 - A backend with media storage and a moderation queue is added. It is separate from the alert and content infrastructure and can fail without affecting them.
+
+---
+
+## I-3. Relay mode for official alerts
+
+*Added 2026-10-18, from the [Budrus analysis](competitive/budrus.md).*
+
+**Idea:** before any agreement with the state, show real official alerts. Priedanga's server reads the official PAGD warning feed and signs each message with a dedicated **relay** certificate.
+
+**Why it matters:** competitors already show real alerts today; an app that shows only TEST alerts is not useful to people yet.
+
+**Design constraints:**
+- **Honest provenance.** The phone labels relayed alerts as "Relayed from PAGD by Priedanga — not signed by PAGD", visually distinct from authority-signed alerts.
+- **New certificate role** in the alert format (e.g. `Relay`), with its own reason codes and test vectors. This is a v1 spec change and must be made before any native port.
+- **Verbatim text only.** No AI rewriting or summarising; official text and area description as published.
+- **Latency.** Measure how quickly the open-data feed updates compared with cell broadcast; if it lags, say so in the UI.
+- **Mesh.** Relayed alerts are signed, so they travel over Tiltas like any other alert.
+
+**Proposed phase:** 1 (MVP), if the feed latency turns out acceptable.

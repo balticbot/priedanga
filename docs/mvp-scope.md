@@ -45,7 +45,7 @@ The MVP has to be demoable to PAGD/VRM and survive a real blackout test.
 
 | # | Feature | Notes |
 |---|---|---|
-| A1 | **Offline shelter finder** | Bundled shelter dataset; GPS (works without cellular); nearest-N list with distance and bearing; compass arrow; manual municipality or address pick if GPS is unavailable or spoofed |
+| A1 | **Offline shelter finder** | Shelters, collective protection structures (KAS), evacuation points and sirens from the PAGD open registers; GPS (works without cellular); nearest-N list with distance and bearing; compass arrow; **offline walking route**; search by address or name; manual municipality or address pick if GPS is unavailable or spoofed |
 | A2 | **Offline map** | Vector map of the user's region downloaded at onboarding (~10–30 MB); full-country pack optional |
 | A3 | **Offline guidance library** | What to do for each alert type (air attack, chemical, radiation, flood, etc.), in 5 languages, with large type and voice readout via the OS's offline text-to-speech |
 | A4 | **Signed alerts via push** | One payload carries the full alert; no fetch needed to show it; verified on the device before display |
@@ -57,6 +57,9 @@ The MVP has to be demoable to PAGD/VRM and survive a real blackout test.
 | A10 | **Accessibility baseline** | Dynamic type, screen readers, high contrast, vibration pattern for deaf users |
 | A11 | **Tiltas mesh v0** | Phones relay signed alerts to nearby phones over Bluetooth LE. See §6 for the honest limits |
 | A12 | **Preparedness checklist** | Offline 72-hour kit checklist, stored locally |
+| A13 | **Offline first aid** | Bleeding, unconsciousness, CPR (with metronome), burns; 112 shortcut with tourniquet timer. Table stakes since Budrus ships it (see [competitive/budrus.md](competitive/budrus.md)) |
+| A14 | **Siren coverage** | Using the official siren sound radius: tell users "you may not hear a siren here — keep alerts on" |
+| A15 | **Alert history** | Past alerts with timeline and duration; seeded from the official PAGD warning-message archive |
 
 ### 5.2 Issuer console (web, for authority / demo)
 
@@ -117,7 +120,7 @@ Mesh relaying is the hardest part and the platforms constrain it. The MVP is hon
 
 ## 10. Open questions
 
-1. **Shelter data source.** LT72 shows shelters (priedangos) and evacuation points, but no open dataset was found on data.gov.lt or geoportal.lt. Options: ask PAGD for a data-sharing agreement, or request the dataset via data.gov.lt.
+1. ~~**Shelter data source.**~~ **Resolved 2026-10-18:** PAGD publishes shelters, KAS, sirens, evacuation points and the warning-message archive as open data (CC BY 4.0) via `get.data.gov.lt`. See [competitive/budrus.md](competitive/budrus.md) §6.
 2. **Official alert-level semantics.** Exact meaning and wording of yellow / red / yellow-after-red / white must be confirmed with PAGD and mirrored exactly.
 3. **When to approach PAGD.** Recommendation: after the blackout and load demos work, before Phase 2.
 4. **iOS Critical Alerts.** Apple grants this entitlement case by case; a letter of support from an authority helps.
