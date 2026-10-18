@@ -147,6 +147,31 @@ export interface GuidanceFile {
   topics: GuidanceTopic[];
 }
 
+export interface ChecklistItem {
+  /** Stable within its checklist; ticks are stored on the phone by checklist id + item id. */
+  id: string;
+  /** May contain {amount}, filled in from perPerson × household size. */
+  text: Localized;
+  /** Quantity per person (e.g. litres of water for 72 h). */
+  perPerson?: number;
+}
+
+export interface Checklist {
+  id: string;
+  order: number;
+  title: Localized;
+  summary: Localized;
+  items: ChecklistItem[];
+  sources: GuidanceSource[];
+  review: GuidanceTopic['review'];
+}
+
+export interface ChecklistsFile {
+  format: typeof PACK_FORMAT;
+  version: typeof PACK_FORMAT_VERSION;
+  checklists: Checklist[];
+}
+
 /** Pack files that carry trust material rather than content (not listed in the manifest). */
 export const TRUST_FILE = 'trust.json';
 

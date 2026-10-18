@@ -1,0 +1,225 @@
+{
+  "id": "go-bag",
+  "order": 1,
+  "title": {
+    "lt": "Išvykimo krepšys",
+    "en": "Go-bag",
+    "ru": "Тревожный рюкзак",
+    "pl": "Plecak ewakuacyjny",
+    "uk": "Тривожна валіза"
+  },
+  "summary": {
+    "lt": "Ką susidėti, jei tektų skubiai išvykti.",
+    "en": "What to pack in case you have to leave quickly.",
+    "ru": "Что собрать на случай срочного отъезда.",
+    "pl": "Co spakować na wypadek nagłego wyjazdu.",
+    "uk": "Що зібрати на випадок термінового від’їзду."
+  },
+  "items": [
+    {
+      "id": "documents",
+      "text": {
+        "lt": "Dokumentai: pasas ar asmens tapatybės kortelė, gimimo ar santuokos liudijimai, vairuotojo pažymėjimas, draudimo ir nuosavybės dokumentai",
+        "en": "Documents: passport or ID card, birth or marriage certificates, driving licence, insurance and property papers",
+        "ru": "Документы: паспорт или удостоверение личности, свидетельства о рождении или браке, водительские права, страховые документы и документы на имущество",
+        "pl": "Dokumenty: paszport lub dowód osobisty, akty urodzenia lub małżeństwa, prawo jazdy, dokumenty ubezpieczeniowe i własności",
+        "uk": "Документи: паспорт або посвідчення особи, свідоцтва про народження чи шлюб, посвідчення водія, страхові документи та документи на майно"
+      }
+    },
+    {
+      "id": "cash",
+      "text": {
+        "lt": "Grynieji pinigai ir banko kortelės (laikykite keliose vietose)",
+        "en": "Cash and bank cards (keep them in more than one place)",
+        "ru": "Наличные и банковские карты (храните в нескольких местах)",
+        "pl": "Gotówka i karty bankowe (trzymaj w kilku miejscach)",
+        "uk": "Готівка та банківські картки (зберігайте в кількох місцях)"
+      }
+    },
+    {
+      "id": "phone",
+      "text": {
+        "lt": "Mobilusis telefonas ir įkroviklis ar išorinė baterija",
+        "en": "Mobile phone and charger or power bank",
+        "ru": "Мобильный телефон и зарядка или пауэрбанк",
+        "pl": "Telefon komórkowy i ładowarka lub powerbank",
+        "uk": "Мобільний телефон і зарядка чи павербанк"
+      }
+    },
+    {
+      "id": "torch",
+      "text": {
+        "lt": "Kišeninis žibintuvėlis ir atsarginės baterijos",
+        "en": "Pocket torch and spare batteries",
+        "ru": "Карманный фонарик и запасные батарейки",
+        "pl": "Latarka kieszonkowa i zapasowe baterie",
+        "uk": "Кишеньковий ліхтарик і запасні батарейки"
+      }
+    },
+    {
+      "id": "radio",
+      "text": {
+        "lt": "Nešiojamas radijo imtuvas ir atsarginės baterijos",
+        "en": "Portable radio and spare batteries",
+        "ru": "Портативный радиоприёмник и запасные батарейки",
+        "pl": "Przenośne radio i zapasowe baterie",
+        "uk": "Портативний радіоприймач і запасні батарейки"
+      }
+    },
+    {
+      "id": "medicines",
+      "text": {
+        "lt": "Vaistinėlė ir kiekvieno šeimos nario kasdien vartojami vaistai",
+        "en": "First-aid kit and each family member's daily medicines",
+        "ru": "Аптечка и ежедневные лекарства каждого члена семьи",
+        "pl": "Apteczka i codzienne leki każdego członka rodziny",
+        "uk": "Аптечка й щоденні ліки кожного члена родини"
+      }
+    },
+    {
+      "id": "glasses",
+      "text": {
+        "lt": "Akiniai, kontaktiniai lęšiai ar klausos aparatai",
+        "en": "Glasses, contact lenses or hearing aids",
+        "ru": "Очки, контактные линзы или слуховые аппараты",
+        "pl": "Okulary, soczewki kontaktowe lub aparaty słuchowe",
+        "uk": "Окуляри, контактні лінзи або слухові апарати"
+      }
+    },
+    {
+      "id": "food-water",
+      "text": {
+        "lt": "Maisto ir vandens 3 paroms (vanduo – mažuose buteliuose)",
+        "en": "Food and water for 3 days (water in small bottles)",
+        "ru": "Еда и вода на 3 суток (вода – в небольших бутылках)",
+        "pl": "Żywność i woda na 3 dni (woda w małych butelkach)",
+        "uk": "Їжа й вода на 3 доби (вода – у невеликих пляшках)"
+      }
+    },
+    {
+      "id": "special-food",
+      "text": {
+        "lt": "Papildomai maisto, jei kas nors laikosi specialios dietos",
+        "en": "Extra food for anyone on a special diet",
+        "ru": "Дополнительная еда для тех, кто соблюдает особую диету",
+        "pl": "Dodatkowa żywność dla osób na specjalnej diecie",
+        "uk": "Додаткова їжа для тих, хто дотримується особливої дієти"
+      }
+    },
+    {
+      "id": "tin-opener",
+      "text": {
+        "lt": "Konservų atidarytuvas",
+        "en": "Tin opener",
+        "ru": "Консервный нож",
+        "pl": "Otwieracz do konserw",
+        "uk": "Консервний ніж"
+      }
+    },
+    {
+      "id": "baby",
+      "text": {
+        "lt": "Kūdikių maistas, sauskelnės, drėgnos servetėlės (jei reikia)",
+        "en": "Baby food, nappies, wet wipes (if needed)",
+        "ru": "Детское питание, подгузники, влажные салфетки (если нужно)",
+        "pl": "Jedzenie dla niemowląt, pieluchy, chusteczki nawilżane (jeśli potrzebne)",
+        "uk": "Дитяче харчування, підгузки, вологі серветки (якщо потрібно)"
+      }
+    },
+    {
+      "id": "kids",
+      "text": {
+        "lt": "Žaislai ar knygos vaikams",
+        "en": "Toys or books for children",
+        "ru": "Игрушки или книги для детей",
+        "pl": "Zabawki lub książki dla dzieci",
+        "uk": "Іграшки чи книжки для дітей"
+      }
+    },
+    {
+      "id": "clothes",
+      "text": {
+        "lt": "Sezoną atitinkantys drabužiai",
+        "en": "Clothes suited to the season",
+        "ru": "Одежда по сезону",
+        "pl": "Odzież odpowiednia do pory roku",
+        "uk": "Одяг відповідно до сезону"
+      }
+    },
+    {
+      "id": "hygiene",
+      "text": {
+        "lt": "Higienos reikmenys: rankšluostis, muilas, dantų šepetėlis, tualetinis popierius",
+        "en": "Toiletries: towel, soap, toothbrush, toilet paper",
+        "ru": "Средства гигиены: полотенце, мыло, зубная щётка, туалетная бумага",
+        "pl": "Przybory higieniczne: ręcznik, mydło, szczoteczka do zębów, papier toaletowy",
+        "uk": "Засоби гігієни: рушник, мило, зубна щітка, туалетний папір"
+      }
+    },
+    {
+      "id": "blanket",
+      "text": {
+        "lt": "Šilta antklodė ar kompaktiškas miegmaišis",
+        "en": "Warm blanket or compact sleeping bag",
+        "ru": "Тёплое одеяло или компактный спальник",
+        "pl": "Ciepły koc lub kompaktowy śpiwór",
+        "uk": "Тепла ковдра або компактний спальник"
+      }
+    },
+    {
+      "id": "mask",
+      "text": {
+        "lt": "Respiratorius ar apsauginė kaukė nuo dulkių",
+        "en": "Dust mask",
+        "ru": "Респиратор или защитная маска от пыли",
+        "pl": "Maska przeciwpyłowa",
+        "uk": "Респіратор або захисна маска від пилу"
+      }
+    },
+    {
+      "id": "matches",
+      "text": {
+        "lt": "Degtukai vandeniui atsparioje dėžutėje",
+        "en": "Matches in a waterproof box",
+        "ru": "Спички в водонепроницаемой коробке",
+        "pl": "Zapałki w wodoodpornym pudełku",
+        "uk": "Сірники у водонепроникній коробці"
+      }
+    },
+    {
+      "id": "notebook",
+      "text": {
+        "lt": "Užrašų knygelė su surašytais telefonų numeriais ir adresais, pieštukas",
+        "en": "Notebook with written-down phone numbers and addresses, and a pencil",
+        "ru": "Блокнот с записанными телефонами и адресами, карандаш",
+        "pl": "Notes z zapisanymi numerami telefonów i adresami, ołówek",
+        "uk": "Блокнот із записаними телефонами й адресами, олівець"
+      }
+    },
+    {
+      "id": "photos",
+      "text": {
+        "lt": "Artimųjų nuotraukos (gali padėti ieškant)",
+        "en": "Photos of family members (can help in a search)",
+        "ru": "Фотографии близких (могут помочь при поиске)",
+        "pl": "Zdjęcia bliskich (mogą pomóc w poszukiwaniach)",
+        "uk": "Фотографії близьких (можуть допомогти в пошуку)"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Išvykimo krepšys",
+      "url": "https://lt72.lt/isvykimo-krepsys/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Based on the cited PAGD pages; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

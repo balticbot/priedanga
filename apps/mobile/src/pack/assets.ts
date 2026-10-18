@@ -8,4 +8,5 @@ export const PACK_ASSETS: Record<PackPath, number> = {
   'places.json': require('../../assets/pack/places.json.bin'),
   'municipalities.json': require('../../assets/pack/municipalities.json.bin'),
   'guidance.json': require('../../assets/pack/guidance.json.bin'),
+  'checklists.json': require('../../assets/pack/checklists.json.bin'),
 };

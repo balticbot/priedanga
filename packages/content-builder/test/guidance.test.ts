@@ -46,3 +46,21 @@ describe('validateTopic', () => {
     expect(() => validateTopic(t, 'x.json')).toThrow(/source/);
   });
 });
+
+describe('checklists', () => {
+  it('loads the checklists with per-person quantities wired up', async () => {
+    const { loadChecklists } = await import('../src/guidance.js');
+    const lists = loadChecklists(join(__dirname, '../../../content/checklists'));
+    expect(lists.map((l) => l.id)).toEqual(['go-bag', 'home-supplies', 'family-plan', 'before-leaving']);
+    const water = lists.find((l) => l.id === 'home-supplies')!.items.find((i) => i.id === 'water')!;
+    expect(water.perPerson).toBe(12);
+    expect(water.text.lt).toContain('{amount}');
+  });
+
+  it('rejects {amount} without perPerson', async () => {
+    const { loadChecklists, validateChecklist } = await import('../src/guidance.js');
+    const list = JSON.parse(JSON.stringify(loadChecklists(join(__dirname, '../../../content/checklists'))[1]));
+    delete list.items[0].perPerson;
+    expect(() => validateChecklist(list, 'x.json')).toThrow(/perPerson/);
+  });
+});

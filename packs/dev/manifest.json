@@ -1,8 +1,8 @@
 {
   "format": "priedanga-content-pack",
   "version": 1,
-  "packVersion": 202610181012,
-  "created": "2026-10-18T10:12:18.292Z",
+  "packVersion": 202610181140,
+  "created": "2026-10-18T11:40:10.279Z",
   "files": [
     {
       "path": "places.json",
@@ -18,6 +18,11 @@
       "path": "guidance.json",
       "bytes": 83207,
       "sha256": "99eca90a2279f4181ef10c7d0bbbad014d66c6cbeea61adae386f490aee5d1c4"
+    },
+    {
+      "path": "checklists.json",
+      "bytes": 17832,
+      "sha256": "9dcbc1dd01d3b9dcd19e8134eb2e40b0fd94cd4e349eaad1992c9ed84a7c6a90"
     }
   ],
   "sources": [
@@ -79,6 +84,7 @@
     "evacuation.kept": 1960,
     "siren.source_rows": 1180,
     "siren.kept": 1180,
-    "guidance.topics": 13
+    "guidance.topics": 13,
+    "checklists": 4
   }
 }

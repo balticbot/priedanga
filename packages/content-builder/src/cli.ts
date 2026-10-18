@@ -30,6 +30,7 @@ const { manifest } = await buildPack({
   outDir,
   cacheDir: join(repoRoot, 'packages/content-builder/.cache'),
   guidanceDir: join(repoRoot, 'content/guidance'),
+  checklistsDir: join(repoRoot, 'content/checklists'),
   keys,
   offline,
   now,

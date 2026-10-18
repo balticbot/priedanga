@@ -26,10 +26,12 @@ import type {
   TrustFile,
   GuidanceFile,
   GuidanceTopic,
+  Checklist,
+  ChecklistsFile,
 } from '@priedanga/content-builder/schema';
 import { hexToBytes } from './hex';
 
-export const PACK_PATHS = ['manifest.json', 'manifest.sig', 'trust.json', 'places.json', 'municipalities.json', 'guidance.json'] as const;
+export const PACK_PATHS = ['manifest.json', 'manifest.sig', 'trust.json', 'places.json', 'municipalities.json', 'guidance.json', 'checklists.json'] as const;
 export type PackPath = (typeof PACK_PATHS)[number];
 
 export type PackFailure =
@@ -45,6 +47,7 @@ export interface VerifiedPack {
   places: PackPlace[];
   municipalities: Municipality[];
   guidance: GuidanceTopic[];
+  checklists: Checklist[];
   signerName: string;
   /** Root-verified certificates from the pack; used to verify alerts too. */
   store: TrustStore;
@@ -118,7 +121,7 @@ export async function verifyPack(
     }
   }
   lap('hash');
-  for (const required of ['places.json', 'municipalities.json', 'guidance.json']) {
+  for (const required of ['places.json', 'municipalities.json', 'guidance.json', 'checklists.json']) {
     if (!manifest.files.some((e) => e.path === required)) {
       return { ok: false, reason: 'BAD_MANIFEST', detail: `${required} not listed` };
     }
@@ -128,7 +131,13 @@ export async function verifyPack(
     const places = JSON.parse(decode(f['places.json'])) as PlacesFile;
     const municipalities = JSON.parse(decode(f['municipalities.json'])) as MunicipalitiesFile;
     const guidance = JSON.parse(decode(f['guidance.json'])) as GuidanceFile;
-    if (!Array.isArray(places.places) || !Array.isArray(municipalities.municipalities) || !Array.isArray(guidance.topics)) {
+    const checklists = JSON.parse(decode(f['checklists.json'])) as ChecklistsFile;
+    if (
+      !Array.isArray(places.places) ||
+      !Array.isArray(municipalities.municipalities) ||
+      !Array.isArray(guidance.topics) ||
+      !Array.isArray(checklists.checklists)
+    ) {
       throw new Error('bad shape');
     }
     lap('parse');
@@ -138,6 +147,7 @@ export async function verifyPack(
       places: places.places,
       municipalities: municipalities.municipalities,
       guidance: guidance.topics,
+      checklists: checklists.checklists,
       signerName: sig.signer.name,
       store,
     };

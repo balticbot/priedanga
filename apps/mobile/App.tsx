@@ -29,6 +29,8 @@ import { GuideDetail } from './src/ui/GuideDetail';
 import { GuideList } from './src/ui/GuideList';
 import { TourniquetTool } from './src/ui/TourniquetTool';
 import { topicForAlert } from './src/guidance';
+import { useChecklistState } from './src/state/checklistStore';
+import { ChecklistDetail, ChecklistIndex } from './src/ui/Checklists';
 import { colors, radius, space } from './src/ui/theme';
 
 type Screen =
@@ -36,7 +38,9 @@ type Screen =
   | { name: 'place'; item: Nearby }
   | { name: 'guides'; group: 'emergency' | 'firstaid' }
   | { name: 'guide'; id: string; from: Screen }
-  | { name: 'tool'; tool: 'cpr' | 'tourniquet'; from: Screen };
+  | { name: 'tool'; tool: 'cpr' | 'tourniquet'; from: Screen }
+  | { name: 'checklists' }
+  | { name: 'checklist'; id: string };
 
 type Position =
   | { status: 'locating' }
@@ -70,6 +74,7 @@ function Main() {
   const [screen, setScreen] = useState<Screen>({ name: 'home' });
   const setSelected = (item: Nearby) => setScreen({ name: 'place', item });
   const home = () => setScreen({ name: 'home' });
+  const [checklistState, updateChecklists] = useChecklistState();
   const network = useNetworkState();
   const online = network.isInternetReachable !== false && network.isConnected !== false;
 
@@ -184,6 +189,37 @@ function Main() {
       );
     }
   }
+  if (screen.name === 'checklists' && pack.ok) {
+    return (
+      <SafeAreaView style={styles.root}>
+        <ChecklistIndex
+          lists={pack.checklists}
+          state={checklistState}
+          lang={lang}
+          t={t}
+          onBack={home}
+          onOpen={(id) => setScreen({ name: 'checklist', id })}
+        />
+      </SafeAreaView>
+    );
+  }
+  if (screen.name === 'checklist' && pack.ok) {
+    const list = pack.checklists.find((c) => c.id === screen.id);
+    if (list) {
+      return (
+        <SafeAreaView style={styles.root}>
+          <ChecklistDetail
+            list={list}
+            state={checklistState}
+            update={updateChecklists}
+            lang={lang}
+            t={t}
+            onBack={() => setScreen({ name: 'checklists' })}
+          />
+        </SafeAreaView>
+      );
+    }
+  }
   if (screen.name === 'tool') {
     return (
       <SafeAreaView style={styles.root}>
@@ -248,6 +284,9 @@ function Main() {
           <Text style={[styles.guideButtonText, { color: colors.bad }]}>{t.firstAid}</Text>
         </Pressable>
       </View>
+      <Pressable style={[styles.guideButton, styles.prepButton]} onPress={() => setScreen({ name: 'checklists' })} accessibilityRole="button">
+        <Text style={[styles.guideButtonText, { color: colors.ok }]}>{t.preparedness}</Text>
+      </Pressable>
 
       {pack.ok ? (
         <Pressable disabled={!ROOT_IS_DEV} onPress={runConformance} accessibilityHint={ROOT_IS_DEV ? 'Runs the native Ed25519 conformance check' : undefined}>
@@ -446,6 +485,7 @@ const styles = StyleSheet.create({
   rowDirection: { fontSize: 13, color: colors.muted },
   guideButtons: { flexDirection: 'row', gap: space(2), marginTop: space(2), marginBottom: space(3) },
   guideButton: { flex: 1, borderWidth: 2, borderRadius: radius, padding: space(3), backgroundColor: colors.card, justifyContent: 'center' },
+  prepButton: { borderColor: colors.ok, flex: 0, marginBottom: space(3) },
   guideButtonText: { fontSize: 16, fontWeight: '800', textAlign: 'center' },
   urgent: { marginTop: space(3), marginBottom: space(2) },
   urgentTitle: { fontSize: 19, fontWeight: '900', color: colors.ink, marginBottom: space(2) },

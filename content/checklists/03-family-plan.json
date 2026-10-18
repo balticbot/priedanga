@@ -1,0 +1,110 @@
+{
+  "id": "family-plan",
+  "order": 3,
+  "title": {
+    "lt": "Šeimos planas",
+    "en": "Family plan",
+    "ru": "Семейный план",
+    "pl": "Plan rodzinny",
+    "uk": "Сімейний план"
+  },
+  "summary": {
+    "lt": "Ką iš anksto sutarti su artimaisiais.",
+    "en": "What to agree with your family in advance.",
+    "ru": "О чём заранее договориться с близкими.",
+    "pl": "Co ustalić z rodziną z wyprzedzeniem.",
+    "uk": "Про що заздалегідь домовитися з близькими."
+  },
+  "items": [
+    {
+      "id": "where-shelter",
+      "text": {
+        "lt": "Sutarta, kur slėpsimės pavojaus metu",
+        "en": "We have agreed where we will take shelter",
+        "ru": "Договорились, где будем укрываться",
+        "pl": "Ustaliliśmy, gdzie się schronimy",
+        "uk": "Домовилися, де будемо ховатися"
+      }
+    },
+    {
+      "id": "meeting-point",
+      "text": {
+        "lt": "Sutarta susitikimo vieta, jei išsiskirtume",
+        "en": "We have a meeting point in case we get separated",
+        "ru": "Есть место встречи на случай, если разделимся",
+        "pl": "Mamy miejsce spotkania na wypadek rozdzielenia",
+        "uk": "Є місце зустрічі на випадок, якщо розділимося"
+      }
+    },
+    {
+      "id": "how-leave",
+      "text": {
+        "lt": "Sutarta, kaip išvyktume (automobiliu, traukiniu, autobusu) ir ką darysime, jei automobilis suges",
+        "en": "We know how we would leave (car, train, bus) and what to do if the car breaks down",
+        "ru": "Знаем, как уедем (машина, поезд, автобус) и что делать, если машина сломается",
+        "pl": "Wiemy, jak wyjedziemy (samochód, pociąg, autobus) i co zrobić, jeśli auto się zepsuje",
+        "uk": "Знаємо, як виїдемо (авто, поїзд, автобус) і що робити, якщо авто зламається"
+      }
+    },
+    {
+      "id": "alt-route",
+      "text": {
+        "lt": "Žinomas alternatyvus evakuacijos maršrutas",
+        "en": "We know an alternative evacuation route",
+        "ru": "Знаем альтернативный маршрут эвакуации",
+        "pl": "Znamy alternatywną trasę ewakuacji",
+        "uk": "Знаємо альтернативний маршрут евакуації"
+      }
+    },
+    {
+      "id": "what-take",
+      "text": {
+        "lt": "Sutarta, ką pasiimsime į priedangą ir ką – evakuojantis",
+        "en": "We know what to take to a shelter and what to take when evacuating",
+        "ru": "Знаем, что взять в укрытие и что – при эвакуации",
+        "pl": "Wiemy, co zabrać do schronu, a co przy ewakuacji",
+        "uk": "Знаємо, що взяти в укриття, а що – під час евакуації"
+      }
+    },
+    {
+      "id": "contacts",
+      "text": {
+        "lt": "Visi žino numerius: 112 (skubi pagalba) ir 1856 (PAGD konsultacijos)",
+        "en": "Everyone knows the numbers: 112 (emergencies) and 1856 (PAGD advice line)",
+        "ru": "Все знают номера: 112 (экстренная помощь) и 1856 (консультации PAGD)",
+        "pl": "Wszyscy znają numery: 112 (pomoc w nagłych wypadkach) i 1856 (infolinia PAGD)",
+        "uk": "Усі знають номери: 112 (екстрена допомога) і 1856 (консультації PAGD)"
+      }
+    },
+    {
+      "id": "text-not-call",
+      "text": {
+        "lt": "Sutarta pavojaus metu artimiesiems rašyti žinutes, o ne skambinti",
+        "en": "We have agreed to text rather than call each other during an emergency",
+        "ru": "Договорились во время опасности писать сообщения, а не звонить",
+        "pl": "Ustaliliśmy, że w razie zagrożenia piszemy wiadomości zamiast dzwonić",
+        "uk": "Домовилися під час небезпеки писати повідомлення, а не дзвонити"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Šeimos planas",
+      "url": "https://lt72.lt/seimos-planas/",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "PAGD prie VRM: Išvykimo krepšys",
+      "url": "https://lt72.lt/isvykimo-krepsys/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Based on the cited PAGD pages; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

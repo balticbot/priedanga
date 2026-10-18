@@ -1,0 +1,90 @@
+{
+  "id": "before-leaving",
+  "order": 4,
+  "title": {
+    "lt": "Prieš išeinant iš namų",
+    "en": "Before leaving home",
+    "ru": "Перед уходом из дома",
+    "pl": "Przed wyjściem z domu",
+    "uk": "Перед виходом з дому"
+  },
+  "summary": {
+    "lt": "Ką padaryti, jei liepiama evakuotis.",
+    "en": "What to do if you are told to evacuate.",
+    "ru": "Что сделать, если велено эвакуироваться.",
+    "pl": "Co zrobić, jeśli polecono ewakuację.",
+    "uk": "Що зробити, якщо наказано евакуюватися."
+  },
+  "items": [
+    {
+      "id": "gas-water-power",
+      "text": {
+        "lt": "Užsukti dujų ir vandens čiaupus, išjungti elektrą",
+        "en": "Shut off gas and water, switch off the electricity",
+        "ru": "Перекрыть газ и воду, отключить электричество",
+        "pl": "Zakręcić gaz i wodę, wyłączyć prąd",
+        "uk": "Перекрити газ і воду, вимкнути електрику"
+      }
+    },
+    {
+      "id": "windows-doors",
+      "text": {
+        "lt": "Uždaryti langus ir užrakinti duris",
+        "en": "Close the windows and lock the doors",
+        "ru": "Закрыть окна и запереть двери",
+        "pl": "Zamknąć okna i drzwi na klucz",
+        "uk": "Зачинити вікна й замкнути двері"
+      }
+    },
+    {
+      "id": "take-bag",
+      "text": {
+        "lt": "Pasiimti išvykimo krepšį",
+        "en": "Take the go-bag",
+        "ru": "Взять тревожный рюкзак",
+        "pl": "Zabrać plecak ewakuacyjny",
+        "uk": "Взяти тривожну валізу"
+      }
+    },
+    {
+      "id": "pets",
+      "text": {
+        "lt": "Pasiimti gyvūnus",
+        "en": "Take your pets",
+        "ru": "Взять с собой животных",
+        "pl": "Zabrać zwierzęta",
+        "uk": "Взяти тварин"
+      }
+    },
+    {
+      "id": "tell-family",
+      "text": {
+        "lt": "Parašyti artimiesiems, kur vykstate",
+        "en": "Text your family where you are going",
+        "ru": "Написать близким, куда вы едете",
+        "pl": "Napisać bliskim, dokąd jedziesz",
+        "uk": "Написати близьким, куди ви прямуєте"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Išvykimo krepšys",
+      "url": "https://lt72.lt/isvykimo-krepsys/",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "PAGD prie VRM: Kaip elgtis kilus oro pavojui ir kitoms karinėms grėsmėms",
+      "url": "https://lt72.lt/kaip-elgtis-kilus-oro-pavojui-ir-kitoms-karinems-gresmems/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Based on the cited PAGD pages; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

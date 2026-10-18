@@ -1,0 +1,116 @@
+{
+  "id": "home-supplies",
+  "order": 2,
+  "title": {
+    "lt": "Atsargos namuose 72 valandoms",
+    "en": "Home supplies for 72 hours",
+    "ru": "Запасы дома на 72 часа",
+    "pl": "Zapasy w domu na 72 godziny",
+    "uk": "Запаси вдома на 72 години"
+  },
+  "summary": {
+    "lt": "Vanduo ir maistas visai šeimai trims paroms.",
+    "en": "Water and food for the whole household for three days.",
+    "ru": "Вода и еда для всей семьи на трое суток.",
+    "pl": "Woda i żywność dla całego domu na trzy dni.",
+    "uk": "Вода й їжа для всієї родини на три доби."
+  },
+  "items": [
+    {
+      "id": "water",
+      "text": {
+        "lt": "Vanduo: {amount} l (po 12 l žmogui trims paroms)",
+        "en": "Water: {amount} L (12 L per person for three days)",
+        "ru": "Вода: {amount} л (по 12 л на человека на трое суток)",
+        "pl": "Woda: {amount} l (12 l na osobę na trzy dni)",
+        "uk": "Вода: {amount} л (по 12 л на людину на три доби)"
+      },
+      "perPerson": 12
+    },
+    {
+      "id": "canned-meat",
+      "text": {
+        "lt": "Mėsos konservai",
+        "en": "Canned meat",
+        "ru": "Мясные консервы",
+        "pl": "Konserwy mięsne",
+        "uk": "М’ясні консерви"
+      }
+    },
+    {
+      "id": "canned-veg",
+      "text": {
+        "lt": "Daržovių ir ankštinių konservai",
+        "en": "Canned vegetables and pulses",
+        "ru": "Овощные и бобовые консервы",
+        "pl": "Konserwy warzywne i strączkowe",
+        "uk": "Овочеві та бобові консерви"
+      }
+    },
+    {
+      "id": "canned-other",
+      "text": {
+        "lt": "Kiti konservai: kondensuotas pienas, vaisiai",
+        "en": "Other tinned food: condensed milk, fruit",
+        "ru": "Другие консервы: сгущённое молоко, фрукты",
+        "pl": "Inne konserwy: mleko skondensowane, owoce",
+        "uk": "Інші консерви: згущене молоко, фрукти"
+      }
+    },
+    {
+      "id": "grains",
+      "text": {
+        "lt": "Kruopos",
+        "en": "Groats and grains",
+        "ru": "Крупы",
+        "pl": "Kasze",
+        "uk": "Крупи"
+      }
+    },
+    {
+      "id": "basics",
+      "text": {
+        "lt": "Aliejus, cukrus, druska, prieskoniai, medus, arbata",
+        "en": "Oil, sugar, salt, spices, honey, tea",
+        "ru": "Масло, сахар, соль, специи, мёд, чай",
+        "pl": "Olej, cukier, sól, przyprawy, miód, herbata",
+        "uk": "Олія, цукор, сіль, спеції, мед, чай"
+      }
+    },
+    {
+      "id": "opener",
+      "text": {
+        "lt": "Konservų atidarytuvas",
+        "en": "Tin opener",
+        "ru": "Консервный нож",
+        "pl": "Otwieracz do konserw",
+        "uk": "Консервний ніж"
+      }
+    },
+    {
+      "id": "rotate",
+      "text": {
+        "lt": "Naujus produktus dėkite už senųjų, kad senesni būtų suvartoti pirmiausia",
+        "en": "Put new items behind older ones so the oldest are used first",
+        "ru": "Новые продукты ставьте за старыми, чтобы сначала использовались старые",
+        "pl": "Nowe produkty stawiaj za starszymi, aby najpierw zużywać starsze",
+        "uk": "Нові продукти ставте за старими, щоб спершу використовувалися старші"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Maisto atsargos",
+      "url": "https://lt72.lt/maisto-atsargos/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Based on the cited PAGD pages; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

@@ -17,6 +17,9 @@ export const LANGUAGE_NAMES: Record<Lang, string> = {
 };
 
 const lt = {
+  preparedness: 'Pasiruošimas',
+  householdSize: 'Žmonių namuose',
+  progress: 'Atlikta {done} iš {total}',
   whatToDo: 'Ką daryti',
   emergencyGuides: 'Ką daryti pavojaus metu',
   firstAid: 'Pirmoji pagalba',
@@ -116,6 +119,9 @@ const lt = {
 export type Strings = typeof lt;
 
 const en: Strings = {
+  preparedness: 'Be prepared',
+  householdSize: 'People at home',
+  progress: '{done} of {total} done',
   whatToDo: 'What to do',
   emergencyGuides: 'What to do in an emergency',
   firstAid: 'First aid',
@@ -214,6 +220,9 @@ const en: Strings = {
 
 // DRAFT — needs native review
 const ru: Strings = {
+  preparedness: 'Подготовка',
+  householdSize: 'Человек дома',
+  progress: 'Выполнено {done} из {total}',
   whatToDo: 'Что делать',
   emergencyGuides: 'Что делать при опасности',
   firstAid: 'Первая помощь',
@@ -312,6 +321,9 @@ const ru: Strings = {
 
 // DRAFT — needs native review
 const pl: Strings = {
+  preparedness: 'Przygotowanie',
+  householdSize: 'Osób w domu',
+  progress: 'Zrobione {done} z {total}',
   whatToDo: 'Co robić',
   emergencyGuides: 'Co robić w razie zagrożenia',
   firstAid: 'Pierwsza pomoc',
@@ -410,6 +422,9 @@ const pl: Strings = {
 
 // DRAFT — needs native review
 const uk: Strings = {
+  preparedness: 'Підготовка',
+  householdSize: 'Людей удома',
+  progress: 'Виконано {done} з {total}',
   whatToDo: 'Що робити',
   emergencyGuides: 'Що робити в разі небезпеки',
   firstAid: 'Перша допомога',

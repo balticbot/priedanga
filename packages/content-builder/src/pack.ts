@@ -3,13 +3,14 @@ import { join } from 'node:path';
 import { bytesToHex } from '@noble/hashes/utils.js';
 import { sha256Hex, signManifest } from '@priedanga/alert-format';
 import { downloadModel, type Download } from './fetch.js';
-import { loadGuidance } from './guidance.js';
+import { loadChecklists, loadGuidance } from './guidance.js';
 import type { DevKeys } from './keys.js';
 import { buildMunicipalityIndex, normalizeAll, parseMunicipalities, Stats } from './normalize.js';
 import {
   PACK_FORMAT,
   PACK_FORMAT_VERSION,
   TRUST_FILE,
+  type ChecklistsFile,
   type GuidanceFile,
   type Manifest,
   type ManifestFile,
@@ -38,6 +39,8 @@ export interface BuildOptions {
   cacheDir: string;
   /** content/guidance: topic source files, bundled as guidance.json. */
   guidanceDir: string;
+  /** content/checklists, bundled as checklists.json. */
+  checklistsDir: string;
   keys: DevKeys;
   offline?: boolean;
   now?: Date;
@@ -88,6 +91,9 @@ export async function buildPack(opts: BuildOptions): Promise<BuildResult> {
   const guidanceFile: GuidanceFile = { format: PACK_FORMAT, version: PACK_FORMAT_VERSION, topics: loadGuidance(opts.guidanceDir) };
   stats.add('guidance.topics', guidanceFile.topics.length);
   write('guidance.json', guidanceFile);
+  const checklistsFile: ChecklistsFile = { format: PACK_FORMAT, version: PACK_FORMAT_VERSION, checklists: loadChecklists(opts.checklistsDir) };
+  stats.add('checklists', checklistsFile.checklists.length);
+  write('checklists.json', checklistsFile);
 
   const manifest: Manifest = {
     format: PACK_FORMAT,
