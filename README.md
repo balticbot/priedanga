@@ -9,6 +9,7 @@ Status: early development. Not affiliated with or endorsed by any government bod
 
 ## Docs
 
+- [**Project status** (start here)](docs/STATUS.md)
 - [MVP scope](docs/mvp-scope.md)
 - [Architecture](docs/architecture.md)
 - [Ideas backlog](docs/ideas-backlog.md)
