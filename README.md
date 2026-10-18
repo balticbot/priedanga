@@ -45,7 +45,7 @@ npm run relay -- serve              # serve the signed PAGD relay feed at http:/
 npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labelled TEST alert
 (cd apps/mobile/modules/tiltas/ios && swift test)            # Swift Tiltas frames against the shared vectors
 npm run offers -w @priedanga/tiltas > /tmp/offers.json       # live feed alerts as offers for the Mac test peer
-(cd apps/mobile/modules/tiltas/ios && swift run tiltas-peer --offers /tmp/offers.json)   # Mac serves them over Bluetooth
+apps/mobile/modules/tiltas/ios/Peer/make-app.sh              # Mac test peer as an app bundle; prints the run command
 ```
 
 Tiltas needs real Bluetooth: the iOS Simulator has none (the app shows "not supported" there). Test with a phone (iPhone dev build or Android release APK) next to the Mac peer, or two phones. Android build: OpenJDK 17 + Android SDK, `npx expo prebuild -p android`, `cd apps/mobile/android && ./gradlew assembleRelease`, install with `adb install -r app/build/outputs/apk/release/app-release.apk`.

@@ -15,6 +15,8 @@ struct OfferFile: Decodable {
   let expires: UInt32
 }
 
+setvbuf(stdout, nil, _IOLBF, 0) // line-buffered when redirected to a log file
+
 var offersPath: String?
 var seconds: Double?
 var args = CommandLine.arguments.dropFirst().makeIterator()

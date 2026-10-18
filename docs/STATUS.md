@@ -35,7 +35,7 @@ Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas bac
 - **Preparedness checklists** with household-size scaling, ticks saved on device.
 - **Offline map** (MapLibre, local PMTiles, Lithuanian labels, local glyphs) with shelters and **offline A\* walking routes**; picks the installed region containing you.
 - **Offline maps screen**: download regions on demand (Kaunas 16 MB, Vilnius 27 MB) with progress, update, delete. Install = temp folder → content-key signature + per-file SHA-256 → swap; tampered download rejected, old copy kept. Listing checks signatures/sizes; the region in use is fully hashed.
-- **Tiltas mesh (iOS + Android, not yet tested over the air)**: Android asks for Bluetooth permissions and runs as a foreground service with a notification; home switch; auto-on while a danger alert is active or offline. Native engine serves verified alerts and fetches missing ones (content-addressed keys, chunked GATT reads); fetched envelopes wait in an inbox until JS verifies them; only verified alerts are relayed, with hops + 1 (limit 16); failures are not fetched again for 1 h. Mesh alerts are labelled "received over Tiltas". Simulator has no Bluetooth: card says "not supported".
+- **Tiltas mesh (iOS + Android; Android tested over the air 2026-10-18: Pixel 8 ↔ Mac peer, fetch in 1.7 s, verify + relay with hops + 1, forged copy rejected, app in background — see [field test](tiltas-field-test.md))**: Android asks for Bluetooth permissions and runs as a foreground service with a notification; home switch; auto-on while a danger alert is active or offline. Native engine serves verified alerts and fetches missing ones (content-addressed keys, chunked GATT reads); fetched envelopes wait in an inbox until JS verifies them; only verified alerts are relayed, with hops + 1 (limit 16); failures are not fetched again for 1 h. Mesh alerts are labelled "received over Tiltas". Simulator has no Bluetooth: card says "not supported".
 - **5 languages** for all UI; LT default. RU/PL/UK drafts need native review.
 
 ## Run it
@@ -49,7 +49,7 @@ npm run region -- build vilnius            # build a region pack (network), refr
 npm run region -- serve                    # region downloads on :8788 (app default EXPO_PUBLIC_REGIONS_URL)
 npm run relay -- serve --days 60 --demo red --demo-area "Kauno m."   # feed + TEST alert on :8787
 (cd apps/mobile/modules/tiltas/ios && swift test)                     # Swift frames vs shared vectors
-npm run offers -w @priedanga/tiltas > /tmp/offers.json && (cd apps/mobile/modules/tiltas/ios && swift run tiltas-peer --offers /tmp/offers.json)   # Mac BLE test peer
+npm run offers -w @priedanga/tiltas > /tmp/offers.json && apps/mobile/modules/tiltas/ios/Peer/make-app.sh   # Mac BLE test peer (app bundle; see docs/tiltas-field-test.md)
 npm run web -w @priedanga/mobile           # web (no map)
 ```
 
@@ -77,7 +77,7 @@ Native iOS (this Mac): `export LANG=en_US.UTF-8 SSL_CERT_FILE=/etc/ssl/cert.pem 
 ## Open / next
 
 - Regions: hosting (CDN) for packs, all-Lithuania coverage, resumable downloads, map taps ignored while a large region is still loading (show a loading hint).
-- **Tiltas next:** over-the-air test (iPhone + Mac peer, then 2+ iPhones), measure time-to-spread; native verification so iPhones can relay in the background; CoreBluetooth state restoration; revocations over the mesh.
+- **Tiltas next:** iPhone over the air, mixed phones and time-to-spread, screen-locked soak test; native verification so iPhones can relay in the background; CoreBluetooth state restoration; revocations over the mesh.
 - Hosting decisions: relay feed, region packs (CDN), production keys/HSM.
 - Push delivery (FCM/APNs), iOS Critical Alerts entitlement.
 - Reviews: PAGD (guidance/checklists), medical (first aid), native speakers (RU/PL/UK).

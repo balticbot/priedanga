@@ -15,7 +15,7 @@ let package = Package(
       name: "tiltas-peer",
       dependencies: ["TiltasCore"],
       path: "Peer",
-      exclude: ["Info.plist"],
+      exclude: ["Info.plist", "make-app.sh"],
       linkerSettings: [
         // CoreBluetooth needs a usage description, even in a command-line tool.
         .unsafeFlags(["-Xlinker", "-sectcreate", "-Xlinker", "__TEXT", "-Xlinker", "__info_plist", "-Xlinker", "Peer/Info.plist"])
