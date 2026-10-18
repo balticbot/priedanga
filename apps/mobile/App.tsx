@@ -15,7 +15,7 @@ import {
   type Nearby,
 } from './src/geo';
 import { fmt, LANGUAGE_NAMES, LANGUAGES, STRINGS, type Lang } from './src/i18n';
-import { loadBundledPack } from './src/pack/loadPack';
+import { loadBundledPack, type PackTimings } from './src/pack/loadPack';
 import type { VerifyPackResult } from './src/pack/verifyPack';
 import { ROOT_IS_DEV } from './src/trust/root';
 import { Banner } from './src/ui/Banner';
@@ -46,6 +46,7 @@ function Main() {
   const [lang, setLang] = useState<Lang>('lt');
   const t = STRINGS[lang];
   const [pack, setPack] = useState<VerifyPackResult | null>(null);
+  const [timings, setTimings] = useState<PackTimings | null>(null);
   const [position, setPosition] = useState<Position>({ status: 'locating' });
   const [kinds, setKinds] = useState<ReadonlySet<number>>(new Set([0, 1]));
   const [accessibleOnly, setAccessibleOnly] = useState(false);
@@ -56,7 +57,10 @@ function Main() {
 
   useEffect(() => {
     loadBundledPack()
-      .then(setPack)
+      .then(({ result, timings: tm }) => {
+        setPack(result);
+        setTimings(tm);
+      })
       .catch((e: unknown) => setPack({ ok: false, reason: 'MISSING_FILE', detail: String(e) }));
   }, []);
 
@@ -144,6 +148,9 @@ function Main() {
         <Text style={styles.packLine}>
           ✓ {t.packVerified} · {fmt(t.packUpdated, { date: pack.manifest.created.slice(0, 10) })} · {fmt(t.places, { n: pack.places.length })}
           {ROOT_IS_DEV ? ` · ${t.devBuild}` : ''}
+          {ROOT_IS_DEV && timings?.total !== undefined
+            ? ` · ${Math.round(timings.total)} ms (read ${Math.round(timings.read ?? 0)}, hash ${Math.round(timings.hash ?? 0)}, parse ${Math.round(timings.parse ?? 0)})`
+            : ''}
         </Text>
       ) : (
         <Banner tone="bad" title={t.packFailed} body={`${pack.reason}: ${pack.detail}`} />

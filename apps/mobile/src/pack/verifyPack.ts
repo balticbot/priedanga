@@ -3,7 +3,8 @@
  *   1. certificates in trust.json are checked against the pinned root
  *   2. manifest.json signature must come from a valid Content-role key
  *   3. every file listed in the manifest must match its length and SHA-256
- * Pure function: no I/O, so it runs identically in the app and in tests.
+ * No I/O, so it runs identically in the app and in tests. The hash function is
+ * injectable so the app can use native SHA-256.
  */
 
 import {
@@ -46,11 +47,26 @@ export type VerifyPackResult = ({ ok: true } & VerifiedPack) | ({ ok: false } & 
 const decode = (b: Uint8Array): string =>
   typeof TextDecoder !== 'undefined' ? new TextDecoder('utf-8', { fatal: true }).decode(b) : decodeUtf8(b);
 
-export function verifyPack(
+export type PackStage = 'trust' | 'signature' | 'hash' | 'parse';
+
+const now = (): number => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+
+/** Hex SHA-256. The app injects the platform's native implementation; pure JS is ~10x too slow on Hermes. */
+export type Sha256Hex = (data: Uint8Array) => Promise<string> | string;
+
+export async function verifyPack(
   files: Partial<Record<PackPath, Uint8Array>>,
   rootPublicKeyHex: string,
   nowSeconds: number,
-): VerifyPackResult {
+  onTiming?: (stage: PackStage, ms: number) => void,
+  hash: Sha256Hex = sha256Hex,
+): Promise<VerifyPackResult> {
+  let mark = now();
+  const lap = (stage: PackStage) => {
+    const t = now();
+    onTiming?.(stage, t - mark);
+    mark = t;
+  };
   for (const p of PACK_PATHS) {
     if (files[p] === undefined) return { ok: false, reason: 'MISSING_FILE', detail: p };
   }
@@ -69,8 +85,10 @@ export function verifyPack(
     ...(trust.revocation !== undefined ? { revocation: hexToBytes(trust.revocation) } : {}),
   });
 
+  lap('trust');
   const sig = verifyManifest(f['manifest.json'], f['manifest.sig'], store, nowSeconds);
   if (!sig.ok) return { ok: false, reason: 'MANIFEST_SIGNATURE', detail: sig.reason };
+  lap('signature');
 
   let manifest: Manifest;
   try {
@@ -83,10 +101,11 @@ export function verifyPack(
   for (const entry of manifest.files) {
     const data = f[entry.path as PackPath];
     if (data === undefined) return { ok: false, reason: 'MISSING_FILE', detail: entry.path };
-    if (data.length !== entry.bytes || sha256Hex(data) !== entry.sha256) {
+    if (data.length !== entry.bytes || (await hash(data)) !== entry.sha256) {
       return { ok: false, reason: 'FILE_MISMATCH', detail: entry.path };
     }
   }
+  lap('hash');
   for (const required of ['places.json', 'municipalities.json']) {
     if (!manifest.files.some((e) => e.path === required)) {
       return { ok: false, reason: 'BAD_MANIFEST', detail: `${required} not listed` };
@@ -97,6 +116,7 @@ export function verifyPack(
     const places = JSON.parse(decode(f['places.json'])) as PlacesFile;
     const municipalities = JSON.parse(decode(f['municipalities.json'])) as MunicipalitiesFile;
     if (!Array.isArray(places.places) || !Array.isArray(municipalities.municipalities)) throw new Error('bad shape');
+    lap('parse');
     return {
       ok: true,
       manifest,
