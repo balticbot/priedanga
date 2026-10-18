@@ -8,9 +8,10 @@
   "scripts": {
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "build:packages": "npm run build -w @priedanga/alert-format -w @priedanga/content-builder -w @priedanga/relay",
+    "build:packages": "npm run build -w @priedanga/alert-format -w @priedanga/content-builder -w @priedanga/relay -w @priedanga/region-builder",
     "pack": "npm run pack -w @priedanga/content-builder --",
-    "relay": "npm run relay -w @priedanga/relay --"
+    "relay": "npm run relay -w @priedanga/relay --",
+    "region": "npm run region -w @priedanga/region-builder --"
   },
   "engines": {
     "node": ">=22"
