@@ -19,9 +19,11 @@ import { fmt, LANGUAGE_NAMES, LANGUAGES, STRINGS, type Lang } from './src/i18n';
 import { loadBundledPack, type PackTimings } from './src/pack/loadPack';
 import type { VerifyPackResult } from './src/pack/verifyPack';
 import { ROOT_IS_DEV } from './src/trust/root';
-import { currentAirAlert, isDanger } from './src/alerts/alerts';
+import { currentAirAlert, isDanger, mergeAlerts } from './src/alerts/alerts';
 import { useAlertFeed } from './src/alerts/useAlertFeed';
+import { useTiltas } from './src/mesh/useTiltas';
 import { AlertPanel, RecentMessages } from './src/ui/AlertPanel';
+import { TiltasCard } from './src/ui/TiltasCard';
 import { Banner } from './src/ui/Banner';
 import { MunicipalityPicker } from './src/ui/MunicipalityPicker';
 import { PlaceDetail } from './src/ui/PlaceDetail';
@@ -139,8 +141,14 @@ function Main() {
     return null;
   }, [position, places]);
   const feedState = useAlertFeed(pack?.ok ? pack.store : null, online);
-  const feedAlerts = feedState.status === 'ok' ? feedState.feed.alerts : feedState.status === 'error' ? (feedState.last?.alerts ?? []) : [];
-  const current = useMemo(() => currentAirAlert(feedAlerts, areaCode), [feedAlerts, areaCode]);
+  const feedAlerts = useMemo(
+    () => (feedState.status === 'ok' ? feedState.feed.alerts : feedState.status === 'error' ? (feedState.last?.alerts ?? []) : []),
+    [feedState],
+  );
+  const feedDanger = useMemo(() => isDanger(currentAirAlert(feedAlerts, areaCode)), [feedAlerts, areaCode]);
+  const tiltas = useTiltas(pack?.ok ? pack.store : null, { online, danger: feedDanger, feedAlerts });
+  const allAlerts = useMemo(() => mergeAlerts(feedAlerts, tiltas.alerts), [feedAlerts, tiltas.alerts]);
+  const current = useMemo(() => currentAirAlert(allAlerts, areaCode), [allAlerts, areaCode]);
   // During an alert the nearest shelter goes straight under the banner, whatever the filters say.
   const nearestShelter = useMemo(
     () => (pos === null || !isDanger(current) ? null : (nearest(places, pos, 1, (p) => p.k === 0 || p.k === 1)[0] ?? null)),
@@ -309,6 +317,7 @@ function Main() {
           <PlaceRow item={nearestShelter} t={t} onPress={() => setSelected(nearestShelter)} />
         </View>
       ) : null}
+      <TiltasCard tiltas={tiltas} t={t} />
 
       <View style={styles.guideButtons}>
         <Pressable style={[styles.guideButton, { borderColor: colors.accent }]} onPress={() => setScreen({ name: 'guides', group: 'emergency' })} accessibilityRole="button">
@@ -395,7 +404,7 @@ function Main() {
 
   const footer = (
     <View>
-      <RecentMessages state={feedState} municipalities={pack.ok ? pack.municipalities : []} t={t} />
+      <RecentMessages alerts={allAlerts} municipalities={pack.ok ? pack.municipalities : []} t={t} />
       <View style={styles.footer}>
         <Text style={styles.footerTitle}>{t.about}</Text>
         <Text style={styles.footerText}>{t.disclaimer}</Text>

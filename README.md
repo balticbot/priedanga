@@ -25,6 +25,8 @@ Status: early development. Not affiliated with or endorsed by any government bod
 | `packages/region-builder` | Builds offline region packs: map tiles cut from the Protomaps OpenStreetMap build + walking network, signed; A* walking routes |
 | `packs/dev` | Current dev content pack (12k+ shelters, KAS, evacuation points, sirens), signed with a dev key |
 | `packages/relay` | Relays official PAGD warning messages as signed alerts (relay role), with a dev feed server |
+| `packages/tiltas` | Tiltas Bluetooth mesh protocol: [SPEC](packages/tiltas/SPEC.md), reference implementation, crowd simulation, frame vectors |
+| `apps/mobile/modules/tiltas` | Tiltas native engine (Swift / CoreBluetooth), also a SwiftPM package with vector tests and a macOS test peer |
 | `apps/mobile` | Expo (React Native) app: offline shelter finder, live alerts from the relay feed, LT/EN/RU/PL/UK |
 
 ## Development
@@ -41,7 +43,12 @@ npm run region -- serve             # serve packs/regions on :8788 for in-app do
 npm run region -- fonts             # refresh the map label glyphs in apps/mobile/assets/glyphs
 npm run relay -- serve              # serve the signed PAGD relay feed at http://localhost:8787/feed.json
 npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labelled TEST alert
+(cd apps/mobile/modules/tiltas/ios && swift test)            # Swift Tiltas frames against the shared vectors
+npm run offers -w @priedanga/tiltas > /tmp/offers.json       # live feed alerts as offers for the Mac test peer
+(cd apps/mobile/modules/tiltas/ios && swift run tiltas-peer --offers /tmp/offers.json)   # Mac serves them over Bluetooth
 ```
+
+Tiltas needs real Bluetooth: the iOS Simulator has none (the app shows "not supported" there). Test with an iPhone running a dev build next to the Mac peer, or two iPhones.
 
 The app reads the feed from `EXPO_PUBLIC_FEED_URL` (default `http://localhost:8787/feed.json`, reachable from the iOS Simulator).
 

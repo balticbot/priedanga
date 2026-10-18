@@ -66,12 +66,12 @@ function feedOf(state: FeedState) {
   return state.status === 'ok' ? state.feed : state.status === 'error' ? state.last : null;
 }
 
-/** Message history. Shown below the shelter list so it never pushes shelters off screen. */
-export function RecentMessages(props: { state: FeedState; municipalities: readonly Municipality[]; t: Strings }) {
-  const feed = feedOf(props.state);
+/** Message history (feed and Tiltas). Shown below the shelter list so it never pushes shelters off screen. */
+export function RecentMessages(props: { alerts: readonly ShownAlert[]; municipalities: readonly Municipality[]; t: Strings }) {
+  const { alerts } = props;
   const [more, setMore] = useState(false);
-  if (!feed || feed.alerts.length === 0) return null;
-  const recent = feed.alerts.slice(0, more ? 15 : 4);
+  if (alerts.length === 0) return null;
+  const recent = alerts.slice(0, more ? 15 : 4);
   return (
     <View style={styles.recent}>
       <Text style={styles.sectionTitle} accessibilityRole="header">
@@ -80,7 +80,7 @@ export function RecentMessages(props: { state: FeedState; municipalities: readon
       {recent.map((item) => (
         <MessageRow key={formatTime(item.alert.issued) + (item.alert.sourceRef ?? '')} item={item} municipalities={props.municipalities} t={props.t} />
       ))}
-      {feed.alerts.length > 4 ? (
+      {alerts.length > 4 ? (
         <Pressable onPress={() => setMore((m) => !m)} accessibilityRole="button" hitSlop={8}>
           <Text style={styles.more}>{more ? props.t.showLess : props.t.showMore}</Text>
         </Pressable>
@@ -114,6 +114,7 @@ function CurrentAlert({
       {lang !== 'lt' ? <Text style={[styles.caption, { color: s.fg }]}>{t.originalText}</Text> : null}
       <Text style={[styles.currentText, { color: s.fg }]}>{item.alert.text?.lt ?? ''}</Text>
       {item.relayed ? <Text style={[styles.caption, { color: s.fg }]}>{t.relayed}</Text> : null}
+      {item.via === 'mesh' ? <Text style={[styles.caption, { color: s.fg }]}>{t.viaMesh}</Text> : null}
       {onWhatToDo ? (
         <Pressable onPress={onWhatToDo} style={[styles.whatToDo, { borderColor: s.fg }]} accessibilityRole="button">
           <Text style={[styles.whatToDoText, { color: s.fg }]}>{t.whatToDo} →</Text>
@@ -135,7 +136,10 @@ function MessageRow({ item, municipalities, t }: { item: ShownAlert; municipalit
         <Text style={[styles.chip, { backgroundColor: chip.bg, color: chip.fg }]}>
           {a.test ? `TEST · ${label}` : label}
         </Text>
-        <Text style={styles.rowTime}>{formatTime(a.issued)}</Text>
+        <Text style={styles.rowTime}>
+          {item.via === 'mesh' ? 'Tiltas · ' : ''}
+          {formatTime(a.issued)}
+        </Text>
       </View>
       <Text style={styles.rowArea}>{areaNames(a.areas, municipalities, t)}</Text>
       <Text style={styles.rowText} numberOfLines={open ? undefined : 3}>

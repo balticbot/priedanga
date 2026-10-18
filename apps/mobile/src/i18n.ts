@@ -17,6 +17,19 @@ export const LANGUAGE_NAMES: Record<Lang, string> = {
 };
 
 const lt = {
+  tiltasTitle: 'Tiltas – perdavimas be interneto',
+  tiltasHint: 'Per Bluetooth gauna ir perduoda patikrintus pranešimus artimiems telefonams, kai neveikia ryšys.',
+  tiltasOn: 'Įjungta',
+  tiltasOff: 'Išjungta',
+  tiltasAutoDanger: 'Įjungta automatiškai: paskelbtas pavojus',
+  tiltasAutoOffline: 'Įjungta automatiškai: nėra interneto',
+  tiltasStats: 'Sutikta telefonų: {peers} · perduodama pranešimų: {served}',
+  tiltasLastSync: 'Paskutinis apsikeitimas {time}',
+  tiltasBtOff: 'Įjunkite Bluetooth',
+  tiltasBtDenied: 'Leiskite Priedangai naudoti Bluetooth (Nustatymai)',
+  tiltasUnsupported: 'Šis įrenginys nepalaiko Bluetooth LE',
+  tiltasUnavailable: 'Tiltas dar neveikia šioje platformoje',
+  viaMesh: 'Gauta per Tiltas iš kito telefono. Parašas patikrintas šiame telefone.',
   regions: 'Žemėlapiai be interneto',
   download: 'Atsisiųsti',
   update: 'Atnaujinti',
@@ -142,6 +155,19 @@ const lt = {
 export type Strings = typeof lt;
 
 const en: Strings = {
+  tiltasTitle: 'Tiltas – relay without internet',
+  tiltasHint: 'Receives and passes on verified alerts to nearby phones over Bluetooth when the network is down.',
+  tiltasOn: 'On',
+  tiltasOff: 'Off',
+  tiltasAutoDanger: 'On automatically: alert in effect',
+  tiltasAutoOffline: 'On automatically: no internet',
+  tiltasStats: 'Phones met: {peers} · alerts shared: {served}',
+  tiltasLastSync: 'Last exchange {time}',
+  tiltasBtOff: 'Turn on Bluetooth',
+  tiltasBtDenied: 'Allow Priedanga to use Bluetooth (Settings)',
+  tiltasUnsupported: 'This device does not support Bluetooth LE',
+  tiltasUnavailable: 'Tiltas is not available on this platform yet',
+  viaMesh: 'Received over Tiltas from another phone. Signature verified on this phone.',
   regions: 'Offline maps',
   download: 'Download',
   update: 'Update',
@@ -266,6 +292,19 @@ const en: Strings = {
 
 // DRAFT — needs native review
 const ru: Strings = {
+  tiltasTitle: 'Tiltas – передача без интернета',
+  tiltasHint: 'Получает и передаёт проверенные оповещения ближайшим телефонам по Bluetooth, когда нет связи.',
+  tiltasOn: 'Включено',
+  tiltasOff: 'Выключено',
+  tiltasAutoDanger: 'Включено автоматически: объявлена тревога',
+  tiltasAutoOffline: 'Включено автоматически: нет интернета',
+  tiltasStats: 'Встречено телефонов: {peers} · передаётся оповещений: {served}',
+  tiltasLastSync: 'Последний обмен {time}',
+  tiltasBtOff: 'Включите Bluetooth',
+  tiltasBtDenied: 'Разрешите Priedanga использовать Bluetooth (Настройки)',
+  tiltasUnsupported: 'Это устройство не поддерживает Bluetooth LE',
+  tiltasUnavailable: 'Tiltas пока недоступен на этой платформе',
+  viaMesh: 'Получено через Tiltas с другого телефона. Подпись проверена на этом телефоне.',
   regions: 'Офлайн-карты',
   download: 'Скачать',
   update: 'Обновить',
@@ -390,6 +429,19 @@ const ru: Strings = {
 
 // DRAFT — needs native review
 const pl: Strings = {
+  tiltasTitle: 'Tiltas – przekazywanie bez internetu',
+  tiltasHint: 'Odbiera i przekazuje zweryfikowane alerty pobliskim telefonom przez Bluetooth, gdy nie ma sieci.',
+  tiltasOn: 'Włączone',
+  tiltasOff: 'Wyłączone',
+  tiltasAutoDanger: 'Włączone automatycznie: ogłoszono alarm',
+  tiltasAutoOffline: 'Włączone automatycznie: brak internetu',
+  tiltasStats: 'Napotkane telefony: {peers} · przekazywane alerty: {served}',
+  tiltasLastSync: 'Ostatnia wymiana {time}',
+  tiltasBtOff: 'Włącz Bluetooth',
+  tiltasBtDenied: 'Zezwól aplikacji Priedanga na Bluetooth (Ustawienia)',
+  tiltasUnsupported: 'To urządzenie nie obsługuje Bluetooth LE',
+  tiltasUnavailable: 'Tiltas nie jest jeszcze dostępny na tej platformie',
+  viaMesh: 'Odebrano przez Tiltas z innego telefonu. Podpis zweryfikowany na tym telefonie.',
   regions: 'Mapy offline',
   download: 'Pobierz',
   update: 'Aktualizuj',
@@ -514,6 +566,19 @@ const pl: Strings = {
 
 // DRAFT — needs native review
 const uk: Strings = {
+  tiltasTitle: 'Tiltas – передавання без інтернету',
+  tiltasHint: 'Отримує й передає перевірені сповіщення найближчим телефонам через Bluetooth, коли немає зв’язку.',
+  tiltasOn: 'Увімкнено',
+  tiltasOff: 'Вимкнено',
+  tiltasAutoDanger: 'Увімкнено автоматично: оголошено тривогу',
+  tiltasAutoOffline: 'Увімкнено автоматично: немає інтернету',
+  tiltasStats: 'Зустрінуто телефонів: {peers} · передається сповіщень: {served}',
+  tiltasLastSync: 'Останній обмін {time}',
+  tiltasBtOff: 'Увімкніть Bluetooth',
+  tiltasBtDenied: 'Дозвольте Priedanga використовувати Bluetooth (Налаштування)',
+  tiltasUnsupported: 'Цей пристрій не підтримує Bluetooth LE',
+  tiltasUnavailable: 'Tiltas поки недоступний на цій платформі',
+  viaMesh: 'Отримано через Tiltas з іншого телефону. Підпис перевірено на цьому телефоні.',
   regions: 'Офлайн-мапи',
   download: 'Завантажити',
   update: 'Оновити',

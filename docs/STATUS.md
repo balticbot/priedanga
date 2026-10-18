@@ -20,6 +20,8 @@ Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas bac
 | `content/checklists` | 4 checklists (go-bag, 72 h supplies, family plan, before leaving) |
 | `packs/dev` | Current signed dev content pack (committed) |
 | `packs/regions/` | Region packs (git-ignored, built locally) |
+| `packages/tiltas` | Tiltas BLE mesh protocol v1: [SPEC](../packages/tiltas/SPEC.md), frame codecs, verify-and-relay (`accept.ts`), reference node, crowd simulation, 35 frame vectors |
+| `apps/mobile/modules/tiltas` | Tiltas native engine (Swift, CoreBluetooth peripheral + central); SwiftPM package: `swift test` (vectors), `swift run tiltas-peer` (macOS test peer) |
 | `apps/mobile` | Expo SDK 58 / RN 0.88 app (iOS, Android, web) |
 
 ## App features (built)
@@ -33,6 +35,7 @@ Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas bac
 - **Preparedness checklists** with household-size scaling, ticks saved on device.
 - **Offline map** (MapLibre, local PMTiles, Lithuanian labels, local glyphs) with shelters and **offline A\* walking routes**; picks the installed region containing you.
 - **Offline maps screen**: download regions on demand (Kaunas 16 MB, Vilnius 27 MB) with progress, update, delete. Install = temp folder → content-key signature + per-file SHA-256 → swap; tampered download rejected, old copy kept. Listing checks signatures/sizes; the region in use is fully hashed.
+- **Tiltas mesh (iOS, not yet tested over the air)**: home switch; auto-on while a danger alert is active or offline. Native engine serves verified alerts and fetches missing ones (content-addressed keys, chunked GATT reads); fetched envelopes wait in an inbox until JS verifies them; only verified alerts are relayed, with hops + 1 (limit 16); failures are not fetched again for 1 h. Mesh alerts are labelled "received over Tiltas". Simulator has no Bluetooth: card says "not supported".
 - **5 languages** for all UI; LT default. RU/PL/UK drafts need native review.
 
 ## Run it
@@ -45,6 +48,8 @@ npm run pack -- --offline                  # rebuild packs/dev from cache + cont
 npm run region -- build vilnius            # build a region pack (network), refreshes packs/regions/index.json
 npm run region -- serve                    # region downloads on :8788 (app default EXPO_PUBLIC_REGIONS_URL)
 npm run relay -- serve --days 60 --demo red --demo-area "Kauno m."   # feed + TEST alert on :8787
+(cd apps/mobile/modules/tiltas/ios && swift test)                     # Swift frames vs shared vectors
+npm run offers -w @priedanga/tiltas > /tmp/offers.json && (cd apps/mobile/modules/tiltas/ios && swift run tiltas-peer --offers /tmp/offers.json)   # Mac BLE test peer
 npm run web -w @priedanga/mobile           # web (no map)
 ```
 
@@ -67,11 +72,12 @@ Native iOS (this Mac): `export LANG=en_US.UTF-8 SSL_CERT_FILE=/etc/ssl/cert.pem 
 | balticbot/priedanga#2 | `feat/content-pack` | Content pack, app shell, SDK 58 |
 | balticbot/priedanga#3 | `feat/native-ed25519` | Native Ed25519 |
 | (no PR yet) | `feat/relay-feed` | Relay + alerts UI, guidance, first aid, checklists, region builder, offline map, region downloads |
+| (no PR yet) | `feat/tiltas` (on top of relay-feed) | Tiltas protocol, Swift engine, app integration |
 
 ## Open / next
 
 - Regions: hosting (CDN) for packs, all-Lithuania coverage, resumable downloads, map taps ignored while a large region is still loading (show a loading hint).
-- Tiltas BLE mesh (iOS first), native verifier reuse (`Ed25519Strict`).
+- **Tiltas next:** over-the-air test (iPhone + Mac peer, then 2+ iPhones), measure time-to-spread; Android engine (Kotlin, foreground service); native verification so iPhones can relay in the background; CoreBluetooth state restoration; revocations over the mesh.
 - Hosting decisions: relay feed, region packs (CDN), production keys/HSM.
 - Push delivery (FCM/APNs), iOS Critical Alerts entitlement.
 - Reviews: PAGD (guidance/checklists), medical (first aid), native speakers (RU/PL/UK).

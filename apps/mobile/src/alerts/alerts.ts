@@ -24,6 +24,10 @@ export interface ShownAlert {
   issuerName: string;
   /** Still within its validity window right now. */
   live: boolean;
+  /** The verified envelope as received (needed to relay it over Tiltas). */
+  envelope: Uint8Array;
+  /** How it reached this phone. */
+  via: 'feed' | 'mesh';
 }
 
 export interface VerifiedFeed {
@@ -70,13 +74,21 @@ export async function verifyFeed(feed: RelayFeed, store: TrustStore, now: number
       rejected++;
       continue;
     }
-    const key = Array.from(r.alert.id, (b) => b.toString(16).padStart(2, '0')).join('');
+    const key = alertKey(r.alert);
     if (seen.has(key)) continue;
     seen.add(key);
-    alerts.push({ alert: r.alert, relayed: r.relayed, issuerName: r.issuer.name, live });
+    alerts.push({ alert: r.alert, relayed: r.relayed, issuerName: r.issuer.name, live, envelope, via: 'feed' });
   }
   alerts.sort((a, b) => b.alert.issued - a.alert.issued);
   return { alerts, rejected, generated: feed.generated };
+}
+
+export const alertKey = (a: Alert): string => Array.from(a.id, (b) => b.toString(16).padStart(2, '0')).join('');
+
+/** Feed and mesh alerts together, newest first; the feed copy wins when both have an alert. */
+export function mergeAlerts(feed: readonly ShownAlert[], mesh: readonly ShownAlert[]): ShownAlert[] {
+  const seen = new Set(feed.map((a) => alertKey(a.alert)));
+  return [...feed, ...mesh.filter((a) => !seen.has(alertKey(a.alert)))].sort((a, b) => b.alert.issued - a.alert.issued);
 }
 
 /**

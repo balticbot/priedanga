@@ -10,7 +10,12 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.balticbot.priedanga",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Priedanga uses your location on this phone only, to find the nearest shelters. It is never sent anywhere."
+        "NSLocationWhenInUseUsageDescription": "Priedanga uses your location on this phone only, to find the nearest shelters. It is never sent anywhere.",
+        "NSBluetoothAlwaysUsageDescription": "Priedanga uses Bluetooth (Tiltas) to receive and pass on signed alerts to nearby phones when there is no network. No personal data is sent.",
+        "UIBackgroundModes": [
+          "bluetooth-central",
+          "bluetooth-peripheral"
+        ]
       }
     },
     "android": {
