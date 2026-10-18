@@ -36,7 +36,8 @@ npm test                   # all workspaces
 npm run pack               # refresh packs/dev from data.gov.lt and content/ (creates dev keys in secrets/dev on first run)
 npm run pack -- --offline  # rebuild from the download cache, e.g. after editing content/guidance
 npm run web -w @priedanga/mobile    # run the app in a browser
-npm run region -- build kaunas      # build the Kaunas region pack (map tiles + walking network) into packs/regions/ (git-ignored)
+npm run region -- build kaunas      # build a region pack (kaunas, vilnius) into packs/regions/ (git-ignored) and refresh index.json
+npm run region -- serve             # serve packs/regions on :8788 for in-app downloads (EXPO_PUBLIC_REGIONS_URL)
 npm run region -- fonts             # refresh the map label glyphs in apps/mobile/assets/glyphs
 npm run relay -- serve              # serve the signed PAGD relay feed at http://localhost:8787/feed.json
 npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labelled TEST alert
@@ -46,7 +47,7 @@ The app reads the feed from `EXPO_PUBLIC_FEED_URL` (default `http://localhost:87
 
 Dev keys live in `secrets/dev/` and are never committed. If you rebuild the pack with new dev keys, update `apps/mobile/src/trust/root.ts` with the new root public key (`packs/dev/DEV_ROOT_PUBLIC_KEY.txt`); a test checks they match.
 
-Map data © OpenStreetMap contributors (ODbL), tiles via Protomaps. Region packs are bundled into the app when present in `packs/regions/` (the map screen says so when none is installed).
+Map data © OpenStreetMap contributors (ODbL), tiles via Protomaps. Region packs are downloaded in the app (Offline maps screen) and installed only after signature and hash checks; set `PRIEDANGA_BUNDLE_REGIONS=1` to bundle them into a dev build instead.
 
 Data: Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM and Registrų centras via data.gov.lt, CC BY 4.0.
 
