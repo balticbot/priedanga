@@ -24,10 +24,12 @@ import type {
   Municipality,
   PlacesFile,
   TrustFile,
+  GuidanceFile,
+  GuidanceTopic,
 } from '@priedanga/content-builder/schema';
 import { hexToBytes } from './hex';
 
-export const PACK_PATHS = ['manifest.json', 'manifest.sig', 'trust.json', 'places.json', 'municipalities.json'] as const;
+export const PACK_PATHS = ['manifest.json', 'manifest.sig', 'trust.json', 'places.json', 'municipalities.json', 'guidance.json'] as const;
 export type PackPath = (typeof PACK_PATHS)[number];
 
 export type PackFailure =
@@ -42,6 +44,7 @@ export interface VerifiedPack {
   manifest: Manifest;
   places: PackPlace[];
   municipalities: Municipality[];
+  guidance: GuidanceTopic[];
   signerName: string;
   /** Root-verified certificates from the pack; used to verify alerts too. */
   store: TrustStore;
@@ -115,7 +118,7 @@ export async function verifyPack(
     }
   }
   lap('hash');
-  for (const required of ['places.json', 'municipalities.json']) {
+  for (const required of ['places.json', 'municipalities.json', 'guidance.json']) {
     if (!manifest.files.some((e) => e.path === required)) {
       return { ok: false, reason: 'BAD_MANIFEST', detail: `${required} not listed` };
     }
@@ -124,13 +127,17 @@ export async function verifyPack(
   try {
     const places = JSON.parse(decode(f['places.json'])) as PlacesFile;
     const municipalities = JSON.parse(decode(f['municipalities.json'])) as MunicipalitiesFile;
-    if (!Array.isArray(places.places) || !Array.isArray(municipalities.municipalities)) throw new Error('bad shape');
+    const guidance = JSON.parse(decode(f['guidance.json'])) as GuidanceFile;
+    if (!Array.isArray(places.places) || !Array.isArray(municipalities.municipalities) || !Array.isArray(guidance.topics)) {
+      throw new Error('bad shape');
+    }
     lap('parse');
     return {
       ok: true,
       manifest,
       places: places.places,
       municipalities: municipalities.municipalities,
+      guidance: guidance.topics,
       signerName: sig.signer.name,
       store,
     };

@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const src = join(here, '../../../packs/dev');
 const dst = join(here, '../assets/pack');
-const FILES = ['manifest.json', 'manifest.sig', 'trust.json', 'places.json', 'municipalities.json'];
+const FILES = ['manifest.json', 'manifest.sig', 'trust.json', 'places.json', 'municipalities.json', 'guidance.json'];
 
 rmSync(dst, { recursive: true, force: true });
 mkdirSync(dst, { recursive: true });

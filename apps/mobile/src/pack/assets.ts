@@ -7,4 +7,5 @@ export const PACK_ASSETS: Record<PackPath, number> = {
   'trust.json': require('../../assets/pack/trust.json.bin'),
   'places.json': require('../../assets/pack/places.json.bin'),
   'municipalities.json': require('../../assets/pack/municipalities.json.bin'),
+  'guidance.json': require('../../assets/pack/guidance.json.bin'),
 };

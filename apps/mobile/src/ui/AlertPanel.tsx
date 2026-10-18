@@ -34,6 +34,7 @@ export function AlertPanel(props: {
   municipalities: readonly Municipality[];
   t: Strings;
   lang: Lang;
+  onWhatToDo?: (() => void) | undefined;
 }) {
   const { state, current, t } = props;
   const feed = feedOf(state);
@@ -49,7 +50,7 @@ export function AlertPanel(props: {
   return (
     <View>
       {current ? (
-        <CurrentAlert item={current} municipalities={props.municipalities} t={t} lang={props.lang} />
+        <CurrentAlert item={current} municipalities={props.municipalities} t={t} lang={props.lang} onWhatToDo={props.onWhatToDo} />
       ) : (
         <View style={styles.calm} accessibilityRole="summary">
           <Text style={styles.calmTitle}>{props.hasArea ? t.noActiveAir : t.noActiveAirNoArea}</Text>
@@ -88,7 +89,19 @@ export function RecentMessages(props: { state: FeedState; municipalities: readon
   );
 }
 
-function CurrentAlert({ item, municipalities, t, lang }: { item: ShownAlert; municipalities: readonly Municipality[]; t: Strings; lang: Lang }) {
+function CurrentAlert({
+  item,
+  municipalities,
+  t,
+  lang,
+  onWhatToDo,
+}: {
+  item: ShownAlert;
+  municipalities: readonly Municipality[];
+  t: Strings;
+  lang: Lang;
+  onWhatToDo?: (() => void) | undefined;
+}) {
   const level = item.alert.level ?? Level.Yellow;
   const s = LEVEL_STYLE[level] ?? LEVEL_STYLE[Level.Yellow]!;
   return (
@@ -101,6 +114,11 @@ function CurrentAlert({ item, municipalities, t, lang }: { item: ShownAlert; mun
       {lang !== 'lt' ? <Text style={[styles.caption, { color: s.fg }]}>{t.originalText}</Text> : null}
       <Text style={[styles.currentText, { color: s.fg }]}>{item.alert.text?.lt ?? ''}</Text>
       {item.relayed ? <Text style={[styles.caption, { color: s.fg }]}>{t.relayed}</Text> : null}
+      {onWhatToDo ? (
+        <Pressable onPress={onWhatToDo} style={[styles.whatToDo, { borderColor: s.fg }]} accessibilityRole="button">
+          <Text style={[styles.whatToDoText, { color: s.fg }]}>{t.whatToDo} →</Text>
+        </Pressable>
+      ) : null}
     </View>
   );
 }
@@ -136,6 +154,8 @@ const styles = StyleSheet.create({
   currentMeta: { fontSize: 14, fontWeight: '600' },
   currentText: { fontSize: 17, lineHeight: 24 },
   caption: { fontSize: 12, opacity: 0.85 },
+  whatToDo: { borderWidth: 2, borderRadius: radius, paddingVertical: space(3), marginTop: space(1) },
+  whatToDoText: { fontSize: 18, fontWeight: '900', textAlign: 'center' },
   testBadge: { alignSelf: 'flex-start', backgroundColor: '#111', color: '#fff', fontWeight: '900', fontSize: 13, paddingHorizontal: space(2), paddingVertical: 3, borderRadius: 6, overflow: 'hidden' },
   recent: { marginTop: space(6), marginBottom: space(3) },
   sectionTitle: { fontSize: 19, fontWeight: '800', color: colors.ink, marginBottom: space(2) },

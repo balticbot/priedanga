@@ -62,7 +62,8 @@ describe('native hash injection', () => {
       return sha256Hex(d);
     });
     expect(ok.ok).toBe(true);
-    expect(calls.length).toBe(2);
+    const listed = (JSON.parse(new TextDecoder().decode(load()['manifest.json'])) as { files: unknown[] }).files.length;
+    expect(calls.length).toBe(listed);
     const bad = await verifyPack(load(), ROOT_PUBLIC_KEY_HEX, now, undefined, () => '00');
     expect(bad).toMatchObject({ ok: false, reason: 'FILE_MISMATCH' });
   });

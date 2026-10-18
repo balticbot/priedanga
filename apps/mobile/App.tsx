@@ -24,7 +24,19 @@ import { AlertPanel, RecentMessages } from './src/ui/AlertPanel';
 import { Banner } from './src/ui/Banner';
 import { MunicipalityPicker } from './src/ui/MunicipalityPicker';
 import { PlaceDetail } from './src/ui/PlaceDetail';
+import { CprTool } from './src/ui/CprTool';
+import { GuideDetail } from './src/ui/GuideDetail';
+import { GuideList } from './src/ui/GuideList';
+import { TourniquetTool } from './src/ui/TourniquetTool';
+import { topicForAlert } from './src/guidance';
 import { colors, radius, space } from './src/ui/theme';
+
+type Screen =
+  | { name: 'home' }
+  | { name: 'place'; item: Nearby }
+  | { name: 'guides'; group: 'emergency' | 'firstaid' }
+  | { name: 'guide'; id: string; from: Screen }
+  | { name: 'tool'; tool: 'cpr' | 'tourniquet'; from: Screen };
 
 type Position =
   | { status: 'locating' }
@@ -55,7 +67,9 @@ function Main() {
   const [kinds, setKinds] = useState<ReadonlySet<number>>(new Set([0, 1]));
   const [accessibleOnly, setAccessibleOnly] = useState(false);
   const [picker, setPicker] = useState(false);
-  const [selected, setSelected] = useState<Nearby | null>(null);
+  const [screen, setScreen] = useState<Screen>({ name: 'home' });
+  const setSelected = (item: Nearby) => setScreen({ name: 'place', item });
+  const home = () => setScreen({ name: 'home' });
   const network = useNetworkState();
   const online = network.isInternetReachable !== false && network.isConnected !== false;
 
@@ -132,13 +146,53 @@ function Main() {
     );
   }
 
-  if (selected && pack.ok) {
+  if (screen.name === 'place' && pack.ok) {
     return (
       <SafeAreaView style={styles.root}>
-        <PlaceDetail item={selected} t={t} municipalities={pack.municipalities} online={online} onBack={() => setSelected(null)} />
+        <PlaceDetail item={screen.item} t={t} municipalities={pack.municipalities} online={online} onBack={home} />
       </SafeAreaView>
     );
   }
+  if (screen.name === 'guides' && pack.ok) {
+    return (
+      <SafeAreaView style={styles.root}>
+        <GuideList
+          topics={pack.guidance}
+          group={screen.group}
+          lang={lang}
+          t={t}
+          onBack={home}
+          onOpen={(id) => setScreen({ name: 'guide', id, from: screen })}
+        />
+      </SafeAreaView>
+    );
+  }
+  if (screen.name === 'guide' && pack.ok) {
+    const topic = pack.guidance.find((x) => x.id === screen.id);
+    if (topic) {
+      return (
+        <SafeAreaView style={styles.root}>
+          <GuideDetail
+            topic={topic}
+            lang={lang}
+            t={t}
+            online={online}
+            onBack={() => setScreen(screen.from)}
+            onTool={(tool) => setScreen({ name: 'tool', tool, from: screen })}
+          />
+        </SafeAreaView>
+      );
+    }
+  }
+  if (screen.name === 'tool') {
+    return (
+      <SafeAreaView style={styles.root}>
+        {screen.tool === 'cpr' ? <CprTool t={t} onBack={() => setScreen(screen.from)} /> : <TourniquetTool t={t} onBack={() => setScreen(screen.from)} />}
+      </SafeAreaView>
+    );
+  }
+
+  const alertGuide = current && pack.ok ? topicForAlert(pack.guidance, current.alert) : null;
 
   const toggleKind = (k: number) =>
     setKinds((prev) => {
@@ -177,6 +231,7 @@ function Main() {
         municipalities={pack.ok ? pack.municipalities : []}
         t={t}
         lang={lang}
+        onWhatToDo={alertGuide ? () => setScreen({ name: 'guide', id: alertGuide.id, from: { name: 'home' } }) : undefined}
       />
       {nearestShelter ? (
         <View style={styles.urgent}>
@@ -184,6 +239,15 @@ function Main() {
           <PlaceRow item={nearestShelter} t={t} onPress={() => setSelected(nearestShelter)} />
         </View>
       ) : null}
+
+      <View style={styles.guideButtons}>
+        <Pressable style={[styles.guideButton, { borderColor: colors.accent }]} onPress={() => setScreen({ name: 'guides', group: 'emergency' })} accessibilityRole="button">
+          <Text style={[styles.guideButtonText, { color: colors.accent }]}>{t.emergencyGuides}</Text>
+        </Pressable>
+        <Pressable style={[styles.guideButton, { borderColor: colors.bad }]} onPress={() => setScreen({ name: 'guides', group: 'firstaid' })} accessibilityRole="button">
+          <Text style={[styles.guideButtonText, { color: colors.bad }]}>{t.firstAid}</Text>
+        </Pressable>
+      </View>
 
       {pack.ok ? (
         <Pressable disabled={!ROOT_IS_DEV} onPress={runConformance} accessibilityHint={ROOT_IS_DEV ? 'Runs the native Ed25519 conformance check' : undefined}>
@@ -380,6 +444,9 @@ const styles = StyleSheet.create({
   rowArrow: { fontSize: 28, fontWeight: '800', color: colors.accent },
   rowDistanceText: { fontSize: 17, fontWeight: '800', color: colors.ink },
   rowDirection: { fontSize: 13, color: colors.muted },
+  guideButtons: { flexDirection: 'row', gap: space(2), marginTop: space(2), marginBottom: space(3) },
+  guideButton: { flex: 1, borderWidth: 2, borderRadius: radius, padding: space(3), backgroundColor: colors.card, justifyContent: 'center' },
+  guideButtonText: { fontSize: 16, fontWeight: '800', textAlign: 'center' },
   urgent: { marginTop: space(3), marginBottom: space(2) },
   urgentTitle: { fontSize: 19, fontWeight: '900', color: colors.ink, marginBottom: space(2) },
   footer: { marginTop: space(6), paddingTop: space(4), borderTopWidth: 1, borderColor: colors.line, gap: space(2) },
