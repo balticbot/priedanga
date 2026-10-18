@@ -1,8 +1,8 @@
 {
   "format": "priedanga-content-pack",
   "version": 1,
-  "packVersion": 202610180915,
-  "created": "2026-10-18T09:15:31.163Z",
+  "packVersion": 202610181012,
+  "created": "2026-10-18T10:12:18.292Z",
   "files": [
     {
       "path": "places.json",
@@ -13,6 +13,11 @@
       "path": "municipalities.json",
       "bytes": 3797,
       "sha256": "f8922215b7dce5a131a413547dd4ca8904556dcd38544cda0a046bc000155b25"
+    },
+    {
+      "path": "guidance.json",
+      "bytes": 83207,
+      "sha256": "99eca90a2279f4181ef10c7d0bbbad014d66c6cbeea61adae386f490aee5d1c4"
     }
   ],
   "sources": [
@@ -22,7 +27,7 @@
       "license": "CC BY 4.0",
       "attribution": "Registrų centras, Adresų registras (data.gov.lt)",
       "rows": 60,
-      "fetched": "2026-10-18T09:15:31.347Z"
+      "fetched": "2026-10-18T10:08:31.546Z"
     },
     {
       "id": "rc/ar/apskritis",
@@ -30,7 +35,7 @@
       "license": "CC BY 4.0",
       "attribution": "Registrų centras, Adresų registras (data.gov.lt)",
       "rows": 10,
-      "fetched": "2026-10-18T09:15:31.439Z"
+      "fetched": "2026-10-18T10:08:31.831Z"
     },
     {
       "id": "pagd/priedangos",
@@ -73,6 +78,7 @@
     "evacuation.source_rows": 1960,
     "evacuation.kept": 1960,
     "siren.source_rows": 1180,
-    "siren.kept": 1180
+    "siren.kept": 1180,
+    "guidance.topics": 13
   }
 }

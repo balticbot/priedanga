@@ -47,7 +47,7 @@ The MVP has to be demoable to PAGD/VRM and survive a real blackout test.
 |---|---|---|
 | A1 | **Offline shelter finder** | Shelters, collective protection structures (KAS), evacuation points and sirens from the PAGD open registers; GPS (works without cellular); nearest-N list with distance and bearing; compass arrow; **offline walking route**; search by address or name; manual municipality or address pick if GPS is unavailable or spoofed |
 | A2 | **Offline map** | Vector map of the user's region downloaded at onboarding (~10–30 MB); full-country pack optional |
-| A3 | **Offline guidance library** | What to do for each alert type (air attack, chemical, radiation, flood, etc.), in 5 languages, with large type and voice readout via the OS's offline text-to-speech |
+| A3 | **Offline guidance library** | What to do for each alert type (air attack, chemical, radiation, flood, etc.), in 5 languages, with large type and voice readout via the OS's offline text-to-speech. **Built (draft):** 8 emergency topics in `content/guidance`, written from PAGD / SAM / RSC guidance with cited sources, shipped in the signed pack, linked from alerts. Needs PAGD review; RU/PL/UK need native review. Read-aloud only appears where the OS has a voice (iOS has none for Lithuanian) |
 | A4 | **Signed alerts via push** | One payload carries the full alert; no fetch needed to show it; verified on the device before display |
 | A5 | **Local area filtering** | Alerts are sent to every device; the phone shows them only if its municipality or area matches. No location leaves the phone |
 | A6 | **Loud alerts that get through** | Android: high-priority channel that can break through Do Not Disturb, full-screen alert. iOS: Critical Alerts entitlement (apply to Apple; needs a public-safety justification) |
@@ -57,7 +57,7 @@ The MVP has to be demoable to PAGD/VRM and survive a real blackout test.
 | A10 | **Accessibility baseline** | Dynamic type, screen readers, high contrast, vibration pattern for deaf users |
 | A11 | **Tiltas mesh v0** | Phones relay signed alerts to nearby phones over Bluetooth LE. See §6 for the honest limits |
 | A12 | **Preparedness checklist** | Offline 72-hour kit checklist, stored locally |
-| A13 | **Offline first aid** | Bleeding, unconsciousness, CPR (with metronome), burns; 112 shortcut with tourniquet timer. Table stakes since Budrus ships it (see [competitive/budrus.md](competitive/budrus.md)) |
+| A13 | **Offline first aid** | Bleeding, unconsciousness, CPR (with metronome), burns; 112 shortcut with tourniquet timer. Table stakes since Budrus ships it (see [competitive/budrus.md](competitive/budrus.md)). **Built (draft):** CPR, severe bleeding, recovery position, burns, choking (ERC 2025), CPR metronome (110/min, compressions-only or 30:2, haptics, screen kept awake), tourniquet timer that survives app restarts. Needs medical review |
 | A14 | **Siren coverage** | Using the official siren sound radius: tell users "you may not hear a siren here — keep alerts on" |
 | A15 | **Alert history** | Past alerts with timeline and duration; seeded from the official PAGD warning-message archive |
 

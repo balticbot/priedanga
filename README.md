@@ -19,6 +19,7 @@ Status: early development. Not affiliated with or endorsed by any government bod
 |---|---|
 | `packages/alert-format` | Trust core: signed alerts, certificates, revocation, manifests ([SPEC](packages/alert-format/SPEC.md)) |
 | `packages/content-builder` | Builds signed content packs from official open data (PAGD registers, Address Register) |
+| `content/guidance` | Guidance and first-aid topics (LT/EN/RU/PL/UK) with cited official sources; bundled into the signed pack |
 | `packs/dev` | Current dev content pack (12k+ shelters, KAS, evacuation points, sirens), signed with a dev key |
 | `packages/relay` | Relays official PAGD warning messages as signed alerts (relay role), with a dev feed server |
 | `apps/mobile` | Expo (React Native) app: offline shelter finder, live alerts from the relay feed, LT/EN/RU/PL/UK |
@@ -29,7 +30,8 @@ Status: early development. Not affiliated with or endorsed by any government bod
 npm install
 npm run build:packages     # build alert-format + content-builder
 npm test                   # all workspaces
-npm run pack               # refresh packs/dev from data.gov.lt (creates dev keys in secrets/dev on first run)
+npm run pack               # refresh packs/dev from data.gov.lt and content/ (creates dev keys in secrets/dev on first run)
+npm run pack -- --offline  # rebuild from the download cache, e.g. after editing content/guidance
 npm run web -w @priedanga/mobile    # run the app in a browser
 npm run relay -- serve              # serve the signed PAGD relay feed at http://localhost:8787/feed.json
 npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labelled TEST alert

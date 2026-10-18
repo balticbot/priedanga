@@ -1,0 +1,104 @@
+{
+  "id": "burns",
+  "group": "firstaid",
+  "order": 23,
+  "title": {
+    "lt": "Nudegimai",
+    "en": "Burns",
+    "ru": "Ожоги",
+    "pl": "Oparzenia",
+    "uk": "Опіки"
+  },
+  "summary": {
+    "lt": "Vėsinkite vandeniu ir uždenkite.",
+    "en": "Cool with water and cover.",
+    "ru": "Охладите водой и накройте.",
+    "pl": "Schłodź wodą i przykryj.",
+    "uk": "Охолодіть водою й накрийте."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Ką daryti",
+        "en": "What to do",
+        "ru": "Что делать",
+        "pl": "Co robić",
+        "uk": "Що робити"
+      },
+      "steps": [
+        {
+          "lt": "Nedelsdami vėsinkite nudegimą vėsiu (ne lediniu) tekančiu vandeniu bent 20 minučių.",
+          "en": "Cool the burn immediately under cool (not ice-cold) running water for at least 20 minutes.",
+          "ru": "Немедленно охлаждайте ожог прохладной (не ледяной) проточной водой не менее 20 минут.",
+          "pl": "Natychmiast chłodź oparzenie chłodną (nie lodowatą) bieżącą wodą przez co najmniej 20 minut.",
+          "uk": "Негайно охолоджуйте опік прохолодною (не крижаною) проточною водою щонайменше 20 хвилин."
+        },
+        {
+          "lt": "Nuimkite žiedus, laikrodžius ir drabužius, jei jie neprilipę prie odos.",
+          "en": "Remove rings, watches and clothing unless stuck to the skin.",
+          "ru": "Снимите кольца, часы и одежду, если они не прилипли к коже.",
+          "pl": "Zdejmij pierścionki, zegarki i ubranie, jeśli nie przywarły do skóry.",
+          "uk": "Зніміть каблучки, годинники й одяг, якщо вони не прилипли до шкіри."
+        },
+        {
+          "lt": "Laisvai uždenkite švariu nepūkuotu audiniu ar maistine plėvele.",
+          "en": "Cover loosely with a clean non-fluffy cloth or cling film.",
+          "ru": "Неплотно накройте чистой безворсовой тканью или пищевой плёнкой.",
+          "pl": "Luźno przykryj czystym, niestrzępiącym się materiałem lub folią spożywczą.",
+          "uk": "Нещільно накрийте чистою безворсовою тканиною або харчовою плівкою."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Ko nedaryti",
+        "en": "Do not",
+        "ru": "Чего не делать",
+        "pl": "Czego nie robić",
+        "uk": "Чого не робити"
+      },
+      "steps": [
+        {
+          "lt": "Nedėkite ledo, aliejaus ar tepalų ir nepradurkite pūslių.",
+          "en": "Do not apply ice, oil or ointments, and do not burst blisters.",
+          "ru": "Не прикладывайте лёд, масло или мази и не прокалывайте пузыри.",
+          "pl": "Nie przykładaj lodu, oleju ani maści i nie przebijaj pęcherzy.",
+          "uk": "Не прикладайте лід, олію чи мазі й не проколюйте пухирі."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Kada skambinti 112",
+        "en": "When to call 112",
+        "ru": "Когда звонить 112",
+        "pl": "Kiedy dzwonić pod 112",
+        "uk": "Коли телефонувати 112"
+      },
+      "steps": [
+        {
+          "lt": "Jei nudegimas didelis ar gilus, ant veido, rankų, kojų ar lytinių organų, nudegė vaikas arba buvo įkvėpta dūmų.",
+          "en": "If the burn is large or deep, on the face, hands, feet or genitals, the casualty is a child, or smoke was inhaled.",
+          "ru": "Если ожог большой или глубокий, на лице, руках, ногах или половых органах, пострадал ребёнок или был вдыхаемый дым.",
+          "pl": "Jeśli oparzenie jest duże lub głębokie, na twarzy, dłoniach, stopach lub narządach płciowych, poszkodowane jest dziecko lub doszło do wdychania dymu.",
+          "uk": "Якщо опік великий чи глибокий, на обличчі, руках, ногах або статевих органах, постраждала дитина або було вдихання диму."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "European Resuscitation Council Guidelines 2025: First Aid",
+      "url": "https://cprguidelines.eu/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the ERC guidelines; must be reviewed by a medical professional (e.g. Lithuanian Red Cross or an emergency physician) before release. RU, PL and UK need native-speaker review."
+  }
+}

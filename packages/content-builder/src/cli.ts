@@ -29,6 +29,7 @@ const keys = loadDevKeys(join(repoRoot, 'secrets/dev'), Math.floor(now.getTime()
 const { manifest } = await buildPack({
   outDir,
   cacheDir: join(repoRoot, 'packages/content-builder/.cache'),
+  guidanceDir: join(repoRoot, 'content/guidance'),
   keys,
   offline,
   now,

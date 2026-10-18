@@ -1,0 +1,191 @@
+{
+  "id": "air-alert-levels",
+  "group": "emergency",
+  "order": 1,
+  "title": {
+    "lt": "Oro pavojaus lygiai",
+    "en": "Air alert levels",
+    "ru": "Уровни воздушной тревоги",
+    "pl": "Poziomy alarmu lotniczego",
+    "uk": "Рівні повітряної тривоги"
+  },
+  "summary": {
+    "lt": "Ką reiškia kiekvienas pranešimas ir ką tada daryti.",
+    "en": "What each message means and what to do.",
+    "ru": "Что означает каждое сообщение и что делать.",
+    "pl": "Co oznacza każdy komunikat i co wtedy robić.",
+    "uk": "Що означає кожне повідомлення і що робити."
+  },
+  "links": [
+    {
+      "category": 1,
+      "levels": [
+        1,
+        4
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "heading": {
+        "lt": "Geltona – tikėtinas oro pavojus",
+        "en": "Yellow – possible air threat",
+        "ru": "Жёлтый – возможна воздушная тревога",
+        "pl": "Żółty – możliwe zagrożenie z powietrza",
+        "uk": "Жовтий – можлива повітряна тривога"
+      },
+      "steps": [
+        {
+          "lt": "Teritorijoje stebimas neatpažintas objektas ar dronas, bet tiesioginės grėsmės dar nėra.",
+          "en": "An unidentified object or drone is being tracked in the area, but there is no direct threat yet.",
+          "ru": "В районе отслеживается неопознанный объект или дрон, но прямой угрозы пока нет.",
+          "pl": "Na tym obszarze śledzony jest niezidentyfikowany obiekt lub dron, ale bezpośredniego zagrożenia jeszcze nie ma.",
+          "uk": "У районі відстежується невідомий об’єкт або дрон, але прямої загрози поки немає."
+        },
+        {
+          "lt": "Išlikite ramūs ir iš anksto nusimatykite artimiausią priedangą ar saugią vietą.",
+          "en": "Stay calm and pick the nearest shelter or safe place in advance.",
+          "ru": "Сохраняйте спокойствие и заранее определите ближайшее укрытие или безопасное место.",
+          "pl": "Zachowaj spokój i zawczasu wybierz najbliższy schron lub bezpieczne miejsce.",
+          "uk": "Зберігайте спокій і заздалегідь визначте найближче укриття або безпечне місце."
+        },
+        {
+          "lt": "Sekite oficialius pranešimus telefone, per LRT radiją ar televiziją.",
+          "en": "Follow official messages on your phone, LRT radio or television.",
+          "ru": "Следите за официальными сообщениями на телефоне, по радио или телевидению LRT.",
+          "pl": "Śledź oficjalne komunikaty w telefonie, w radiu lub telewizji LRT.",
+          "uk": "Стежте за офіційними повідомленнями на телефоні, по радіо чи телебаченню LRT."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Raudona – oro pavojus",
+        "en": "Red – air raid alert",
+        "ru": "Красный – воздушная тревога",
+        "pl": "Czerwony – alarm lotniczy",
+        "uk": "Червоний – повітряна тривога"
+      },
+      "steps": [
+        {
+          "lt": "Grėsmė jūsų teritorijoje reali.",
+          "en": "The threat in your area is real.",
+          "ru": "Угроза в вашем районе реальна.",
+          "pl": "Zagrożenie na Twoim obszarze jest realne.",
+          "uk": "Загроза у вашому районі реальна."
+        },
+        {
+          "lt": "Nedelsdami eikite į artimiausią priedangą ar saugią vietą.",
+          "en": "Go to the nearest shelter or safe place immediately.",
+          "ru": "Немедленно идите в ближайшее укрытие или безопасное место.",
+          "pl": "Natychmiast udaj się do najbliższego schronu lub bezpiecznego miejsca.",
+          "uk": "Негайно йдіть до найближчого укриття або безпечного місця."
+        },
+        {
+          "lt": "Vykdykite pranešime pateiktus nurodymus.",
+          "en": "Follow the instructions given in the alert.",
+          "ru": "Выполняйте указания из сообщения.",
+          "pl": "Wykonuj polecenia zawarte w komunikacie.",
+          "uk": "Виконуйте вказівки з повідомлення."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Geltona po raudonos",
+        "en": "Yellow after red",
+        "ru": "Жёлтый после красного",
+        "pl": "Żółty po czerwonym",
+        "uk": "Жовтий після червоного"
+      },
+      "steps": [
+        {
+          "lt": "Objektų ore nebėra, bet pavojus dar neatšauktas.",
+          "en": "The objects are no longer in the air, but the alert has not been lifted.",
+          "ru": "Объектов в воздухе больше нет, но тревога ещё не отменена.",
+          "pl": "Obiektów w powietrzu już nie ma, ale alarm nie został odwołany.",
+          "uk": "Об’єктів у повітрі вже немає, але тривогу ще не скасовано."
+        },
+        {
+          "lt": "Likite priedangoje ar saugioje vietoje, kol gausite baltą pranešimą.",
+          "en": "Stay in the shelter or safe place until you receive the white message.",
+          "ru": "Оставайтесь в укрытии или безопасном месте до белого сообщения.",
+          "pl": "Pozostań w schronie lub bezpiecznym miejscu do otrzymania białego komunikatu.",
+          "uk": "Залишайтеся в укритті чи безпечному місці до білого повідомлення."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Balta – oro pavojaus nėra",
+        "en": "White – all clear",
+        "ru": "Белый – отбой тревоги",
+        "pl": "Biały – odwołanie alarmu",
+        "uk": "Білий – відбій тривоги"
+      },
+      "steps": [
+        {
+          "lt": "Galite grįžti prie įprastos veiklos.",
+          "en": "You can return to normal activities.",
+          "ru": "Можно вернуться к обычным делам.",
+          "pl": "Możesz wrócić do zwykłych zajęć.",
+          "uk": "Можна повертатися до звичних справ."
+        },
+        {
+          "lt": "Prieš išeidami apžiūrėkite aplinką: ar nėra nutrūkusių laidų ar apgadintų statinių.",
+          "en": "Before leaving, check your surroundings for fallen wires or damaged structures.",
+          "ru": "Перед выходом осмотрите окружение: нет ли оборванных проводов или повреждённых конструкций.",
+          "pl": "Przed wyjściem sprawdź otoczenie: czy nie ma zerwanych przewodów lub uszkodzonych konstrukcji.",
+          "uk": "Перед виходом огляньте все довкола: чи немає обірваних дротів або пошкоджених споруд."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Svarbu",
+        "en": "Important",
+        "ru": "Важно",
+        "pl": "Ważne",
+        "uk": "Важливо"
+      },
+      "steps": [
+        {
+          "lt": "Kiekvienas lygio pasikeitimas ir pavojaus pabaiga skelbiami atskiru pranešimu.",
+          "en": "Every change of level and the end of the alert is announced in a separate message.",
+          "ru": "Каждое изменение уровня и окончание тревоги объявляется отдельным сообщением.",
+          "pl": "Każda zmiana poziomu i koniec alarmu są ogłaszane osobnym komunikatem.",
+          "uk": "Кожна зміна рівня і завершення тривоги оголошуються окремим повідомленням."
+        },
+        {
+          "lt": "Negavę naujo pranešimo, toliau vykdykite paskutinio pranešimo nurodymus.",
+          "en": "If no new message arrives, keep following the last one.",
+          "ru": "Если нового сообщения нет, продолжайте выполнять указания последнего.",
+          "pl": "Jeśli nie ma nowego komunikatu, nadal stosuj się do ostatniego.",
+          "uk": "Якщо нового повідомлення немає, далі виконуйте вказівки останнього."
+        },
+        {
+          "lt": "Pranešimo nurodymai visada svarbiausi; ši informacija juos tik papildo.",
+          "en": "The alert's own instructions always come first; this guide only adds to them.",
+          "ru": "Указания в самом сообщении всегда главнее; эта информация их только дополняет.",
+          "pl": "Polecenia w komunikacie są zawsze najważniejsze; ten poradnik tylko je uzupełnia.",
+          "uk": "Вказівки в самому повідомленні завжди головні; ця інформація їх лише доповнює."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Rekomendacijos oro pavojaus atveju",
+      "url": "https://lt72.lt/rekomendacijos-oro-pavojaus-atveju/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited PAGD guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

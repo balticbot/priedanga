@@ -1,0 +1,158 @@
+{
+  "id": "cpr",
+  "group": "firstaid",
+  "order": 20,
+  "tool": "cpr",
+  "title": {
+    "lt": "Gaivinimas (nereaguoja ir nekvėpuoja)",
+    "en": "CPR (not responding, not breathing)",
+    "ru": "Реанимация (не реагирует и не дышит)",
+    "pl": "Resuscytacja (nie reaguje i nie oddycha)",
+    "uk": "Реанімація (не реагує й не дихає)"
+  },
+  "summary": {
+    "lt": "Krūtinės paspaudimai, kol atvyks pagalba.",
+    "en": "Chest compressions until help arrives.",
+    "ru": "Компрессии грудной клетки до прибытия помощи.",
+    "pl": "Uciśnięcia klatki piersiowej do przybycia pomocy.",
+    "uk": "Компресії грудної клітки до прибуття допомоги."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Patikrinkite",
+        "en": "Check",
+        "ru": "Проверьте",
+        "pl": "Sprawdź",
+        "uk": "Перевірте"
+      },
+      "steps": [
+        {
+          "lt": "Įsitikinkite, kad jums ir nukentėjusiajam saugu.",
+          "en": "Make sure it is safe for you and the casualty.",
+          "ru": "Убедитесь, что вам и пострадавшему ничего не угрожает.",
+          "pl": "Upewnij się, że jest bezpiecznie dla ciebie i poszkodowanego.",
+          "uk": "Переконайтеся, що вам і постраждалому нічого не загрожує."
+        },
+        {
+          "lt": "Garsiai užkalbinkite ir švelniai papurtykite už pečių.",
+          "en": "Speak loudly and gently shake the shoulders.",
+          "ru": "Громко обратитесь и осторожно потрясите за плечи.",
+          "pl": "Głośno zawołaj i delikatnie potrząśnij za ramiona.",
+          "uk": "Голосно зверніться й обережно потрусіть за плечі."
+        },
+        {
+          "lt": "Atloškite galvą, pakelkite smakrą ir iki 10 sekundžių stebėkite, ar žmogus normaliai kvėpuoja.",
+          "en": "Tilt the head back, lift the chin and look for normal breathing for up to 10 seconds.",
+          "ru": "Запрокиньте голову, поднимите подбородок и до 10 секунд проверяйте, дышит ли человек нормально.",
+          "pl": "Odegnij głowę, unieś żuchwę i przez maks. 10 sekund sprawdź, czy oddycha prawidłowo.",
+          "uk": "Закиньте голову, підніміть підборіддя й до 10 секунд перевіряйте, чи людина дихає нормально."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Kvieskite pagalbą",
+        "en": "Call for help",
+        "ru": "Вызовите помощь",
+        "pl": "Wezwij pomoc",
+        "uk": "Викличте допомогу"
+      },
+      "steps": [
+        {
+          "lt": "Jei nereaguoja ir normaliai nekvėpuoja, skambinkite 112 ir įjunkite garsiakalbį.",
+          "en": "If they do not respond and are not breathing normally, call 112 and put the phone on speaker.",
+          "ru": "Если не реагирует и не дышит нормально, позвоните 112 и включите громкую связь.",
+          "pl": "Jeśli nie reaguje i nie oddycha prawidłowo, zadzwoń pod 112 i włącz głośnik.",
+          "uk": "Якщо не реагує й не дихає нормально, зателефонуйте 112 і ввімкніть гучний зв’язок."
+        },
+        {
+          "lt": "Paprašykite, kad kas nors atneštų automatinį išorinį defibriliatorių (AED).",
+          "en": "Ask someone to bring an automated external defibrillator (AED).",
+          "ru": "Попросите кого-нибудь принести автоматический наружный дефибриллятор (АНД).",
+          "pl": "Poproś kogoś o przyniesienie automatycznego defibrylatora (AED).",
+          "uk": "Попросіть когось принести автоматичний зовнішній дефібрилятор (АЗД)."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Spauskite krūtinę",
+        "en": "Push on the chest",
+        "ru": "Давите на грудь",
+        "pl": "Uciskaj klatkę piersiową",
+        "uk": "Натискайте на грудну клітку"
+      },
+      "steps": [
+        {
+          "lt": "Vieno delno pagrindą padėkite krūtinės viduryje, kitą delną – ant viršaus; rankos tiesios.",
+          "en": "Put the heel of one hand in the centre of the chest and the other hand on top; keep your arms straight.",
+          "ru": "Положите основание ладони на центр грудной клетки, другую ладонь сверху; руки прямые.",
+          "pl": "Połóż nadgarstek jednej dłoni na środku klatki piersiowej, drugą dłoń na wierzchu; ręce wyprostowane.",
+          "uk": "Покладіть основу долоні на центр грудної клітки, іншу долоню зверху; руки прямі."
+        },
+        {
+          "lt": "Spauskite 5–6 cm gyliu, 100–120 kartų per minutę. Programėlės metronomas padės išlaikyti tempą.",
+          "en": "Press 5–6 cm deep, 100–120 times a minute. The app's metronome helps you keep the pace.",
+          "ru": "Нажимайте на глубину 5–6 см, 100–120 раз в минуту. Метроном приложения поможет держать темп.",
+          "pl": "Uciskaj na głębokość 5–6 cm, 100–120 razy na minutę. Metronom w aplikacji pomoże utrzymać tempo.",
+          "uk": "Натискайте на глибину 5–6 см, 100–120 разів на хвилину. Метроном застосунку допоможе тримати темп."
+        },
+        {
+          "lt": "Po kiekvieno paspaudimo leiskite krūtinei visiškai atsitiesti.",
+          "en": "Let the chest rise fully after each compression.",
+          "ru": "После каждого нажатия дайте грудной клетке полностью расправиться.",
+          "pl": "Po każdym uciśnięciu pozwól klatce piersiowej całkowicie się unieść.",
+          "uk": "Після кожного натискання дайте грудній клітці повністю розправитися."
+        },
+        {
+          "lt": "Jei esate apmokyti, po 30 paspaudimų atlikite 2 įpūtimus. Jei ne – spauskite be pertraukų.",
+          "en": "If you are trained, give 2 rescue breaths after every 30 compressions. If not, keep compressing without stopping.",
+          "ru": "Если вы обучены, после 30 нажатий сделайте 2 вдоха. Если нет – давите без перерыва.",
+          "pl": "Jeśli jesteś przeszkolony, po 30 uciśnięciach wykonaj 2 oddechy. Jeśli nie – uciskaj bez przerw.",
+          "uk": "Якщо ви навчені, після 30 натискань зробіть 2 вдихи. Якщо ні – натискайте без перерв."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Toliau",
+        "en": "Then",
+        "ru": "Далее",
+        "pl": "Dalej",
+        "uk": "Далі"
+      },
+      "steps": [
+        {
+          "lt": "Atnešus AED, įjunkite jį ir vykdykite balso nurodymus.",
+          "en": "When the AED arrives, switch it on and follow its voice instructions.",
+          "ru": "Когда принесут АНД, включите его и следуйте голосовым указаниям.",
+          "pl": "Gdy dotrze AED, włącz go i postępuj zgodnie z poleceniami głosowymi.",
+          "uk": "Коли принесуть АЗД, увімкніть його й виконуйте голосові вказівки."
+        },
+        {
+          "lt": "Nesustokite, kol atvyks medikai, žmogus pradės normaliai kvėpuoti arba nebegalėsite tęsti. Jei yra kas padeda, keiskitės kas 2 minutes.",
+          "en": "Do not stop until medics arrive, the person starts breathing normally or you cannot continue. If someone can help, swap every 2 minutes.",
+          "ru": "Не останавливайтесь, пока не прибудут медики, человек не начнёт нормально дышать или вы не сможете продолжать. Если есть помощник, меняйтесь каждые 2 минуты.",
+          "pl": "Nie przerywaj, dopóki nie przyjadą ratownicy, poszkodowany nie zacznie normalnie oddychać lub nie dasz rady kontynuować. Jeśli ktoś może pomóc, zmieniajcie się co 2 minuty.",
+          "uk": "Не зупиняйтеся, доки не прибудуть медики, людина не почне нормально дихати або ви не зможете продовжувати. Якщо є помічник, змінюйтеся кожні 2 хвилини."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "European Resuscitation Council Guidelines 2025: Basic Life Support",
+      "url": "https://cprguidelines.eu/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the ERC guidelines; must be reviewed by a medical professional (e.g. Lithuanian Red Cross or an emergency physician) before release. RU, PL and UK need native-speaker review."
+  }
+}

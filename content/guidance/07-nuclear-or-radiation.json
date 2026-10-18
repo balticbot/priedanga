@@ -1,0 +1,131 @@
+{
+  "id": "nuclear-or-radiation",
+  "group": "emergency",
+  "order": 7,
+  "title": {
+    "lt": "Branduolinė ar radiacinė avarija",
+    "en": "Nuclear or radiation accident",
+    "ru": "Ядерная или радиационная авария",
+    "pl": "Awaria jądrowa lub radiacyjna",
+    "uk": "Ядерна чи радіаційна аварія"
+  },
+  "summary": {
+    "lt": "Kaip slėptis patalpose ir kada gerti kalio jodido tabletes.",
+    "en": "How to shelter indoors and when to take potassium iodide.",
+    "ru": "Как укрыться в помещении и когда принимать йодид калия.",
+    "pl": "Jak schronić się w pomieszczeniu i kiedy przyjąć jodek potasu.",
+    "uk": "Як укритися в приміщенні та коли приймати йодид калію."
+  },
+  "links": [
+    {
+      "category": 3
+    }
+  ],
+  "sections": [
+    {
+      "heading": {
+        "lt": "Gavus perspėjimą",
+        "en": "When you are warned",
+        "ru": "Получив предупреждение",
+        "pl": "Po otrzymaniu ostrzeżenia",
+        "uk": "Отримавши попередження"
+      },
+      "steps": [
+        {
+          "lt": "Nedelsdami eikite į vidų ir likite ten.",
+          "en": "Go indoors immediately and stay there.",
+          "ru": "Немедленно зайдите в помещение и оставайтесь там.",
+          "pl": "Natychmiast wejdź do środka i zostań tam.",
+          "uk": "Негайно зайдіть у приміщення й залишайтеся там."
+        },
+        {
+          "lt": "Uždarykite langus, orlaides, duris ir dūmtraukių sklendes.",
+          "en": "Close windows, vents, doors and chimney dampers.",
+          "ru": "Закройте окна, форточки, двери и дымоходные заслонки.",
+          "pl": "Zamknij okna, wywietrzniki, drzwi i zasuwy kominowe.",
+          "uk": "Зачиніть вікна, кватирки, двері та димохідні засувки."
+        },
+        {
+          "lt": "Išjunkite vėdinimo, kondicionavimo ir šildymo sistemas, kurios naudoja lauko orą.",
+          "en": "Switch off ventilation, air conditioning and heating that draw in outside air.",
+          "ru": "Выключите вентиляцию, кондиционирование и отопление, использующие наружный воздух.",
+          "pl": "Wyłącz wentylację, klimatyzację i ogrzewanie korzystające z powietrza zewnętrznego.",
+          "uk": "Вимкніть вентиляцію, кондиціювання та опалення, що використовують зовнішнє повітря."
+        },
+        {
+          "lt": "Būkite kuo giliau pastato viduje, toliau nuo išorinių sienų ir stogo.",
+          "en": "Stay as deep inside the building as you can, away from outer walls and the roof.",
+          "ru": "Находитесь как можно глубже внутри здания, подальше от наружных стен и крыши.",
+          "pl": "Przebywaj jak najgłębiej wewnątrz budynku, z dala od ścian zewnętrznych i dachu.",
+          "uk": "Перебувайте якомога глибше всередині будівлі, подалі від зовнішніх стін і даху."
+        },
+        {
+          "lt": "Sekite pranešimus per LRT radiją ir televiziją. Viduje paprastai reikia likti neilgai, ne daugiau kaip 2 paras.",
+          "en": "Follow announcements on LRT radio and television. Sheltering usually lasts a short time, no more than 2 days.",
+          "ru": "Следите за сообщениями по радио и ТВ LRT. Оставаться внутри обычно нужно недолго, не более 2 суток.",
+          "pl": "Śledź komunikaty w radiu i telewizji LRT. Pozostanie w środku zwykle trwa krótko, nie dłużej niż 2 doby.",
+          "uk": "Стежте за повідомленнями по радіо й ТБ LRT. Залишатися всередині зазвичай треба недовго, не більше 2 діб."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Kalio jodido tabletės",
+        "en": "Potassium iodide tablets",
+        "ru": "Таблетки йодида калия",
+        "pl": "Tabletki jodku potasu",
+        "uk": "Таблетки йодиду калію"
+      },
+      "steps": [
+        {
+          "lt": "Gerkite jas tik tada, kai tai rekomenduoja Sveikatos apsaugos ministerija.",
+          "en": "Take them only when the Ministry of Health recommends it.",
+          "ru": "Принимайте их только по рекомендации Министерства здравоохранения.",
+          "pl": "Przyjmuj je tylko wtedy, gdy zaleci to Ministerstwo Zdrowia.",
+          "uk": "Приймайте їх лише за рекомендацією Міністерства охорони здоров’я."
+        },
+        {
+          "lt": "Jos apsaugo tik skydliaukę nuo radioaktyviojo jodo, ne nuo kitos apšvitos.",
+          "en": "They protect only the thyroid from radioactive iodine, not from other radiation.",
+          "ru": "Они защищают только щитовидную железу от радиоактивного йода, а не от другого облучения.",
+          "pl": "Chronią tylko tarczycę przed radioaktywnym jodem, nie przed innym promieniowaniem.",
+          "uk": "Вони захищають лише щитоподібну залозу від радіоактивного йоду, а не від іншого опромінення."
+        },
+        {
+          "lt": "Vaistinėse parduodami jodo tirpalai, purškalai ir maisto papildai skydliaukės neapsaugo.",
+          "en": "Iodine solutions, sprays and supplements sold in pharmacies do not protect the thyroid.",
+          "ru": "Продаваемые в аптеках растворы йода, спреи и добавки не защищают щитовидную железу.",
+          "pl": "Sprzedawane w aptekach roztwory jodu, spraye i suplementy nie chronią tarczycy.",
+          "uk": "Розчини йоду, спреї та добавки з аптек не захищають щитоподібну залозу."
+        },
+        {
+          "lt": "Tabletes išdalija savivaldybės; dozes pagal amžių nurodo oficiali informacija.",
+          "en": "Municipalities distribute the tablets; official information gives the dose for each age group.",
+          "ru": "Таблетки раздают самоуправления; дозы по возрасту указаны в официальной информации.",
+          "pl": "Tabletki rozdają samorządy; dawki według wieku podaje oficjalna informacja.",
+          "uk": "Таблетки роздають самоврядування; дози за віком наведено в офіційній інформації."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Kaip elgtis branduolinės avarijos atveju (parengta su Radiacinės saugos centru)",
+      "url": "https://www.mruni.eu/wp-content/uploads/2022/03/kaip_elgtis_branduolines_avarijos_atveju.pdf",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Sveikatos apsaugos ministerija: Dažniausiai užduodami klausimai (branduolinė avarija, kalio jodidas)",
+      "url": "https://sam.lrv.lt/uploads/sam/documents/files/Veiklos_sritys/visuomenes-sveikatos-prieziura/Estremaliu%20situaciju%20valdymas/Da%C5%BEniausiai%20u%C5%BEduodami%20klausimai.pdf",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited official guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

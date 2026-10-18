@@ -1,0 +1,105 @@
+{
+  "id": "unconscious-breathing",
+  "group": "firstaid",
+  "order": 22,
+  "title": {
+    "lt": "Nereaguoja, bet kvėpuoja",
+    "en": "Not responding but breathing",
+    "ru": "Не реагирует, но дышит",
+    "pl": "Nie reaguje, ale oddycha",
+    "uk": "Не реагує, але дихає"
+  },
+  "summary": {
+    "lt": "Stabili šoninė padėtis.",
+    "en": "The recovery position.",
+    "ru": "Устойчивое боковое положение.",
+    "pl": "Pozycja bezpieczna.",
+    "uk": "Стабільне бокове положення."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Paguldykite ant šono",
+        "en": "Roll onto the side",
+        "ru": "Уложите на бок",
+        "pl": "Ułóż na boku",
+        "uk": "Покладіть на бік"
+      },
+      "steps": [
+        {
+          "lt": "Artimesnę ranką padėkite stačiu kampu į šoną.",
+          "en": "Place the nearer arm out at a right angle.",
+          "ru": "Ближнюю руку отведите в сторону под прямым углом.",
+          "pl": "Bliższą rękę ułóż pod kątem prostym.",
+          "uk": "Ближчу руку відведіть убік під прямим кутом."
+        },
+        {
+          "lt": "Tolimesnės rankos plaštaką prispauskite prie žmogaus skruosto.",
+          "en": "Hold the back of the far hand against the person's cheek.",
+          "ru": "Тыльную сторону дальней кисти прижмите к щеке человека.",
+          "pl": "Grzbiet dalszej dłoni przyłóż do policzka poszkodowanego.",
+          "uk": "Тильну сторону дальньої кисті притисніть до щоки людини."
+        },
+        {
+          "lt": "Sulenkite tolimesnę koją per kelį ir, traukdami už jos, atverskite žmogų į save.",
+          "en": "Bend the far leg at the knee and pull on it to roll the person towards you.",
+          "ru": "Согните дальнюю ногу в колене и, потянув за неё, поверните человека к себе.",
+          "pl": "Zegnij dalszą nogę w kolanie i ciągnąc za nią, obróć poszkodowanego do siebie.",
+          "uk": "Зігніть дальню ногу в коліні й, потягнувши за неї, поверніть людину до себе."
+        },
+        {
+          "lt": "Atloškite galvą, kad kvėpavimo takai liktų atviri.",
+          "en": "Tilt the head back to keep the airway open.",
+          "ru": "Запрокиньте голову, чтобы дыхательные пути оставались открытыми.",
+          "pl": "Odegnij głowę, aby drogi oddechowe pozostały drożne.",
+          "uk": "Закиньте голову, щоб дихальні шляхи залишалися відкритими."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Stebėkite",
+        "en": "Monitor",
+        "ru": "Наблюдайте",
+        "pl": "Obserwuj",
+        "uk": "Спостерігайте"
+      },
+      "steps": [
+        {
+          "lt": "Skambinkite 112.",
+          "en": "Call 112.",
+          "ru": "Позвоните 112.",
+          "pl": "Zadzwoń pod 112.",
+          "uk": "Зателефонуйте 112."
+        },
+        {
+          "lt": "Nuolat tikrinkite kvėpavimą. Nustojus normaliai kvėpuoti, paguldykite ant nugaros ir pradėkite gaivinimą.",
+          "en": "Keep checking the breathing. If it stops being normal, roll them onto their back and start CPR.",
+          "ru": "Постоянно проверяйте дыхание. Если оно перестанет быть нормальным, переверните на спину и начните реанимацию.",
+          "pl": "Stale sprawdzaj oddech. Jeśli przestanie być prawidłowy, obróć na plecy i rozpocznij resuscytację.",
+          "uk": "Постійно перевіряйте дихання. Якщо воно перестане бути нормальним, переверніть на спину й почніть реанімацію."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "European Resuscitation Council Guidelines 2025: First Aid",
+      "url": "https://cprguidelines.eu/",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "European Resuscitation Council Guidelines 2025: Basic Life Support",
+      "url": "https://cprguidelines.eu/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the ERC guidelines; must be reviewed by a medical professional (e.g. Lithuanian Red Cross or an emergency physician) before release. RU, PL and UK need native-speaker review."
+  }
+}

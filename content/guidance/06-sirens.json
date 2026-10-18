@@ -1,0 +1,98 @@
+{
+  "id": "sirens",
+  "group": "emergency",
+  "order": 6,
+  "title": {
+    "lt": "Išgirdus sirenas",
+    "en": "When you hear sirens",
+    "ru": "Если вы слышите сирены",
+    "pl": "Gdy słyszysz syreny",
+    "uk": "Якщо ви чуєте сирени"
+  },
+  "summary": {
+    "lt": "Ką reiškia sirenos ir kur ieškoti informacijos.",
+    "en": "What sirens mean and where to find information.",
+    "ru": "Что означают сирены и где искать информацию.",
+    "pl": "Co oznaczają syreny i gdzie szukać informacji.",
+    "uk": "Що означають сирени і де шукати інформацію."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Ką daryti",
+        "en": "What to do",
+        "ru": "Что делать",
+        "pl": "Co robić",
+        "uk": "Що робити"
+      },
+      "steps": [
+        {
+          "lt": "Įsijunkite LRT radiją ar televiziją ir klausykite informacijos.",
+          "en": "Turn on LRT radio or television and listen for information.",
+          "ru": "Включите радио или телевидение LRT и слушайте информацию.",
+          "pl": "Włącz radio lub telewizję LRT i słuchaj informacji.",
+          "uk": "Увімкніть радіо чи телебачення LRT і слухайте інформацію."
+        },
+        {
+          "lt": "Patikrinkite pranešimus telefone ir šioje programėlėje.",
+          "en": "Check the alerts on your phone and in this app.",
+          "ru": "Проверьте сообщения на телефоне и в этом приложении.",
+          "pl": "Sprawdź komunikaty w telefonie i w tej aplikacji.",
+          "uk": "Перевірте повідомлення на телефоні й у цьому застосунку."
+        },
+        {
+          "lt": "Vykdykite gautų pranešimų nurodymus.",
+          "en": "Follow the instructions in the alerts you receive.",
+          "ru": "Выполняйте указания полученных сообщений.",
+          "pl": "Wykonuj polecenia z otrzymanych komunikatów.",
+          "uk": "Виконуйте вказівки отриманих повідомлень."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Verta žinoti",
+        "en": "Good to know",
+        "ru": "Полезно знать",
+        "pl": "Warto wiedzieć",
+        "uk": "Варто знати"
+      },
+      "steps": [
+        {
+          "lt": "Sirenos girdimos ne visur – laikykite įjungtą perspėjimų gavimą telefone.",
+          "en": "Sirens cannot be heard everywhere: keep alert reception switched on on your phone.",
+          "ru": "Сирены слышны не везде – держите приём предупреждений на телефоне включённым.",
+          "pl": "Syreny nie są słyszalne wszędzie – miej włączony odbiór ostrzeżeń w telefonie.",
+          "uk": "Сирени чути не скрізь – тримайте приймання попереджень на телефоні увімкненим."
+        },
+        {
+          "lt": "Planinio patikrinimo metu sirenos skamba apie 3 minutes ir nereiškia tikro pavojaus; apie patikrinimus skelbiama iš anksto.",
+          "en": "During a scheduled test, sirens sound for about 3 minutes and do not mean real danger; tests are announced in advance.",
+          "ru": "Во время плановой проверки сирены звучат около 3 минут и не означают реальной опасности; о проверках объявляют заранее.",
+          "pl": "Podczas planowego testu syreny brzmią około 3 minut i nie oznaczają rzeczywistego zagrożenia; testy są zapowiadane z wyprzedzeniem.",
+          "uk": "Під час планової перевірки сирени звучать близько 3 хвилин і не означають реальної небезпеки; про перевірки оголошують заздалегідь."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Rekomendacijos oro pavojaus atveju",
+      "url": "https://lt72.lt/rekomendacijos-oro-pavojaus-atveju/",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "LRT: Lietuvoje bus atliekamas perspėjimo sistemos patikrinimas",
+      "url": "https://www.lrt.lt/naujienos/lietuvoje/2/2914025/lietuvoje-bus-atliekamas-perspejimo-sistemos-patikrinimas-kauks-sirenos",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited official guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

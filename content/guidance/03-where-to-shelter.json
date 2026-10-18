@@ -1,0 +1,171 @@
+{
+  "id": "where-to-shelter",
+  "group": "emergency",
+  "order": 3,
+  "title": {
+    "lt": "Kur slėptis",
+    "en": "Where to take shelter",
+    "ru": "Где укрыться",
+    "pl": "Gdzie się schronić",
+    "uk": "Де сховатися"
+  },
+  "summary": {
+    "lt": "Priedangų ženklai, saugios vietos ir ką pasiimti.",
+    "en": "Shelter signs, safe places and what to take.",
+    "ru": "Знаки укрытий, безопасные места и что взять с собой.",
+    "pl": "Oznaczenia schronów, bezpieczne miejsca i co zabrać.",
+    "uk": "Знаки укриттів, безпечні місця і що взяти з собою."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Ženklai",
+        "en": "Signs",
+        "ru": "Знаки",
+        "pl": "Oznaczenia",
+        "uk": "Знаки"
+      },
+      "steps": [
+        {
+          "lt": "Priedanga pažymėta geltonu kvadratu su užrašu „Priedanga“. Ji skirta trumpalaikei apsaugai.",
+          "en": "A shelter is marked with a yellow square reading “Priedanga”. It is for short-term protection.",
+          "ru": "Укрытие обозначено жёлтым квадратом с надписью «Priedanga». Оно предназначено для кратковременной защиты.",
+          "pl": "Schron oznaczony jest żółtym kwadratem z napisem „Priedanga”. Służy do krótkotrwałej ochrony.",
+          "uk": "Укриття позначене жовтим квадратом з написом «Priedanga». Воно призначене для короткочасного захисту."
+        },
+        {
+          "lt": "Kolektyvinės apsaugos statinys pažymėtas mėlynu trikampiu oranžiniame kvadrate. Jis skirtas ilgesniam buvimui; dažniausiai tai mokyklos, kultūros ar sporto centrai.",
+          "en": "A collective protection structure is marked with a blue triangle on an orange square. It is for longer stays; usually a school, cultural or sports centre.",
+          "ru": "Сооружение коллективной защиты обозначено синим треугольником на оранжевом квадрате. Оно для более длительного пребывания; обычно это школы, культурные или спортивные центры.",
+          "pl": "Budowla ochrony zbiorowej oznaczona jest niebieskim trójkątem na pomarańczowym kwadracie. Służy do dłuższego pobytu; zwykle są to szkoły, ośrodki kultury lub sportu.",
+          "uk": "Споруда колективного захисту позначена синім трикутником на помаранчевому квадраті. Вона для тривалішого перебування; зазвичай це школи, культурні чи спортивні центри."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Jei priedangos arti nėra",
+        "en": "If there is no shelter nearby",
+        "ru": "Если укрытия рядом нет",
+        "pl": "Jeśli w pobliżu nie ma schronu",
+        "uk": "Якщо укриття поруч немає"
+      },
+      "steps": [
+        {
+          "lt": "Rūsys ar kita požeminė patalpa.",
+          "en": "A basement or other underground space.",
+          "ru": "Подвал или другое подземное помещение.",
+          "pl": "Piwnica lub inne pomieszczenie podziemne.",
+          "uk": "Підвал або інше підземне приміщення."
+        },
+        {
+          "lt": "Vidinis kambarys ar koridorius be langų.",
+          "en": "An inner room or corridor without windows.",
+          "ru": "Внутренняя комната или коридор без окон.",
+          "pl": "Wewnętrzny pokój lub korytarz bez okien.",
+          "uk": "Внутрішня кімната або коридор без вікон."
+        },
+        {
+          "lt": "Vieta, kurią nuo lauko skiria bent dvi sienos.",
+          "en": "A place with at least two walls between you and the outside.",
+          "ru": "Место, отделённое от улицы как минимум двумя стенами.",
+          "pl": "Miejsce oddzielone od zewnątrz co najmniej dwiema ścianami.",
+          "uk": "Місце, відокремлене від вулиці щонайменше двома стінами."
+        },
+        {
+          "lt": "Venkite langų, balkonų, liftų, atvirų erdvių ir viršutinių aukštų.",
+          "en": "Avoid windows, balconies, lifts, open spaces and top floors.",
+          "ru": "Избегайте окон, балконов, лифтов, открытых пространств и верхних этажей.",
+          "pl": "Unikaj okien, balkonów, wind, otwartych przestrzeni i najwyższych pięter.",
+          "uk": "Уникайте вікон, балконів, ліфтів, відкритих просторів і верхніх поверхів."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Ką pasiimti, jei yra laiko",
+        "en": "What to take, if there is time",
+        "ru": "Что взять, если есть время",
+        "pl": "Co zabrać, jeśli jest czas",
+        "uk": "Що взяти, якщо є час"
+      },
+      "steps": [
+        {
+          "lt": "Telefoną ir įkroviklį ar išorinę bateriją.",
+          "en": "Your phone and a charger or power bank.",
+          "ru": "Телефон и зарядку или пауэрбанк.",
+          "pl": "Telefon i ładowarkę lub powerbank.",
+          "uk": "Телефон і зарядку чи павербанк."
+        },
+        {
+          "lt": "Asmens dokumentus.",
+          "en": "Identity documents.",
+          "ru": "Документы, удостоверяющие личность.",
+          "pl": "Dokumenty tożsamości.",
+          "uk": "Документи, що посвідчують особу."
+        },
+        {
+          "lt": "Būtinus vaistus.",
+          "en": "Essential medicines.",
+          "ru": "Необходимые лекарства.",
+          "pl": "Niezbędne leki.",
+          "uk": "Необхідні ліки."
+        },
+        {
+          "lt": "Geriamojo vandens.",
+          "en": "Drinking water.",
+          "ru": "Питьевую воду.",
+          "pl": "Wodę pitną.",
+          "uk": "Питну воду."
+        },
+        {
+          "lt": "Greitis svarbiau už daiktus.",
+          "en": "Speed matters more than belongings.",
+          "ru": "Скорость важнее вещей.",
+          "pl": "Szybkość jest ważniejsza niż rzeczy.",
+          "uk": "Швидкість важливіша за речі."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Jei priedanga uždaryta",
+        "en": "If the shelter is locked",
+        "ru": "Если укрытие закрыто",
+        "pl": "Jeśli schron jest zamknięty",
+        "uk": "Якщо укриття зачинене"
+      },
+      "steps": [
+        {
+          "lt": "Nelaukite prie durų – eikite į kitą artimiausią saugią vietą; programėlėje matysite kelias artimiausias.",
+          "en": "Do not wait at the door: go to the next nearest safe place; the app lists several nearby.",
+          "ru": "Не ждите у двери – идите к следующему ближайшему безопасному месту; в приложении их несколько.",
+          "pl": "Nie czekaj pod drzwiami – idź do kolejnego najbliższego bezpiecznego miejsca; aplikacja pokazuje kilka w pobliżu.",
+          "uk": "Не чекайте біля дверей – йдіть до наступного найближчого безпечного місця; у застосунку їх кілька."
+        },
+        {
+          "lt": "Klausimais dėl priedangų galite skambinti PAGD konsultacijų linija 1856 (visą parą).",
+          "en": "For questions about shelters, call the PAGD advice line 1856 (24/7).",
+          "ru": "По вопросам об укрытиях звоните на линию консультаций PAGD 1856 (круглосуточно).",
+          "pl": "W sprawach schronów dzwoń na infolinię PAGD 1856 (całodobowo).",
+          "uk": "З питань щодо укриттів телефонуйте на лінію консультацій PAGD 1856 (цілодобово)."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Rekomendacijos oro pavojaus atveju",
+      "url": "https://lt72.lt/rekomendacijos-oro-pavojaus-atveju/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited PAGD guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "id": "chemical-accident",
+  "group": "emergency",
+  "order": 8,
+  "title": {
+    "lt": "Cheminė avarija ar dūmai",
+    "en": "Chemical accident or smoke",
+    "ru": "Химическая авария или дым",
+    "pl": "Awaria chemiczna lub dym",
+    "uk": "Хімічна аварія або дим"
+  },
+  "summary": {
+    "lt": "Kaip apsisaugoti nuo pavojingų medžiagų ore.",
+    "en": "How to protect yourself from hazardous substances in the air.",
+    "ru": "Как защититься от опасных веществ в воздухе.",
+    "pl": "Jak chronić się przed niebezpiecznymi substancjami w powietrzu.",
+    "uk": "Як захиститися від небезпечних речовин у повітрі."
+  },
+  "links": [
+    {
+      "category": 2
+    }
+  ],
+  "sections": [
+    {
+      "heading": {
+        "lt": "Iš karto",
+        "en": "Straight away",
+        "ru": "Сразу",
+        "pl": "Od razu",
+        "uk": "Одразу"
+      },
+      "steps": [
+        {
+          "lt": "Klausykite LRT radijo ar televizijos ir perspėkite artimuosius bei kaimynus.",
+          "en": "Listen to LRT radio or television and warn family and neighbours.",
+          "ru": "Слушайте радио или ТВ LRT и предупредите близких и соседей.",
+          "pl": "Słuchaj radia lub telewizji LRT i ostrzeż bliskich oraz sąsiadów.",
+          "uk": "Слухайте радіо чи ТБ LRT і попередьте близьких та сусідів."
+        },
+        {
+          "lt": "Lauke pasitraukite į priešvėjinę pusę, tolyn nuo dūmų ar kvapo.",
+          "en": "Outdoors, move upwind, away from the smoke or smell.",
+          "ru": "На улице отойдите в наветренную сторону, подальше от дыма или запаха.",
+          "pl": "Na zewnątrz przejdź na stronę nawietrzną, z dala od dymu lub zapachu.",
+          "uk": "Надворі відійдіть на навітряний бік, подалі від диму чи запаху."
+        },
+        {
+          "lt": "Užterštoje vietoje nevalgykite, negerkite ir nerūkykite.",
+          "en": "Do not eat, drink or smoke in a contaminated area.",
+          "ru": "В заражённой зоне не ешьте, не пейте и не курите.",
+          "pl": "W skażonym miejscu nie jedz, nie pij i nie pal.",
+          "uk": "У забрудненій зоні не їжте, не пийте й не куріть."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Jei liepiama likti viduje",
+        "en": "If told to stay indoors",
+        "ru": "Если велено оставаться внутри",
+        "pl": "Jeśli polecono zostać w środku",
+        "uk": "Якщо наказано залишатися всередині"
+      },
+      "steps": [
+        {
+          "lt": "Uždarykite langus, orlaides ir dūmtraukių sklendes, užsandarinkite langų ir durų plyšius.",
+          "en": "Close windows, vents and chimney dampers, and seal gaps around windows and doors.",
+          "ru": "Закройте окна, форточки и заслонки, заделайте щели в окнах и дверях.",
+          "pl": "Zamknij okna, wywietrzniki i zasuwy kominowe, uszczelnij szczeliny w oknach i drzwiach.",
+          "uk": "Зачиніть вікна, кватирки й засувки, загерметизуйте щілини у вікнах і дверях."
+        },
+        {
+          "lt": "Išjunkite vėdinimą, kondicionavimą, šildymą oru ir dujas.",
+          "en": "Switch off ventilation, air conditioning, warm-air heating and gas.",
+          "ru": "Выключите вентиляцию, кондиционер, воздушное отопление и газ.",
+          "pl": "Wyłącz wentylację, klimatyzację, ogrzewanie nadmuchowe i gaz.",
+          "uk": "Вимкніть вентиляцію, кондиціонер, повітряне опалення й газ."
+        },
+        {
+          "lt": "Jei įmanoma, pakilkite į aukštesnį aukštą – daug pavojingų medžiagų kaupiasi žemai.",
+          "en": "If possible, go to a higher floor: many hazardous substances collect low down.",
+          "ru": "По возможности поднимитесь на верхний этаж – многие опасные вещества скапливаются внизу.",
+          "pl": "Jeśli to możliwe, przejdź na wyższe piętro – wiele niebezpiecznych substancji gromadzi się nisko.",
+          "uk": "За можливості підніміться на вищий поверх – багато небезпечних речовин накопичується внизу."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Jei liepiama evakuotis",
+        "en": "If told to evacuate",
+        "ru": "Если велено эвакуироваться",
+        "pl": "Jeśli polecono ewakuację",
+        "uk": "Якщо наказано евакуюватися"
+      },
+      "steps": [
+        {
+          "lt": "Saugokite kvėpavimo takus, akis ir odą.",
+          "en": "Protect your airways, eyes and skin.",
+          "ru": "Защищайте дыхательные пути, глаза и кожу.",
+          "pl": "Chroń drogi oddechowe, oczy i skórę.",
+          "uk": "Захищайте дихальні шляхи, очі та шкіру."
+        },
+        {
+          "lt": "Išėję iš pavojingos zonos, nusivilkite viršutinius drabužius ir avalynę, sudėkite juos į plastikinį maišą, nusiprauskite po dušu ir persirenkite.",
+          "en": "Once out of the danger zone, take off outer clothing and shoes, put them in a plastic bag, shower and change.",
+          "ru": "Выйдя из опасной зоны, снимите верхнюю одежду и обувь, сложите в пластиковый пакет, примите душ и переоденьтесь.",
+          "pl": "Po wyjściu ze strefy zagrożenia zdejmij odzież wierzchnią i obuwie, włóż je do plastikowego worka, weź prysznic i przebierz się.",
+          "uk": "Вийшовши з небезпечної зони, зніміть верхній одяг і взуття, складіть у пластиковий пакет, прийміть душ і переодягніться."
+        },
+        {
+          "lt": "Pasijutę prastai, nedelsdami kreipkitės į medikus ar skambinkite 112.",
+          "en": "If you feel unwell, seek medical help immediately or call 112.",
+          "ru": "Почувствовав себя плохо, немедленно обратитесь к медикам или позвоните 112.",
+          "pl": "Jeśli źle się poczujesz, natychmiast zwróć się do lekarza lub zadzwoń pod 112.",
+          "uk": "Відчувши себе погано, негайно зверніться до медиків або зателефонуйте 112."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD rekomendacijos gyventojams cheminės avarijos atveju (2010)",
+      "url": "https://naujas.anyksciai.lt/data/public/uploads/2017/12/chemine.docx",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "NKVC pranešimas gyventojams dėl dūmų (PAGD perspėjimo pranešimų archyvas, 2025-01-01)",
+      "url": "https://get.data.gov.lt/datasets/gov/pagd/pranesimai/Pranesimas",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited official guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

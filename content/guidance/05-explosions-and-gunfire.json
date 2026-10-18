@@ -1,0 +1,121 @@
+{
+  "id": "explosions-and-gunfire",
+  "group": "emergency",
+  "order": 5,
+  "title": {
+    "lt": "Sprogimai ir šaudymas",
+    "en": "Explosions and gunfire",
+    "ru": "Взрывы и стрельба",
+    "pl": "Wybuchy i strzelanina",
+    "uk": "Вибухи та стрілянина"
+  },
+  "summary": {
+    "lt": "Kaip apsisaugoti sprogimo ar šaudymo metu.",
+    "en": "How to protect yourself during an explosion or shooting.",
+    "ru": "Как защититься во время взрыва или стрельбы.",
+    "pl": "Jak chronić się podczas wybuchu lub strzelaniny.",
+    "uk": "Як захиститися під час вибуху чи стрілянини."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Sprogimas",
+        "en": "Explosion",
+        "ru": "Взрыв",
+        "pl": "Wybuch",
+        "uk": "Вибух"
+      },
+      "steps": [
+        {
+          "lt": "Kriskite ant žemės, prisidenkite galvą ir pasinaudokite artimiausia priedanga.",
+          "en": "Drop to the ground, cover your head and use the nearest cover.",
+          "ru": "Упадите на землю, прикройте голову и используйте ближайшее укрытие.",
+          "pl": "Padnij na ziemię, osłoń głowę i skorzystaj z najbliższej osłony.",
+          "uk": "Падайте на землю, прикрийте голову й скористайтеся найближчим укриттям."
+        },
+        {
+          "lt": "Palaukite, kol nustos kristi nuolaužos; gali būti ir daugiau sprogimų.",
+          "en": "Wait until debris stops falling; more explosions may follow.",
+          "ru": "Подождите, пока перестанут падать обломки; возможны новые взрывы.",
+          "pl": "Poczekaj, aż przestaną spadać odłamki; mogą nastąpić kolejne wybuchy.",
+          "uk": "Зачекайте, поки перестануть падати уламки; можливі нові вибухи."
+        },
+        {
+          "lt": "Įsitikinę, kad saugu, eikite į priedangą ir kurį laiką joje likite: atakos gali kartotis po 1–30 minučių.",
+          "en": "When it is safe, move to a shelter and stay there a while: attacks can repeat within 1–30 minutes.",
+          "ru": "Убедившись, что безопасно, идите в укрытие и оставайтесь там некоторое время: атаки могут повториться через 1–30 минут.",
+          "pl": "Gdy będzie bezpiecznie, przejdź do schronu i zostań tam przez jakiś czas: ataki mogą się powtórzyć po 1–30 minutach.",
+          "uk": "Переконавшись, що безпечно, йдіть в укриття й залишайтеся там деякий час: атаки можуть повторитися через 1–30 хвилин."
+        },
+        {
+          "lt": "Pastatuose naudokitės avariniais išėjimais, ne liftais.",
+          "en": "In buildings, use emergency exits, not lifts.",
+          "ru": "В зданиях пользуйтесь аварийными выходами, а не лифтами.",
+          "pl": "W budynkach korzystaj z wyjść awaryjnych, nie z wind.",
+          "uk": "У будівлях користуйтеся аварійними виходами, а не ліфтами."
+        },
+        {
+          "lt": "Jei galite tai daryti saugiai, padėkite sužeistiesiems ir nelieskite įtartinų daiktų.",
+          "en": "If you can do so safely, help the injured, and do not touch suspicious items.",
+          "ru": "Если это безопасно, помогите раненым и не трогайте подозрительные предметы.",
+          "pl": "Jeśli możesz to zrobić bezpiecznie, pomóż rannym i nie dotykaj podejrzanych przedmiotów.",
+          "uk": "Якщо це безпечно, допоможіть пораненим і не торкайтеся підозрілих предметів."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Šaudymas",
+        "en": "Gunfire",
+        "ru": "Стрельба",
+        "pl": "Strzelanina",
+        "uk": "Стрілянина"
+      },
+      "steps": [
+        {
+          "lt": "Lauke nebėkite: atsigulkite, prisidenkite galvą ir likite žemai, kol šaudoma.",
+          "en": "Outdoors, do not run: lie down, cover your head and stay low while shooting continues.",
+          "ru": "На улице не бегите: лягте, прикройте голову и оставайтесь внизу, пока стреляют.",
+          "pl": "Na zewnątrz nie biegnij: połóż się, osłoń głowę i pozostań nisko, dopóki trwa strzelanina.",
+          "uk": "Надворі не біжіть: ляжте, прикрийте голову й залишайтеся низько, поки стріляють."
+        },
+        {
+          "lt": "Šaudymui nutilus, pereikite į saugesnę vietą.",
+          "en": "When the shooting stops, move to a safer place.",
+          "ru": "Когда стрельба стихнет, перейдите в более безопасное место.",
+          "pl": "Gdy strzały ucichną, przejdź w bezpieczniejsze miejsce.",
+          "uk": "Коли стрілянина стихне, перейдіть у безпечніше місце."
+        },
+        {
+          "lt": "Namuose laikykitės toliau nuo langų, išjunkite šviesą ir būkite kambaryje be langų.",
+          "en": "At home, keep away from windows, turn off the lights and stay in a room without windows.",
+          "ru": "Дома держитесь подальше от окон, выключите свет и находитесь в комнате без окон.",
+          "pl": "W domu trzymaj się z dala od okien, zgaś światło i przebywaj w pokoju bez okien.",
+          "uk": "Удома тримайтеся подалі від вікон, вимкніть світло й перебувайте в кімнаті без вікон."
+        },
+        {
+          "lt": "Jei namuose nesaugu, eikite į artimiausią kolektyvinės apsaugos statinį.",
+          "en": "If home is not safe, go to the nearest collective protection structure.",
+          "ru": "Если дома небезопасно, идите в ближайшее сооружение коллективной защиты.",
+          "pl": "Jeśli w domu nie jest bezpiecznie, idź do najbliższej budowli ochrony zbiorowej.",
+          "uk": "Якщо вдома небезпечно, йдіть до найближчої споруди колективного захисту."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Kaip elgtis kilus oro pavojui ir kitoms karinėms grėsmėms",
+      "url": "https://lt72.lt/kaip-elgtis-kilus-oro-pavojui-ir-kitoms-karinems-gresmems/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited official guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

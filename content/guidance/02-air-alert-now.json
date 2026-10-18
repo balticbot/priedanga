@@ -1,0 +1,262 @@
+{
+  "id": "air-alert-now",
+  "group": "emergency",
+  "order": 2,
+  "title": {
+    "lt": "Oro pavojus: ką daryti dabar",
+    "en": "Air raid alert: what to do now",
+    "ru": "Воздушная тревога: что делать сейчас",
+    "pl": "Alarm lotniczy: co robić teraz",
+    "uk": "Повітряна тривога: що робити зараз"
+  },
+  "summary": {
+    "lt": "Veiksmai pagal tai, kur esate.",
+    "en": "What to do depending on where you are.",
+    "ru": "Действия в зависимости от того, где вы находитесь.",
+    "pl": "Co robić w zależności od tego, gdzie jesteś.",
+    "uk": "Дії залежно від того, де ви перебуваєте."
+  },
+  "links": [
+    {
+      "category": 1,
+      "levels": [
+        2,
+        3
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "heading": {
+        "lt": "Namuose ar pastate",
+        "en": "At home or in a building",
+        "ru": "Дома или в здании",
+        "pl": "W domu lub w budynku",
+        "uk": "Удома або в будівлі"
+      },
+      "steps": [
+        {
+          "lt": "Eikite į vidinį kambarį be langų arba į rūsį.",
+          "en": "Go to an inner room without windows or to the basement.",
+          "ru": "Перейдите во внутреннюю комнату без окон или в подвал.",
+          "pl": "Przejdź do wewnętrznego pomieszczenia bez okien lub do piwnicy.",
+          "uk": "Перейдіть у внутрішню кімнату без вікон або в підвал."
+        },
+        {
+          "lt": "Jei tenka likti kambaryje su langais, būkite kuo toliau nuo jų.",
+          "en": "If you have to stay in a room with windows, keep as far from them as possible.",
+          "ru": "Если приходится оставаться в комнате с окнами, держитесь как можно дальше от них.",
+          "pl": "Jeśli musisz zostać w pokoju z oknami, trzymaj się jak najdalej od nich.",
+          "uk": "Якщо доводиться залишатися в кімнаті з вікнами, тримайтеся якнайдалі від них."
+        },
+        {
+          "lt": "Nesinaudokite liftu.",
+          "en": "Do not use the lift.",
+          "ru": "Не пользуйтесь лифтом.",
+          "pl": "Nie korzystaj z windy.",
+          "uk": "Не користуйтеся ліфтом."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Lauke",
+        "en": "Outdoors",
+        "ru": "На улице",
+        "pl": "Na zewnątrz",
+        "uk": "Надворі"
+      },
+      "steps": [
+        {
+          "lt": "Eikite į artimiausią priedangą ar pastatą; tinka požeminės perėjos, tuneliai, požeminės automobilių aikštelės.",
+          "en": "Go to the nearest shelter or building; underpasses, tunnels and underground car parks also work.",
+          "ru": "Идите в ближайшее укрытие или здание; подойдут подземные переходы, тоннели, подземные парковки.",
+          "pl": "Udaj się do najbliższego schronu lub budynku; mogą to być przejścia podziemne, tunele, parkingi podziemne.",
+          "uk": "Ідіть до найближчого укриття чи будівлі; підійдуть підземні переходи, тунелі, підземні паркінги."
+        },
+        {
+          "lt": "Nelikite atviroje vietoje ir nestebėkite įvykių.",
+          "en": "Do not stay in the open and do not watch what is happening.",
+          "ru": "Не оставайтесь на открытом месте и не наблюдайте за происходящим.",
+          "pl": "Nie zostawaj na otwartej przestrzeni i nie obserwuj wydarzeń.",
+          "uk": "Не залишайтеся на відкритому місці й не спостерігайте за подіями."
+        },
+        {
+          "lt": "Rašykite žinutes, o ne skambinkite; 112 skambinkite tik iškilus tikram pavojui.",
+          "en": "Send messages rather than calling; call 112 only in a real emergency.",
+          "ru": "Пишите сообщения вместо звонков; звоните 112 только при реальной опасности.",
+          "pl": "Wysyłaj wiadomości zamiast dzwonić; dzwoń pod 112 tylko w razie rzeczywistego zagrożenia.",
+          "uk": "Пишіть повідомлення замість дзвінків; телефонуйте 112 лише за реальної небезпеки."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Automobiliu mieste",
+        "en": "Driving in town",
+        "ru": "За рулём в городе",
+        "pl": "Samochodem w mieście",
+        "uk": "Автомобілем у місті"
+      },
+      "steps": [
+        {
+          "lt": "Ramiai ir laikydamiesi KET važiuokite iki artimiausios priedangos, tvirto pastato ar požeminės aikštelės.",
+          "en": "Drive calmly, following traffic rules, to the nearest shelter, solid building or underground car park.",
+          "ru": "Спокойно, соблюдая ПДД, доезжайте до ближайшего укрытия, прочного здания или подземной парковки.",
+          "pl": "Spokojnie, zgodnie z przepisami, jedź do najbliższego schronu, solidnego budynku lub parkingu podziemnego.",
+          "uk": "Спокійно, дотримуючись ПДР, їдьте до найближчого укриття, міцної будівлі чи підземного паркінгу."
+        },
+        {
+          "lt": "Nestabdykite ant tiltų, viadukų, tuneliuose ir prie degalinių.",
+          "en": "Do not stop on bridges, overpasses, in tunnels or near fuel stations.",
+          "ru": "Не останавливайтесь на мостах, эстакадах, в тоннелях и у заправок.",
+          "pl": "Nie zatrzymuj się na mostach, wiaduktach, w tunelach i przy stacjach paliw.",
+          "uk": "Не зупиняйтеся на мостах, естакадах, у тунелях і біля заправок."
+        },
+        {
+          "lt": "Saugiai sustoję išjunkite variklį ir eikite į pastatą ar priedangą.",
+          "en": "Once safely stopped, turn off the engine and go into a building or shelter.",
+          "ru": "Безопасно остановившись, заглушите двигатель и идите в здание или укрытие.",
+          "pl": "Po bezpiecznym zatrzymaniu wyłącz silnik i wejdź do budynku lub schronu.",
+          "uk": "Безпечно зупинившись, вимкніть двигун і йдіть у будівлю чи укриття."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Automobiliu užmiestyje",
+        "en": "Driving outside town",
+        "ru": "За рулём за городом",
+        "pl": "Samochodem poza miastem",
+        "uk": "Автомобілем за містом"
+      },
+      "steps": [
+        {
+          "lt": "Staigiai nestabdykite.",
+          "en": "Do not brake suddenly.",
+          "ru": "Не тормозите резко.",
+          "pl": "Nie hamuj gwałtownie.",
+          "uk": "Не гальмуйте різко."
+        },
+        {
+          "lt": "Pamatę žemai skrendantį objektą ar išgirdę sprogimus, saugiai sustokite kelkraštyje, išjunkite variklį ir išlipkite.",
+          "en": "If you see a low-flying object or hear explosions, pull over safely, turn off the engine and get out.",
+          "ru": "Увидев низколетящий объект или услышав взрывы, безопасно остановитесь на обочине, заглушите двигатель и выйдите.",
+          "pl": "Widząc nisko lecący obiekt lub słysząc wybuchy, bezpiecznie zjedź na pobocze, wyłącz silnik i wysiądź.",
+          "uk": "Побачивши низьколітний об’єкт або почувши вибухи, безпечно зупиніться на узбіччі, вимкніть двигун і вийдіть."
+        },
+        {
+          "lt": "Atsigulkite griovyje ar įduboje ir prisidenkite galvą bei kaklą. Automobilis nėra priedanga.",
+          "en": "Lie down in a ditch or hollow and cover your head and neck. A car is not a shelter.",
+          "ru": "Лягте в канаву или углубление и прикройте голову и шею. Машина – не укрытие.",
+          "pl": "Połóż się w rowie lub zagłębieniu i osłoń głowę i szyję. Samochód nie jest schronem.",
+          "uk": "Ляжте в канаву чи заглибину й прикрийте голову та шию. Автомобіль – не укриття."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Viešajame transporte",
+        "en": "On public transport",
+        "ru": "В общественном транспорте",
+        "pl": "W komunikacji miejskiej",
+        "uk": "У громадському транспорті"
+      },
+      "steps": [
+        {
+          "lt": "Klausykite vairuotojo nurodymų.",
+          "en": "Follow the driver's instructions.",
+          "ru": "Следуйте указаниям водителя.",
+          "pl": "Stosuj się do poleceń kierowcy.",
+          "uk": "Виконуйте вказівки водія."
+        },
+        {
+          "lt": "Išlipę eikite į artimiausią priedangą.",
+          "en": "After getting off, go to the nearest shelter.",
+          "ru": "Выйдя, идите в ближайшее укрытие.",
+          "pl": "Po wyjściu udaj się do najbliższego schronu.",
+          "uk": "Вийшовши, йдіть до найближчого укриття."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Darbe, mokykloje, renginyje",
+        "en": "At work, school or an event",
+        "ru": "На работе, в школе, на мероприятии",
+        "pl": "W pracy, szkole, na imprezie",
+        "uk": "На роботі, у школі, на заході"
+      },
+      "steps": [
+        {
+          "lt": "Vykdykite vadovų ar organizatorių nurodymus.",
+          "en": "Follow the instructions of managers or organisers.",
+          "ru": "Выполняйте указания руководителей или организаторов.",
+          "pl": "Wykonuj polecenia przełożonych lub organizatorów.",
+          "uk": "Виконуйте вказівки керівників чи організаторів."
+        },
+        {
+          "lt": "Nebėkite chaotiškai; padėkite vaikams, senyviems žmonėms ir žmonėms su negalia.",
+          "en": "Do not run in panic; help children, older people and people with disabilities.",
+          "ru": "Не бегите хаотично; помогите детям, пожилым людям и людям с инвалидностью.",
+          "pl": "Nie biegnij chaotycznie; pomóż dzieciom, osobom starszym i z niepełnosprawnościami.",
+          "uk": "Не біжіть хаотично; допоможіть дітям, літнім людям і людям з інвалідністю."
+        },
+        {
+          "lt": "Tėvai: neikite į mokyklą ir nepasiimkite vaikų, kol pavojus neatšauktas – darbuotojai juos nuves į priedangą.",
+          "en": "Parents: do not go to the school or collect children until the alert is lifted; staff take them to shelter.",
+          "ru": "Родители: не идите в школу и не забирайте детей до отмены тревоги – персонал отведёт их в укрытие.",
+          "pl": "Rodzice: nie idźcie do szkoły i nie odbierajcie dzieci przed odwołaniem alarmu – personel zaprowadzi je do schronu.",
+          "uk": "Батьки: не йдіть до школи й не забирайте дітей до скасування тривоги – персонал відведе їх в укриття."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Ko nedaryti",
+        "en": "Do not",
+        "ru": "Чего не делать",
+        "pl": "Czego nie robić",
+        "uk": "Чого не робити"
+      },
+      "steps": [
+        {
+          "lt": "Nefilmuokite ir nefotografuokite skrendančių objektų.",
+          "en": "Do not film or photograph flying objects.",
+          "ru": "Не снимайте летящие объекты на видео и фото.",
+          "pl": "Nie filmuj ani nie fotografuj lecących obiektów.",
+          "uk": "Не знімайте летючі об’єкти на відео й фото."
+        },
+        {
+          "lt": "Nesiartinkite prie nukritusių objektų ar dronų ir jų nelieskite.",
+          "en": "Do not approach or touch fallen objects or drones.",
+          "ru": "Не приближайтесь к упавшим объектам или дронам и не трогайте их.",
+          "pl": "Nie zbliżaj się do spadłych obiektów lub dronów i ich nie dotykaj.",
+          "uk": "Не наближайтеся до впалих об’єктів чи дронів і не торкайтеся їх."
+        },
+        {
+          "lt": "Nesinaudokite liftais.",
+          "en": "Do not use lifts.",
+          "ru": "Не пользуйтесь лифтами.",
+          "pl": "Nie korzystaj z wind.",
+          "uk": "Не користуйтеся ліфтами."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Rekomendacijos oro pavojaus atveju",
+      "url": "https://lt72.lt/rekomendacijos-oro-pavojaus-atveju/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited PAGD guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}

@@ -106,6 +106,47 @@ export interface Manifest {
   stats: Record<string, number>;
 }
 
+/** Languages every guidance string must exist in. */
+export const GUIDANCE_LANGS = ['lt', 'en', 'ru', 'pl', 'uk'] as const;
+export type GuidanceLang = (typeof GUIDANCE_LANGS)[number];
+export type Localized = Record<GuidanceLang, string>;
+
+export interface GuidanceSource {
+  title: string;
+  url: string;
+  /** YYYY-MM-DD the source was read. */
+  accessed: string;
+}
+
+export interface GuidanceTopic {
+  id: string;
+  group: 'emergency' | 'firstaid';
+  /** Sort order within the library. */
+  order: number;
+  title: Localized;
+  summary: Localized;
+  sections: { heading: Localized; steps: Localized[] }[];
+  /** Alerts that should offer this topic ("What to do"). Category and optional levels, as in the alert format. */
+  links?: { category: number; levels?: number[] }[];
+  /** Interactive helper shown with the topic. */
+  tool?: 'cpr' | 'tourniquet';
+  /** Every topic is written in our own words from the cited official sources. */
+  sources: GuidanceSource[];
+  review: {
+    /** 'draft' until checked by the responsible authority (PAGD) or, for first aid, a medical professional. */
+    status: 'draft' | 'reviewed';
+    /** Languages whose translation a native speaker has checked. */
+    translationsReviewed: GuidanceLang[];
+    notes?: string;
+  };
+}
+
+export interface GuidanceFile {
+  format: typeof PACK_FORMAT;
+  version: typeof PACK_FORMAT_VERSION;
+  topics: GuidanceTopic[];
+}
+
 /** Pack files that carry trust material rather than content (not listed in the manifest). */
 export const TRUST_FILE = 'trust.json';
 

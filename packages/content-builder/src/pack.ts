@@ -3,12 +3,14 @@ import { join } from 'node:path';
 import { bytesToHex } from '@noble/hashes/utils.js';
 import { sha256Hex, signManifest } from '@priedanga/alert-format';
 import { downloadModel, type Download } from './fetch.js';
+import { loadGuidance } from './guidance.js';
 import type { DevKeys } from './keys.js';
 import { buildMunicipalityIndex, normalizeAll, parseMunicipalities, Stats } from './normalize.js';
 import {
   PACK_FORMAT,
   PACK_FORMAT_VERSION,
   TRUST_FILE,
+  type GuidanceFile,
   type Manifest,
   type ManifestFile,
   type MunicipalitiesFile,
@@ -34,6 +36,8 @@ export const COUNTY_MODEL = 'datasets/gov/rc/ar/apskritis/Apskritis';
 export interface BuildOptions {
   outDir: string;
   cacheDir: string;
+  /** content/guidance: topic source files, bundled as guidance.json. */
+  guidanceDir: string;
   keys: DevKeys;
   offline?: boolean;
   now?: Date;
@@ -81,6 +85,9 @@ export async function buildPack(opts: BuildOptions): Promise<BuildResult> {
   const municipalitiesFile: MunicipalitiesFile = { format: PACK_FORMAT, version: PACK_FORMAT_VERSION, municipalities };
   write('places.json', placesFile);
   write('municipalities.json', municipalitiesFile);
+  const guidanceFile: GuidanceFile = { format: PACK_FORMAT, version: PACK_FORMAT_VERSION, topics: loadGuidance(opts.guidanceDir) };
+  stats.add('guidance.topics', guidanceFile.topics.length);
+  write('guidance.json', guidanceFile);
 
   const manifest: Manifest = {
     format: PACK_FORMAT,

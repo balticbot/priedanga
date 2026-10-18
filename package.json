@@ -9,7 +9,7 @@
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "build:packages": "npm run build -w @priedanga/alert-format -w @priedanga/content-builder -w @priedanga/relay",
-    "pack": "npm run pack -w @priedanga/content-builder",
+    "pack": "npm run pack -w @priedanga/content-builder --",
     "relay": "npm run relay -w @priedanga/relay --"
   },
   "engines": {

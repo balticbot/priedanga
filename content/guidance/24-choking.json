@@ -1,0 +1,100 @@
+{
+  "id": "choking",
+  "group": "firstaid",
+  "order": 24,
+  "title": {
+    "lt": "Užspringimas (suaugusiesiems)",
+    "en": "Choking (adults)",
+    "ru": "Удушье (у взрослых)",
+    "pl": "Zadławienie (dorośli)",
+    "uk": "Удавлення (у дорослих)"
+  },
+  "summary": {
+    "lt": "Smūgiai tarp menčių ir pilvo spaudimai.",
+    "en": "Back blows and abdominal thrusts.",
+    "ru": "Удары между лопатками и толчки в живот.",
+    "pl": "Uderzenia między łopatki i uciśnięcia nadbrzusza.",
+    "uk": "Удари між лопатками й поштовхи в живіт."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Ką daryti",
+        "en": "What to do",
+        "ru": "Что делать",
+        "pl": "Co robić",
+        "uk": "Що робити"
+      },
+      "steps": [
+        {
+          "lt": "Jei žmogus gali kosėti, skatinkite jį kosėti.",
+          "en": "If the person can cough, encourage them to keep coughing.",
+          "ru": "Если человек может кашлять, побуждайте его кашлять.",
+          "pl": "Jeśli poszkodowany może kaszleć, zachęcaj go do kaszlu.",
+          "uk": "Якщо людина може кашляти, заохочуйте її кашляти."
+        },
+        {
+          "lt": "Jei negali kosėti, kalbėti ar kvėpuoti, palenkite jį į priekį ir delnu suduokite iki 5 smūgių tarp menčių.",
+          "en": "If they cannot cough, speak or breathe, lean them forward and give up to 5 sharp blows between the shoulder blades with the heel of your hand.",
+          "ru": "Если не может кашлять, говорить или дышать, наклоните его вперёд и нанесите ладонью до 5 ударов между лопатками.",
+          "pl": "Jeśli nie może kaszleć, mówić ani oddychać, pochyl go do przodu i wykonaj nadgarstkiem do 5 uderzeń między łopatki.",
+          "uk": "Якщо не може кашляти, говорити чи дихати, нахиліть її вперед і завдайте долонею до 5 ударів між лопатками."
+        },
+        {
+          "lt": "Jei nepadeda: stovėdami už nugaros, kumštį padėkite tarp bambos ir krūtinkaulio ir iki 5 kartų staigiai trauktelėkite į save ir į viršų.",
+          "en": "If that does not work, stand behind them, place a fist between the navel and the breastbone and give up to 5 quick thrusts inwards and upwards.",
+          "ru": "Если не помогает: встаньте сзади, кулак поместите между пупком и грудиной и до 5 раз резко дёрните к себе и вверх.",
+          "pl": "Jeśli to nie pomaga: stań za poszkodowanym, umieść pięść między pępkiem a mostkiem i wykonaj do 5 szybkich uciśnięć do siebie i ku górze.",
+          "uk": "Якщо не допомагає: станьте позаду, кулак розмістіть між пупком і груднинною кісткою й до 5 разів різко смикніть до себе та вгору."
+        },
+        {
+          "lt": "Kartokite po 5 smūgius ir 5 spaudimus; skambinkite 112.",
+          "en": "Keep alternating 5 back blows and 5 thrusts; call 112.",
+          "ru": "Чередуйте по 5 ударов и 5 толчков; позвоните 112.",
+          "pl": "Powtarzaj na zmianę 5 uderzeń i 5 uciśnięć; zadzwoń pod 112.",
+          "uk": "Чергуйте по 5 ударів і 5 поштовхів; зателефонуйте 112."
+        },
+        {
+          "lt": "Jei žmogus netenka sąmonės, pradėkite gaivinimą.",
+          "en": "If they become unresponsive, start CPR.",
+          "ru": "Если человек теряет сознание, начните реанимацию.",
+          "pl": "Jeśli poszkodowany straci przytomność, rozpocznij resuscytację.",
+          "uk": "Якщо людина втрачає свідомість, почніть реанімацію."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Svarbu",
+        "en": "Important",
+        "ru": "Важно",
+        "pl": "Ważne",
+        "uk": "Важливо"
+      },
+      "steps": [
+        {
+          "lt": "Kūdikiams ir nėščiosioms taikomi kiti būdai – jų čia neaprašome.",
+          "en": "Infants and pregnant women need different techniques, not covered here.",
+          "ru": "Для младенцев и беременных применяются другие приёмы – здесь они не описаны.",
+          "pl": "Niemowlęta i kobiety w ciąży wymagają innych technik – nie są tu opisane.",
+          "uk": "Для немовлят і вагітних застосовують інші прийоми – тут вони не описані."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "European Resuscitation Council Guidelines 2025: First Aid",
+      "url": "https://cprguidelines.eu/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the ERC guidelines; must be reviewed by a medical professional (e.g. Lithuanian Red Cross or an emergency physician) before release. RU, PL and UK need native-speaker review."
+  }
+}

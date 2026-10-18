@@ -1,0 +1,133 @@
+{
+  "id": "severe-bleeding",
+  "group": "firstaid",
+  "order": 21,
+  "tool": "tourniquet",
+  "title": {
+    "lt": "Stiprus kraujavimas",
+    "en": "Severe bleeding",
+    "ru": "Сильное кровотечение",
+    "pl": "Silny krwotok",
+    "uk": "Сильна кровотеча"
+  },
+  "summary": {
+    "lt": "Spaudimas į žaizdą ir turniketas.",
+    "en": "Pressure on the wound and a tourniquet.",
+    "ru": "Давление на рану и жгут.",
+    "pl": "Ucisk na ranę i opaska uciskowa.",
+    "uk": "Тиск на рану і турнікет."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Sustabdykite kraujavimą",
+        "en": "Stop the bleeding",
+        "ru": "Остановите кровотечение",
+        "pl": "Zatamuj krwawienie",
+        "uk": "Зупиніть кровотечу"
+      },
+      "steps": [
+        {
+          "lt": "Jei turite, mūvėkite pirštines.",
+          "en": "Wear gloves if you have them.",
+          "ru": "Если есть, наденьте перчатки.",
+          "pl": "Jeśli masz, załóż rękawiczki.",
+          "uk": "Якщо є, вдягніть рукавички."
+        },
+        {
+          "lt": "Stipriai spauskite tiesiai į žaizdą ranka ar tvarsčiu ir nepaleiskite.",
+          "en": "Press firmly directly on the wound with your hand or a dressing and do not let go.",
+          "ru": "Сильно прижмите рану рукой или повязкой и не отпускайте.",
+          "pl": "Mocno uciśnij bezpośrednio ranę ręką lub opatrunkiem i nie puszczaj.",
+          "uk": "Сильно притисніть рану рукою чи пов’язкою й не відпускайте."
+        },
+        {
+          "lt": "Skambinkite 112 arba paprašykite, kad paskambintų kas nors kitas.",
+          "en": "Call 112 or ask someone else to.",
+          "ru": "Позвоните 112 или попросите кого-нибудь позвонить.",
+          "pl": "Zadzwoń pod 112 lub poproś o to kogoś innego.",
+          "uk": "Зателефонуйте 112 або попросіть когось зателефонувати."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Turniketas",
+        "en": "Tourniquet",
+        "ru": "Жгут",
+        "pl": "Opaska uciskowa",
+        "uk": "Турнікет"
+      },
+      "steps": [
+        {
+          "lt": "Jei kraujavimas iš rankos ar kojos pavojingas gyvybei ir spaudimas jo nesustabdo, uždėkite turniketą virš žaizdos, ne ant sąnario.",
+          "en": "If bleeding from an arm or leg is life-threatening and pressure does not stop it, apply a tourniquet above the wound, not over a joint.",
+          "ru": "Если кровотечение из руки или ноги угрожает жизни и давление не помогает, наложите жгут выше раны, не на сустав.",
+          "pl": "Jeśli krwotok z ręki lub nogi zagraża życiu, a ucisk go nie tamuje, załóż opaskę uciskową powyżej rany, nie na staw.",
+          "uk": "Якщо кровотеча з руки чи ноги загрожує життю, а тиск не допомагає, накладіть турнікет вище рани, не на суглоб."
+        },
+        {
+          "lt": "Veržkite, kol kraujavimas sustos. Tai skausminga – taip ir turi būti.",
+          "en": "Tighten until the bleeding stops. It is painful; that is expected.",
+          "ru": "Затягивайте, пока кровотечение не остановится. Это больно – так и должно быть.",
+          "pl": "Zaciskaj, aż krwawienie ustanie. To boli – tak ma być.",
+          "uk": "Затягуйте, доки кровотеча не зупиниться. Це боляче – так і має бути."
+        },
+        {
+          "lt": "Užrašykite uždėjimo laiką ant turniketo ar žmogaus kaktos. Programėlė gali skaičiuoti laiką.",
+          "en": "Write the time it was applied on the tourniquet or the person's forehead. The app can keep the time.",
+          "ru": "Запишите время наложения на жгуте или на лбу пострадавшего. Приложение может засечь время.",
+          "pl": "Zapisz godzinę założenia na opasce lub na czole poszkodowanego. Aplikacja może mierzyć czas.",
+          "uk": "Запишіть час накладання на турнікеті або на лобі постраждалого. Застосунок може відстежувати час."
+        },
+        {
+          "lt": "Turniketo neatlaisvinkite – tai padarys medikai.",
+          "en": "Do not loosen the tourniquet; medics will do that.",
+          "ru": "Не ослабляйте жгут – это сделают медики.",
+          "pl": "Nie luzuj opaski – zrobią to ratownicy.",
+          "uk": "Не послаблюйте турнікет – це зроблять медики."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Kol laukiate",
+        "en": "While you wait",
+        "ru": "Пока ждёте",
+        "pl": "Czekając",
+        "uk": "Поки чекаєте"
+      },
+      "steps": [
+        {
+          "lt": "Paguldykite žmogų, laikykite jį šiltai ir kalbinkite.",
+          "en": "Lay the person down, keep them warm and keep talking to them.",
+          "ru": "Уложите человека, держите его в тепле и разговаривайте с ним.",
+          "pl": "Połóż poszkodowanego, utrzymuj go w cieple i rozmawiaj z nim.",
+          "uk": "Покладіть людину, тримайте її в теплі й розмовляйте з нею."
+        },
+        {
+          "lt": "Jei žmogus nustoja reaguoti ir normaliai kvėpuoti, pradėkite gaivinimą.",
+          "en": "If they stop responding and breathing normally, start CPR.",
+          "ru": "Если человек перестаёт реагировать и нормально дышать, начните реанимацию.",
+          "pl": "Jeśli przestanie reagować i normalnie oddychać, rozpocznij resuscytację.",
+          "uk": "Якщо людина перестає реагувати й нормально дихати, почніть реанімацію."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "European Resuscitation Council Guidelines 2025: First Aid",
+      "url": "https://cprguidelines.eu/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the ERC guidelines; must be reviewed by a medical professional (e.g. Lithuanian Red Cross or an emergency physician) before release. RU, PL and UK need native-speaker review."
+  }
+}

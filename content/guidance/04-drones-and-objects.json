@@ -1,0 +1,121 @@
+{
+  "id": "drones-and-objects",
+  "group": "emergency",
+  "order": 4,
+  "title": {
+    "lt": "Dronai ir įtartini objektai",
+    "en": "Drones and suspicious objects",
+    "ru": "Дроны и подозрительные предметы",
+    "pl": "Drony i podejrzane przedmioty",
+    "uk": "Дрони та підозрілі предмети"
+  },
+  "summary": {
+    "lt": "Ką daryti pamačius droną ar radus įtartiną objektą.",
+    "en": "What to do if you see a drone or find a suspicious object.",
+    "ru": "Что делать, если вы увидели дрон или нашли подозрительный предмет.",
+    "pl": "Co robić, gdy zobaczysz drona lub znajdziesz podejrzany przedmiot.",
+    "uk": "Що робити, якщо ви побачили дрон або знайшли підозрілий предмет."
+  },
+  "sections": [
+    {
+      "heading": {
+        "lt": "Pastebėjus droną",
+        "en": "If you see a drone",
+        "ru": "Если вы видите дрон",
+        "pl": "Gdy widzisz drona",
+        "uk": "Якщо ви бачите дрон"
+      },
+      "steps": [
+        {
+          "lt": "Nedelsdami eikite į pastatą ar priedangą.",
+          "en": "Go into a building or shelter immediately.",
+          "ru": "Немедленно зайдите в здание или укрытие.",
+          "pl": "Natychmiast wejdź do budynku lub schronu.",
+          "uk": "Негайно зайдіть у будівлю чи укриття."
+        },
+        {
+          "lt": "Laikykitės toliau nuo langų ir balkonų, geriausia – koridoriuje.",
+          "en": "Keep away from windows and balconies; a corridor is best.",
+          "ru": "Держитесь подальше от окон и балконов, лучше всего – в коридоре.",
+          "pl": "Trzymaj się z dala od okien i balkonów, najlepiej na korytarzu.",
+          "uk": "Тримайтеся подалі від вікон і балконів, найкраще – у коридорі."
+        },
+        {
+          "lt": "Uždarykite duris ir langus.",
+          "en": "Close doors and windows.",
+          "ru": "Закройте двери и окна.",
+          "pl": "Zamknij drzwi i okna.",
+          "uk": "Зачиніть двері та вікна."
+        },
+        {
+          "lt": "Pasirūpinkite vaikais, senyvais žmonėmis ir gyvūnais.",
+          "en": "Look after children, older people and pets.",
+          "ru": "Позаботьтесь о детях, пожилых людях и животных.",
+          "pl": "Zadbaj o dzieci, osoby starsze i zwierzęta.",
+          "uk": "Подбайте про дітей, літніх людей і тварин."
+        },
+        {
+          "lt": "Jei saugu, įsidėmėkite skrydžio kryptį ir praneškite 112. Vaizdo įrašų nekelkite į internetą.",
+          "en": "If it is safe, note the direction of flight and report it to 112. Do not post videos online.",
+          "ru": "Если безопасно, запомните направление полёта и сообщите по 112. Не публикуйте видео в интернете.",
+          "pl": "Jeśli to bezpieczne, zapamiętaj kierunek lotu i zgłoś na 112. Nie publikuj nagrań w internecie.",
+          "uk": "Якщо безпечно, запам’ятайте напрямок польоту й повідомте 112. Не публікуйте відео в інтернеті."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "lt": "Radus įtartiną objektą",
+        "en": "If you find a suspicious object",
+        "ru": "Если вы нашли подозрительный предмет",
+        "pl": "Gdy znajdziesz podejrzany przedmiot",
+        "uk": "Якщо ви знайшли підозрілий предмет"
+      },
+      "steps": [
+        {
+          "lt": "Nelieskite jo.",
+          "en": "Do not touch it.",
+          "ru": "Не трогайте его.",
+          "pl": "Nie dotykaj go.",
+          "uk": "Не торкайтеся його."
+        },
+        {
+          "lt": "Greitai pasitraukite tuo pačiu keliu, kad tarp jūsų ir objekto būtų sienos.",
+          "en": "Move away quickly by the way you came, putting walls between you and the object.",
+          "ru": "Быстро отойдите тем же путём, чтобы между вами и предметом были стены.",
+          "pl": "Szybko oddal się tą samą drogą, tak aby między tobą a przedmiotem były ściany.",
+          "uk": "Швидко відійдіть тим самим шляхом, щоб між вами і предметом були стіни."
+        },
+        {
+          "lt": "Įspėkite kitus ir neleiskite jiems artintis.",
+          "en": "Warn others and keep them away.",
+          "ru": "Предупредите других и не подпускайте их.",
+          "pl": "Ostrzeż innych i nie pozwól im się zbliżać.",
+          "uk": "Попередьте інших і не підпускайте їх."
+        },
+        {
+          "lt": "Praneškite 112 ir laukite pareigūnų.",
+          "en": "Call 112 and wait for officers to arrive.",
+          "ru": "Позвоните 112 и дождитесь сотрудников.",
+          "pl": "Zadzwoń pod 112 i poczekaj na funkcjonariuszy.",
+          "uk": "Зателефонуйте 112 і дочекайтеся службовців."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "PAGD prie VRM: Rekomendacijos oro pavojaus atveju",
+      "url": "https://lt72.lt/rekomendacijos-oro-pavojaus-atveju/",
+      "accessed": "2026-10-18"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "translationsReviewed": [
+      "lt",
+      "en"
+    ],
+    "notes": "Written from the cited official guidance; not yet reviewed by PAGD. RU, PL and UK need native-speaker review."
+  }
+}
