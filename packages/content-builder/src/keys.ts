@@ -16,6 +16,12 @@ export interface DevKeys {
   rootPublicKey: Uint8Array;
   contentSecretKey: Uint8Array;
   contentCertificate: Uint8Array;
+  relaySecretKey: Uint8Array;
+  /** Live relay for the PAGD warning feed. Window reaches back so recent history verifies. */
+  relayCertificate: Uint8Array;
+  /** TEST issuer for demo alerts; the app labels everything it signs as a test. */
+  testIssuerSecretKey: Uint8Array;
+  testIssuerCertificate: Uint8Array;
 }
 
 function loadOrCreate(file: string): Uint8Array {
@@ -36,5 +42,31 @@ export function loadDevKeys(secretsDir: string, now: number): DevKeys {
     validTo: now + 365 * 86_400,
     name: 'DEV content key — not for production',
   });
-  return { rootPublicKey: getPublicKey(rootSk), contentSecretKey: contentSk, contentCertificate };
+  const relaySk = loadOrCreate(join(secretsDir, 'relay.sk'));
+  const relayCertificate = createCertificate(rootSk, {
+    publicKey: getPublicKey(relaySk),
+    role: Role.LiveRelay,
+    validFrom: now - 400 * 86_400,
+    validTo: now + 365 * 86_400,
+    areas: [0],
+    name: 'DEV relay — PAGD warning feed, not for production',
+  });
+  const testSk = loadOrCreate(join(secretsDir, 'test-issuer.sk'));
+  const testIssuerCertificate = createCertificate(rootSk, {
+    publicKey: getPublicKey(testSk),
+    role: Role.TestIssuer,
+    validFrom: now - 86_400,
+    validTo: now + 365 * 86_400,
+    areas: [0],
+    name: 'DEV TEST issuer — demo alerts only',
+  });
+  return {
+    rootPublicKey: getPublicKey(rootSk),
+    testIssuerSecretKey: testSk,
+    testIssuerCertificate,
+    contentSecretKey: contentSk,
+    contentCertificate,
+    relaySecretKey: relaySk,
+    relayCertificate,
+  };
 }

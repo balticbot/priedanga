@@ -123,7 +123,7 @@ describe('alert validation on encode', () => {
     ['template out of range', { template: 70_000 }],
     ['unknown language', { text: { de: 'Hallo' } as never }],
     ['empty text', { text: { lt: '' } }],
-    ['text too long', { text: { lt: 'a'.repeat(513) } }],
+    ['text too long', { text: { lt: 'a'.repeat(769) } }],
     ['empty text map', { text: {} }],
   ];
   it.each(bad)('rejects %s', (_name, over) => {

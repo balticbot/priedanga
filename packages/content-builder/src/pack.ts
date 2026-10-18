@@ -29,6 +29,7 @@ export const MODELS: Record<PlaceKind, string> = {
   siren: 'datasets/gov/pagd/sirenos/Sirena',
 };
 export const MUNICIPALITY_MODEL = 'datasets/gov/rc/ar/savivaldybe/Savivaldybe';
+export const COUNTY_MODEL = 'datasets/gov/rc/ar/apskritis/Apskritis';
 
 export interface BuildOptions {
   outDir: string;
@@ -50,12 +51,16 @@ export async function buildPack(opts: BuildOptions): Promise<BuildResult> {
   const dl = (model: string) => downloadModel(model, { cacheDir: opts.cacheDir, ...(opts.offline ? { offline: true } : {}) });
 
   const munDownload = await dl(MUNICIPALITY_MODEL);
-  const municipalities = parseMunicipalities(munDownload.rows);
+  const countyDownload = await dl(COUNTY_MODEL);
+  const municipalities = parseMunicipalities(munDownload.rows, countyDownload.rows);
   const munIndex = buildMunicipalityIndex(municipalities);
 
   const stats = new Stats();
   const places: PackPlace[] = [];
-  const sources: PackSource[] = [source('rc/ar/savivaldybe', munDownload, RC_ATTRIBUTION)];
+  const sources: PackSource[] = [
+    source('rc/ar/savivaldybe', munDownload, RC_ATTRIBUTION),
+    source('rc/ar/apskritis', countyDownload, RC_ATTRIBUTION),
+  ];
   for (const kind of Object.keys(MODELS) as PlaceKind[]) {
     const download = await dl(MODELS[kind]);
     stats.add(`${kind}.source_rows`, download.rows.length);
@@ -90,7 +95,13 @@ export async function buildPack(opts: BuildOptions): Promise<BuildResult> {
   writeFileSync(join(opts.outDir, 'manifest.json'), manifestBytes);
   writeFileSync(join(opts.outDir, 'manifest.sig'), signManifest(opts.keys.contentSecretKey, manifestBytes));
 
-  const trust: TrustFile = { certificates: [bytesToHex(opts.keys.contentCertificate)] };
+  const trust: TrustFile = {
+    certificates: [
+      bytesToHex(opts.keys.contentCertificate),
+      bytesToHex(opts.keys.relayCertificate),
+      bytesToHex(opts.keys.testIssuerCertificate),
+    ],
+  };
   writeFileSync(join(opts.outDir, TRUST_FILE), JSON.stringify(trust, null, 2) + '\n');
 
   return { manifest, outDir: opts.outDir };

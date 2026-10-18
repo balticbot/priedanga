@@ -23,3 +23,7 @@ expo-env.d.ts
 # Expo prebuild output (generated from app.json)
 apps/mobile/ios/
 apps/mobile/android/
+
+# relay cache (latency log)
+packages/relay/.cache/
+packs/dev/relay-feed.json

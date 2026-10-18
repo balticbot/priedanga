@@ -56,7 +56,8 @@ export const KEY_ID_BYTES = 8;
 export const PUBLIC_KEY_BYTES = 32;
 export const SIGNATURE_BYTES = 64;
 export const MAX_TEMPLATE_ID = 0xffff;
-export const MAX_TEXT_BYTES = 512;
+/** Official cell-broadcast messages run up to ~600 UTF-8 bytes; relays must carry them verbatim. */
+export const MAX_TEXT_BYTES = 768;
 export const MAX_NAME_BYTES = 128;
 export const MAX_SOURCE_REF_BYTES = 64;
 

@@ -3,9 +3,9 @@ import { buildMunicipalityIndex, municipalityKey, normalizeAll, normalizeRow, pa
 import { packVersion } from '../src/pack.js';
 
 const municipalities = [
-  { code: 13, name: 'Vilniaus miesto sav.' },
-  { code: 69, name: 'Prienų rajono sav.' },
-  { code: 12, name: 'Birštono sav.' },
+  { code: 13, name: "Vilniaus miesto sav.", county: "Vilniaus" },
+  { code: 69, name: "Prienų rajono sav.", county: "Kauno" },
+  { code: 12, name: "Birštono sav.", county: "Kauno" },
 ];
 const index = buildMunicipalityIndex(municipalities);
 
@@ -35,8 +35,11 @@ describe('municipality names', () => {
     expect(municipalityKey('  Birštono   sav. ')).toBe('birštono sav.');
   });
 
-  it('requires exactly 60 municipalities with byte-sized codes', () => {
-    expect(() => parseMunicipalities([{ sav_kodas: 13, pavadinimas: 'Vilniaus miesto', tipo_santrumpa: 'sav.' }])).toThrow(/60/);
+  it('requires exactly 60 municipalities with byte-sized codes and a county', () => {
+    const counties = [{ _id: 'c10', pavadinimas: 'Vilniaus' }];
+    const row = { sav_kodas: 13, pavadinimas: 'Vilniaus miesto', tipo_santrumpa: 'sav.', apskritis: { _id: 'c10' } };
+    expect(() => parseMunicipalities([row], counties)).toThrow(/60/);
+    expect(() => parseMunicipalities([{ ...row, apskritis: { _id: 'nope' } }], counties)).toThrow(/unexpected/);
   });
 });
 

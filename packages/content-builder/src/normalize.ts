@@ -29,16 +29,22 @@ export function buildMunicipalityIndex(municipalities: readonly Municipality[]):
   return index;
 }
 
-export function parseMunicipalities(rows: readonly Row[]): Municipality[] {
+export function parseMunicipalities(rows: readonly Row[], countyRows: readonly Row[]): Municipality[] {
+  const counties = new Map<string, string>();
+  for (const c of countyRows) {
+    if (typeof c['_id'] === 'string' && typeof c['pavadinimas'] === 'string') counties.set(c['_id'], c['pavadinimas']);
+  }
   const out = rows.map((r) => {
     const code = r['sav_kodas'];
     const name = r['pavadinimas'];
     const suffix = r['tipo_santrumpa'];
-    if (typeof code !== 'number' || typeof name !== 'string' || typeof suffix !== 'string') {
+    const countyId = (r['apskritis'] as { _id?: unknown } | undefined)?._id;
+    const county = typeof countyId === 'string' ? counties.get(countyId) : undefined;
+    if (typeof code !== 'number' || typeof name !== 'string' || typeof suffix !== 'string' || county === undefined) {
       throw new Error(`unexpected municipality row: ${JSON.stringify(r)}`);
     }
     if (code < 1 || code > 255) throw new Error(`municipality code out of area-code range: ${code}`);
-    return { code, name: `${name} ${suffix}` };
+    return { code, name: `${name} ${suffix}`, county };
   });
   if (out.length !== 60) throw new Error(`expected 60 municipalities, got ${out.length}`);
   return out.sort((a, b) => a.code - b.code);

@@ -70,6 +70,8 @@ export interface Municipality {
   code: number;
   /** Official name, e.g. "Vilniaus miesto sav.". */
   name: string;
+  /** County (apskritis) name in genitive, e.g. "Vilniaus". */
+  county: string;
 }
 
 export interface MunicipalitiesFile {

@@ -1,8 +1,8 @@
 {
   "format": "priedanga-content-pack",
   "version": 1,
-  "packVersion": 202610180704,
-  "created": "2026-10-18T07:04:12.954Z",
+  "packVersion": 202610180915,
+  "created": "2026-10-18T09:15:31.163Z",
   "files": [
     {
       "path": "places.json",
@@ -11,8 +11,8 @@
     },
     {
       "path": "municipalities.json",
-      "bytes": 2570,
-      "sha256": "7cd284c75ce6c5b2fd47cb2539d62e6eebd646c6e91cbc808e93f649130cb970"
+      "bytes": 3797,
+      "sha256": "f8922215b7dce5a131a413547dd4ca8904556dcd38544cda0a046bc000155b25"
     }
   ],
   "sources": [
@@ -22,7 +22,15 @@
       "license": "CC BY 4.0",
       "attribution": "Registrų centras, Adresų registras (data.gov.lt)",
       "rows": 60,
-      "fetched": "2026-10-18T07:04:13.271Z"
+      "fetched": "2026-10-18T09:15:31.347Z"
+    },
+    {
+      "id": "rc/ar/apskritis",
+      "url": "https://get.data.gov.lt/datasets/gov/rc/ar/apskritis/Apskritis",
+      "license": "CC BY 4.0",
+      "attribution": "Registrų centras, Adresų registras (data.gov.lt)",
+      "rows": 10,
+      "fetched": "2026-10-18T09:15:31.439Z"
     },
     {
       "id": "pagd/priedangos",
@@ -30,7 +38,7 @@
       "license": "CC BY 4.0",
       "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
       "rows": 6583,
-      "fetched": "2026-10-18T07:04:16.896Z"
+      "fetched": "2026-10-18T09:15:32.166Z"
     },
     {
       "id": "pagd/kas",
@@ -38,7 +46,7 @@
       "license": "CC BY 4.0",
       "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
       "rows": 2517,
-      "fetched": "2026-10-18T07:04:18.372Z"
+      "fetched": "2026-10-18T09:15:32.541Z"
     },
     {
       "id": "pagd/evakuacijos_punktai",
@@ -46,7 +54,7 @@
       "license": "CC BY 4.0",
       "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
       "rows": 1960,
-      "fetched": "2026-10-18T07:04:19.286Z"
+      "fetched": "2026-10-18T09:15:32.791Z"
     },
     {
       "id": "pagd/sirenos",
@@ -54,7 +62,7 @@
       "license": "CC BY 4.0",
       "attribution": "Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM, per Valstybės duomenų agentūrą (data.gov.lt)",
       "rows": 1180,
-      "fetched": "2026-10-18T07:04:20.012Z"
+      "fetched": "2026-10-18T09:15:32.992Z"
     }
   ],
   "stats": {

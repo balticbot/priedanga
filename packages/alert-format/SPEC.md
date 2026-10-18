@@ -87,7 +87,7 @@ Integer map keys are part of the wire contract and MUST NOT be renumbered. Unkno
 | 8 | category | uint | 1 air, 2 chemical, 3 radiation, 4 flood, 5 other. Same presence rule as level |
 | 9 | areas | array of uint | non-empty, strictly ascending, each 0–255. `0` = nationwide and MUST then be the only entry |
 | 10 | template | uint | 0–65535. FORBIDDEN for cancel. For alert/update: REQUIRED unless the alert is relayed, then OPTIONAL |
-| 11 | text | map tstr → tstr | OPTIONAL, except relayed alert/update MUST include `lt` with the source's verbatim text. Keys from {`lt`,`en`,`ru`,`pl`,`uk`}; values non-empty, ≤ 512 UTF-8 bytes; map non-empty if present |
+| 11 | text | map tstr → tstr | OPTIONAL, except relayed alert/update MUST include `lt` with the source's verbatim text. Keys from {`lt`,`en`,`ru`,`pl`,`uk`}; values non-empty, ≤ 768 UTF-8 bytes (official cell-broadcast texts reach ~600); map non-empty if present |
 | 12 | test | bool | REQUIRED |
 | 13 | source | uint | Present if and only if the alert is relayed. Registry: 1 = PAGD public warning messages (data.gov.lt `datasets/gov/pagd/pranesimai`). Unknown values MUST be rejected |
 | 14 | sourceRef | tstr | The source's own message identifier; non-empty, ≤ 64 UTF-8 bytes. Present if and only if `source` is |
