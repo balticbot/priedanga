@@ -1,0 +1,7 @@
+{
+  "name": "tiltas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tiltas Bluetooth LE mesh for Priedanga alerts (CoreBluetooth; Android not built yet)",
+  "main": "src/index.ts"
+}
