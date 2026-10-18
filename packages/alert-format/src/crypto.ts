@@ -21,7 +21,8 @@ export const Context = {
 } as const;
 export type Context = (typeof Context)[keyof typeof Context];
 
-function contextMessage(context: Context, body: Uint8Array): Uint8Array {
+/** The exact bytes an Ed25519 signature covers: UTF-8(context) || 0x00 || body. */
+export function contextMessage(context: Context, body: Uint8Array): Uint8Array {
   return concatBytes(encodeUtf8(context), Uint8Array.of(0), body);
 }
 
@@ -30,22 +31,41 @@ export function signWithContext(context: Context, body: Uint8Array, secretKey: U
 }
 
 /**
- * Strict RFC 8032 verification (ZIP-215 relaxations disabled), so that the JS
- * implementation accepts the same signatures as strict native libraries.
- * Never throws: malformed inputs simply fail verification.
+ * Raw Ed25519 verification over `message`, as a pluggable primitive. Apps may
+ * inject a native implementation (CryptoKit, BouncyCastle) through the
+ * `*Async` verification functions. Implementations MUST be strict RFC 8032
+ * (see SPEC.md §2 and test-vectors/ed25519-strict.json) and SHOULD never
+ * throw; a throw or rejection counts as an invalid signature.
  */
+export type Ed25519Verifier = (
+  signature: Uint8Array,
+  message: Uint8Array,
+  publicKey: Uint8Array,
+) => boolean | Promise<boolean>;
+
+/**
+ * Reference verifier: strict RFC 8032 (ZIP-215 relaxations disabled), so that
+ * the JS implementation accepts the same signatures as strict native
+ * libraries: rejects S >= L, non-canonical point encodings and small-order
+ * public keys. Never throws: malformed inputs simply fail verification.
+ */
+export function verifyEd25519(signature: Uint8Array, message: Uint8Array, publicKey: Uint8Array): boolean {
+  if (signature.length !== SIGNATURE_BYTES || publicKey.length !== PUBLIC_KEY_BYTES) return false;
+  try {
+    return ed25519.verify(signature, message, publicKey, { zip215: false });
+  } catch {
+    return false;
+  }
+}
+
+/** Strict verification of a domain-separated signature (see {@link verifyEd25519}). */
 export function verifyWithContext(
   context: Context,
   body: Uint8Array,
   signature: Uint8Array,
   publicKey: Uint8Array,
 ): boolean {
-  if (signature.length !== SIGNATURE_BYTES || publicKey.length !== PUBLIC_KEY_BYTES) return false;
-  try {
-    return ed25519.verify(signature, contextMessage(context, body), publicKey, { zip215: false });
-  } catch {
-    return false;
-  }
+  return verifyEd25519(signature, contextMessage(context, body), publicKey);
 }
 
 /** Key ID = first 8 bytes of SHA-256(UTF-8("priedanga/v1/keyid") || 0x00 || publicKey). */

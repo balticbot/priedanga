@@ -47,6 +47,7 @@ function Main() {
   const t = STRINGS[lang];
   const [pack, setPack] = useState<VerifyPackResult | null>(null);
   const [timings, setTimings] = useState<PackTimings | null>(null);
+  const [conformance, setConformance] = useState<{ ok: boolean; summary: string } | null>(null);
   const [position, setPosition] = useState<Position>({ status: 'locating' });
   const [kinds, setKinds] = useState<ReadonlySet<number>>(new Set([0, 1]));
   const [accessibleOnly, setAccessibleOnly] = useState(false);
@@ -62,6 +63,14 @@ function Main() {
         setTimings(tm);
       })
       .catch((e: unknown) => setPack({ ok: false, reason: 'MISSING_FILE', detail: String(e) }));
+  }, []);
+
+  const runConformance = useCallback(() => {
+    setConformance({ ok: true, summary: 'Ed25519 …' });
+    import('./src/trust/devConformance')
+      .then(({ runNativeConformance }) => runNativeConformance())
+      .then(setConformance)
+      .catch((e: unknown) => setConformance({ ok: false, summary: `Ed25519 check failed: ${String(e)}` }));
   }, []);
 
   const locate = useCallback(async () => {
@@ -145,13 +154,18 @@ function Main() {
       <Banner tone="info" title={t.noAlerts} body={ROOT_IS_DEV ? t.alertsNotLive : undefined} />
 
       {pack.ok ? (
-        <Text style={styles.packLine}>
-          ✓ {t.packVerified} · {fmt(t.packUpdated, { date: pack.manifest.created.slice(0, 10) })} · {fmt(t.places, { n: pack.places.length })}
-          {ROOT_IS_DEV ? ` · ${t.devBuild}` : ''}
-          {ROOT_IS_DEV && timings?.total !== undefined
-            ? ` · ${Math.round(timings.total)} ms (read ${Math.round(timings.read ?? 0)}, hash ${Math.round(timings.hash ?? 0)}, parse ${Math.round(timings.parse ?? 0)})`
-            : ''}
-        </Text>
+        <Pressable disabled={!ROOT_IS_DEV} onPress={runConformance} accessibilityHint={ROOT_IS_DEV ? 'Runs the native Ed25519 conformance check' : undefined}>
+          <Text style={styles.packLine}>
+            ✓ {t.packVerified} · {fmt(t.packUpdated, { date: pack.manifest.created.slice(0, 10) })} · {fmt(t.places, { n: pack.places.length })}
+            {ROOT_IS_DEV ? ` · ${t.devBuild}` : ''}
+            {ROOT_IS_DEV && timings?.total !== undefined
+              ? ` · ${Math.round(timings.total)} ms (read ${Math.round(timings.read ?? 0)}, sig ${Math.round((timings.trust ?? 0) + (timings.signature ?? 0))}, hash ${Math.round(timings.hash ?? 0)}, parse ${Math.round(timings.parse ?? 0)})`
+              : ''}
+          </Text>
+          {conformance ? (
+            <Text style={[styles.packLine, !conformance.ok && styles.conformanceBad]}>{conformance.summary}</Text>
+          ) : null}
+        </Pressable>
       ) : (
         <Banner tone="bad" title={t.packFailed} body={`${pack.reason}: ${pack.detail}`} />
       )}
@@ -300,6 +314,7 @@ const styles = StyleSheet.create({
   lang: { fontSize: 15, color: colors.muted, paddingVertical: space(1) },
   langActive: { color: colors.ink, fontWeight: '800', textDecorationLine: 'underline' },
   packLine: { fontSize: 13, color: colors.ok, marginBottom: space(3) },
+  conformanceBad: { color: colors.bad },
   sectionTitle: { fontSize: 24, fontWeight: '800', color: colors.ink, marginTop: space(2), marginBottom: space(2) },
   positionLine: { fontSize: 15, color: colors.muted, marginBottom: space(2) },
   actionsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: space(2), marginBottom: space(3) },

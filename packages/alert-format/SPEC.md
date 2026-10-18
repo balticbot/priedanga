@@ -1,7 +1,7 @@
 # Priedanga Alert Format — Specification v1
 
 Status: draft, normative for all implementations (TypeScript, Kotlin, Swift).
-Reference implementation: `src/`. Conformance suite: `test-vectors/v1.json`.
+Reference implementation: `src/`. Conformance suite: `test-vectors/v1.json` (format) and `test-vectors/ed25519-strict.json` (signature primitive).
 
 The key words MUST, MUST NOT, SHOULD are used as in RFC 2119.
 
@@ -37,7 +37,8 @@ Consequence: `encode(decode(x)) == x` for every accepted `x`.
 ### 3.1 Signatures
 
 - Algorithm: **Ed25519** (RFC 8032), 32-byte public keys, 64-byte signatures.
-- Verification MUST be strict RFC 8032 (no ZIP-215 relaxations): reject non-canonical `S` and non-canonical point encodings.
+- Verification MUST be strict RFC 8032 (no ZIP-215 relaxations): reject non-canonical `S` (`S >= L`), non-canonical point encodings (`y >= p`, or `x = 0` with the sign bit set) for both `R` and `A`, and small-order public keys `A`.
+- Every verifier (JS reference, native app code, mesh firmware) MUST return the expected result for every vector in `test-vectors/ed25519-strict.json`. Vectors marked `cofactorDependent` are exempt: they can only be produced by the holder of a trusted secret key adding a small-order component to `R` or `A`; cofactored verifiers (the JS reference) accept them, cofactorless verifiers (CryptoKit, BouncyCastle) reject them. RFC 8032 permits both equations.
 - Every signature covers a **domain-separated message**:
 
 ```
@@ -197,6 +198,8 @@ The lifetime cap also bounds the damage of a leaked issuer key after its certifi
 - `trust`: pinned root public key, certificates and revocation list to build the store.
 - `certificateVectors`: single certificates with the expected trust-store outcome.
 - `alertVectors`: envelopes with the expected result at `now`. For `OK` vectors, `decoded` lists every field an implementation must reproduce.
+
+`test-vectors/ed25519-strict.json` contains raw `(signature, message, publicKey)` triples with the result a strict verifier must return (§3.1). It tests the signature primitive alone, so a native verifier can be checked without the rest of the format.
 
 An implementation is conformant when it returns the expected outcome and reason code for every vector. All vector keys are derived from public seeds and are for tests only.
 

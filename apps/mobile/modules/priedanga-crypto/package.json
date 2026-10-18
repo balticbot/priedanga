@@ -1,0 +1,7 @@
+{
+  "name": "priedanga-crypto",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Native Ed25519 verification for Priedanga (CryptoKit / BouncyCastle)",
+  "main": "src/index.ts"
+}

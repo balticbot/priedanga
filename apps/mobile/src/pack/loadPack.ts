@@ -1,4 +1,5 @@
 import { CryptoDigestAlgorithm, digest } from 'expo-crypto';
+import { verifyEd25519 } from '../../modules/priedanga-crypto/src';
 import { ROOT_PUBLIC_KEY_HEX } from '../trust/root';
 import { PACK_ASSETS } from './assets';
 import { readAssetBytes } from './readAsset';
@@ -36,6 +37,7 @@ export async function loadBundledPack(): Promise<{ result: VerifyPackResult; tim
       timings[stage] = ms;
     },
     nativeSha256Hex,
+    verifyEd25519,
   );
   timings.total = now() - start;
   console.log('[priedanga] pack load ms', JSON.stringify(Object.fromEntries(Object.entries(timings).map(([k, v]) => [k, Math.round(v)]))));

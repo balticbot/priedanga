@@ -13,7 +13,8 @@ import { sha256 } from '@noble/hashes/sha2.js';
 import { bytesToHex } from '@noble/hashes/utils.js';
 import { asArray, bytes, fail } from './fields.js';
 import { decode, encode } from './cbor.js';
-import { Context, deriveKeyId, getPublicKey, signWithContext, verifyWithContext } from './crypto.js';
+import { Context, deriveKeyId, getPublicKey, signWithContext, type Ed25519Verifier } from './crypto.js';
+import { runAsync, runSync, type Checks } from './sigcheck.js';
 import { KEY_ID_BYTES, Role, SIGNATURE_BYTES, type Certificate } from './model.js';
 import type { TrustStore } from './verify.js';
 
@@ -42,6 +43,26 @@ export function verifyManifest(
   store: TrustStore,
   now: number,
 ): ManifestResult {
+  return runSync(verifyManifestSteps(manifest, signatureFile, store, now));
+}
+
+/** {@link verifyManifest} with an injected Ed25519 verifier (e.g. native). */
+export function verifyManifestAsync(
+  manifest: Uint8Array,
+  signatureFile: Uint8Array,
+  store: TrustStore,
+  now: number,
+  verify?: Ed25519Verifier,
+): Promise<ManifestResult> {
+  return runAsync(verifyManifestSteps(manifest, signatureFile, store, now), verify);
+}
+
+function* verifyManifestSteps(
+  manifest: Uint8Array,
+  signatureFile: Uint8Array,
+  store: TrustStore,
+  now: number,
+): Checks<ManifestResult> {
   let keyId: Uint8Array;
   let signature: Uint8Array;
   try {
@@ -54,9 +75,8 @@ export function verifyManifest(
   }
   const signer = store.certificates.get(bytesToHex(keyId));
   if (signer === undefined) return { ok: false, reason: 'UNKNOWN_KEY' };
-  if (!verifyWithContext(Context.manifest, manifest, signature, signer.publicKey)) {
-    return { ok: false, reason: 'BAD_SIGNATURE' };
-  }
+  const [signatureOk] = yield [{ context: Context.manifest, body: manifest, signature, publicKey: signer.publicKey }];
+  if (signatureOk !== true) return { ok: false, reason: 'BAD_SIGNATURE' };
   if (store.revokedKeyIds.has(bytesToHex(signer.keyId))) return { ok: false, reason: 'KEY_REVOKED' };
   if (signer.role !== Role.Content) return { ok: false, reason: 'ROLE_NOT_ALLOWED' };
   if (now < signer.validFrom || now > signer.validTo) return { ok: false, reason: 'KEY_NOT_VALID' };

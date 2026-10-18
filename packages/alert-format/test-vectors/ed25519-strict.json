@@ -1,0 +1,169 @@
+{
+  "format": "priedanga-ed25519-strict-vectors",
+  "version": 1,
+  "warning": "All keys are derived from public seeds and are for TESTS ONLY. Never trust them in production.",
+  "vectors": [
+    {
+      "name": "valid",
+      "description": "Honest RFC 8032 signature",
+      "signature": "1f9ba6f424aeba2059a556957f31bf91ff2aa671cdf5f505516b97ba81d54ca56ac32237052378cf7801d18e0d5126033b3ffe9fbd3701d97cc2ce1d7b783004",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652030",
+      "publicKey": "5f7d020a545f4c59b03984efe9adcb29fd1751ebfc8b9fb13943c5532c3e770f",
+      "expect": true
+    },
+    {
+      "name": "wrong_message",
+      "description": "Valid signature, different message",
+      "signature": "1f9ba6f424aeba2059a556957f31bf91ff2aa671cdf5f505516b97ba81d54ca56ac32237052378cf7801d18e0d5126033b3ffe9fbd3701d97cc2ce1d7b783004",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652031",
+      "publicKey": "5f7d020a545f4c59b03984efe9adcb29fd1751ebfc8b9fb13943c5532c3e770f",
+      "expect": false
+    },
+    {
+      "name": "wrong_key",
+      "description": "Valid signature, different public key",
+      "signature": "1f9ba6f424aeba2059a556957f31bf91ff2aa671cdf5f505516b97ba81d54ca56ac32237052378cf7801d18e0d5126033b3ffe9fbd3701d97cc2ce1d7b783004",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652030",
+      "publicKey": "b862409fb5c4c4123df2abf7462b88f041ad36dd6864ce872fd5472be363c5b1",
+      "expect": false
+    },
+    {
+      "name": "s_plus_l",
+      "description": "Non-canonical S (S + L): malleated copy of the valid signature",
+      "signature": "1f9ba6f424aeba2059a556957f31bf91ff2aa671cdf5f505516b97ba81d54ca5579718941f868a274f9ec831ec4a05183b3ffe9fbd3701d97cc2ce1d7b783014",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652030",
+      "publicKey": "5f7d020a545f4c59b03984efe9adcb29fd1751ebfc8b9fb13943c5532c3e770f",
+      "expect": false
+    },
+    {
+      "name": "s_high_bits",
+      "description": "S + 2^255 (top bit set): must be rejected, not reduced",
+      "signature": "1f9ba6f424aeba2059a556957f31bf91ff2aa671cdf5f505516b97ba81d54ca56ac32237052378cf7801d18e0d5126033b3ffe9fbd3701d97cc2ce1d7b783084",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652030",
+      "publicKey": "5f7d020a545f4c59b03984efe9adcb29fd1751ebfc8b9fb13943c5532c3e770f",
+      "expect": false
+    },
+    {
+      "name": "noncanonical_r",
+      "description": "R = identity encoded non-canonically (y = p + 1); equation holds",
+      "signature": "eeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7fbf1a759f288c204544cf2ab83d9738187b0d32782c86045b85d184311437720f",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652032",
+      "publicKey": "5f7d020a545f4c59b03984efe9adcb29fd1751ebfc8b9fb13943c5532c3e770f",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_0",
+      "description": "Public key is torsion point 0100000000000000000000000000000000000000000000000000000000000000; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d65737361676520313037",
+      "publicKey": "0100000000000000000000000000000000000000000000000000000000000000",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_1",
+      "description": "Public key is torsion point c7176a703d4dd84fba3c0b760d10670f2a2053fa2c39ccc64ec7fd7792ac037a; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652031313034",
+      "publicKey": "c7176a703d4dd84fba3c0b760d10670f2a2053fa2c39ccc64ec7fd7792ac037a",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_2",
+      "description": "Public key is torsion point 0000000000000000000000000000000000000000000000000000000000000080; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652032313230",
+      "publicKey": "0000000000000000000000000000000000000000000000000000000000000080",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_3",
+      "description": "Public key is torsion point 26e8958fc2b227b045c3f489f2ef98f0d5dfac05d3c63339b13802886d53fc05; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652033313339",
+      "publicKey": "26e8958fc2b227b045c3f489f2ef98f0d5dfac05d3c63339b13802886d53fc05",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_4",
+      "description": "Public key is torsion point ecffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652034313331",
+      "publicKey": "ecffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_5",
+      "description": "Public key is torsion point 26e8958fc2b227b045c3f489f2ef98f0d5dfac05d3c63339b13802886d53fc85; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652035313137",
+      "publicKey": "26e8958fc2b227b045c3f489f2ef98f0d5dfac05d3c63339b13802886d53fc85",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_6",
+      "description": "Public key is torsion point 0000000000000000000000000000000000000000000000000000000000000000; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652036313030",
+      "publicKey": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expect": false
+    },
+    {
+      "name": "small_order_a_7",
+      "description": "Public key is torsion point c7176a703d4dd84fba3c0b760d10670f2a2053fa2c39ccc64ec7fd7792ac03fa; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652037313030",
+      "publicKey": "c7176a703d4dd84fba3c0b760d10670f2a2053fa2c39ccc64ec7fd7792ac03fa",
+      "expect": false
+    },
+    {
+      "name": "noncanonical_a_y_p_plus_1",
+      "description": "Public key = identity encoded as y = p + 1; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652033",
+      "publicKey": "eeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f",
+      "expect": false
+    },
+    {
+      "name": "noncanonical_a_x0_sign",
+      "description": "Public key = identity with x = 0 but sign bit set; equation holds",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa12380284743631369f7b1225ac1596a8105a6e4e23c246d0999494595a0b20c72901",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652033",
+      "publicKey": "0100000000000000000000000000000000000000000000000000000000000080",
+      "expect": false
+    },
+    {
+      "name": "a_not_on_curve",
+      "description": "Public key y = 2 has no matching x",
+      "signature": "1f9ba6f424aeba2059a556957f31bf91ff2aa671cdf5f505516b97ba81d54ca56ac32237052378cf7801d18e0d5126033b3ffe9fbd3701d97cc2ce1d7b783004",
+      "message": "7072696564616e67612f76312f74657374006d6573736167652030",
+      "publicKey": "0200000000000000000000000000000000000000000000000000000000000000",
+      "expect": false
+    },
+    {
+      "name": "mixed_order_a_k_mult_8",
+      "description": "Public key A + T8, challenge multiple of 8: all verifiers accept",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa1238c9f41a05c3749f59df658f209a368372d526cfd64fc1fc5d7c159c9b1dea7006",
+      "message": "7072696564616e67612f76312f74657374006d657373616765203230303032",
+      "publicKey": "1985d4570628a720a28ce390933f7076461a745853023d01992542ba33830b39",
+      "expect": true
+    },
+    {
+      "name": "mixed_order_a",
+      "description": "Public key A + T8, challenge not a multiple of 8",
+      "signature": "d525526cde1fb5628c50f9c07868d490a0fc670d442a3fd55613259b0caa123879c348c504c08ae7e223680fd6c883e5714e81d5ae3f4672c1fdc76386dc1506",
+      "message": "7072696564616e67612f76312f74657374006d657373616765203330303030",
+      "publicKey": "1985d4570628a720a28ce390933f7076461a745853023d01992542ba33830b39",
+      "cofactorDependent": true,
+      "expect": true
+    },
+    {
+      "name": "mixed_order_r",
+      "description": "R = rB + T8 with honest key: holds only in the cofactored equation",
+      "signature": "17241f4574a6789fcf0026a3f901716051c18d14da1f14f6cb0ea836d5226ae0333a5ecb573adba0acfe9d04fc40245774d3756c65c53ee47f2aac5987b1700b",
+      "message": "7072696564616e67612f76312f74657374006d657373616765203430303030",
+      "publicKey": "5f7d020a545f4c59b03984efe9adcb29fd1751ebfc8b9fb13943c5532c3e770f",
+      "cofactorDependent": true,
+      "expect": true
+    }
+  ]
+}
