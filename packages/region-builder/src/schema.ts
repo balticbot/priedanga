@@ -28,6 +28,14 @@ export interface RegionManifest {
   stats: Record<string, number>;
 }
 
+/** Unsigned list of available regions; each region's own manifest is signed and verified. */
+export interface RegionIndex {
+  format: 'priedanga-region-index';
+  version: 1;
+  generated: string;
+  regions: { id: string; name: string; bbox: RegionBbox; bytes: number; created: string }[];
+}
+
 /**
  * Walking network. Node coordinates are integer microdegrees, flattened:
  * nodes = [lat0, lon0, lat1, lon1, ...]; edges = [a0, b0, a1, b1, ...]

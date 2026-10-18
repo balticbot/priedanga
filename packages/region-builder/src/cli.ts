@@ -9,15 +9,18 @@
  *        with the dev content key -> packs/regions/<id>/
  * fonts  download the few label glyph ranges the map style needs
  *        -> apps/mobile/assets/glyphs/
+ * index  write packs/regions/index.json from the built regions
+ * serve  serve packs/regions over HTTP for development (default port 8788)
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { createServer } from 'node:http';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hexToBytes } from '@noble/hashes/utils.js';
 import { sha256Hex, signManifest } from '@priedanga/alert-format';
 import { writePmtiles } from './pmtilesWriter.js';
-import { REGION_FORMAT, REGION_VERSION, type RegionBbox, type RegionManifest } from './schema.js';
+import { REGION_FORMAT, REGION_VERSION, type RegionBbox, type RegionIndex, type RegionManifest } from './schema.js';
 import { extractTiles } from './tiles.js';
 import { fetchWalkGraph, OVERPASS_URL } from './walk.js';
 
@@ -124,10 +127,49 @@ async function build(id: string): Promise<void> {
   console.log('  stats', JSON.stringify(manifest.stats));
 }
 
+const regionsDir = join(repoRoot, 'packs/regions');
+
+function index(): RegionIndex {
+  const regions: RegionIndex['regions'] = [];
+  for (const id of readdirSync(regionsDir).sort()) {
+    const manifestFile = join(regionsDir, id, 'manifest.json');
+    if (!existsSync(manifestFile)) continue;
+    const m = JSON.parse(readFileSync(manifestFile, 'utf8')) as RegionManifest;
+    regions.push({ id: m.id, name: m.name, bbox: m.bbox, bytes: m.files.reduce((n, f) => n + f.bytes, 0), created: m.created });
+  }
+  const out: RegionIndex = { format: 'priedanga-region-index', version: 1, generated: new Date().toISOString(), regions };
+  writeFileSync(join(regionsDir, 'index.json'), JSON.stringify(out, null, 2) + '\n');
+  console.log(`index: ${regions.map((r) => `${r.id} (${(r.bytes / 1e6).toFixed(1)} MB)`).join(', ')}`);
+  return out;
+}
+
+const SAFE = /^\/(index\.json|[a-z0-9-]+\/(manifest\.json|manifest\.sig|tiles\.pmtiles|walk\.json))$/;
+
+function serve(port: number): void {
+  index();
+  createServer((req, res) => {
+    const path = (req.url ?? '').split('?')[0]!;
+    if (!SAFE.test(path)) return void res.writeHead(404).end();
+    const file = join(regionsDir, path);
+    if (!existsSync(file)) return void res.writeHead(404).end();
+    res.writeHead(200, {
+      'content-type': path.endsWith('.json') ? 'application/json' : 'application/octet-stream',
+      'content-length': statSync(file).size,
+      'cache-control': 'no-cache',
+    });
+    res.end(readFileSync(file));
+    console.log(`[regions] ${req.method} ${path}`);
+  }).listen(port, () => console.log(`[regions] serving ${regionsDir} at http://localhost:${port}/index.json`));
+}
+
 const [command, arg] = process.argv.slice(2);
-if (command === 'build' && arg) await build(arg);
-else if (command === 'fonts') await fonts();
+if (command === 'build' && arg) {
+  await build(arg);
+  index();
+} else if (command === 'fonts') await fonts();
+else if (command === 'index') index();
+else if (command === 'serve') serve(Number(arg ?? 8788));
 else {
-  console.error('usage: region build <id> | region fonts');
+  console.error('usage: region build <id> | fonts | index | serve [port]');
   process.exit(1);
 }

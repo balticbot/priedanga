@@ -70,13 +70,28 @@ export function buildWalkGraph(elements: readonly OsmElement[]): WalkGraphFile &
   };
 }
 
+/** Public Overpass instances, tried in turn; they are often overloaded (429/502/504). */
+export const OVERPASS_MIRRORS = [OVERPASS_URL, 'https://overpass.private.coffee/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter'];
+
 export async function fetchWalkGraph(bbox: RegionBbox): Promise<WalkGraphFile & { stats: Record<string, number> }> {
-  const res = await fetch(OVERPASS_URL, {
-    method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded', 'user-agent': 'priedanga-region-builder' },
-    body: `data=${encodeURIComponent(overpassQuery(bbox))}`,
-  });
-  if (!res.ok) throw new Error(`Overpass: ${res.status} ${res.statusText}`);
-  const json = (await res.json()) as { elements: OsmElement[] };
-  return buildWalkGraph(json.elements);
+  const body = `data=${encodeURIComponent(overpassQuery(bbox))}`;
+  const errors: string[] = [];
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const url = OVERPASS_MIRRORS[attempt % OVERPASS_MIRRORS.length]!;
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded', 'user-agent': 'priedanga-region-builder' },
+        body,
+      });
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+      const json = (await res.json()) as { elements: OsmElement[] };
+      return buildWalkGraph(json.elements);
+    } catch (e) {
+      errors.push(`${url}: ${e instanceof Error ? e.message : String(e)}`);
+      console.warn(`  overpass attempt ${attempt + 1} failed (${errors.at(-1)}), retrying`);
+      await new Promise((r) => setTimeout(r, 5000 * (attempt + 1)));
+    }
+  }
+  throw new Error(`Overpass failed:\n${errors.join('\n')}`);
 }
