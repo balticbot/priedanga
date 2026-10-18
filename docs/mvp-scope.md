@@ -85,7 +85,7 @@ Mesh relaying is the hardest part and the platforms constrain it. The MVP is hon
 - **Android:** a foreground service can scan, advertise and relay continuously. Full relay node.
 - **iOS:** Apple restricts Bluetooth activity when the app is in the background or the phone is locked (Multipeer Connectivity stops entirely; CoreBluetooth still works but is slow and throttled). iPhones receive and relay reliably while Priedanga is open, and opportunistically in the background.
 - **Implication:** in a blackout the Android population carries the mesh, and iPhones pick alerts up when opened. The app tells users "keep Priedanga open during an outage to help relay alerts".
-- **Payload:** alerts are tiny (template ID + area + level + signature, ~150 bytes), so one short Bluetooth exchange is enough. Free text is optional and relayed only if it fits.
+- **Payload:** alerts are tiny (template ID + area + level + signature, ~130 bytes), so one short Bluetooth exchange is enough. Free text is optional and relayed only if it fits.
 - **Safety:** phones relay only alerts with a valid signature, with a hop limit and deduplication, so the mesh cannot be flooded or used to spread fake alerts.
 
 ## 7. Explicitly out of scope for the MVP
