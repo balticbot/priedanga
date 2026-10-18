@@ -43,9 +43,12 @@ export function meshKey(body: Uint8Array): Uint8Array {
 
 export const keyHex = hex;
 
-/** Sort order shared by inventories and fetch plans: priority desc, then expires desc. */
+/** Sort order shared by inventories and fetch plans: priority desc, expires desc, then key ascending. */
 export function byUrgency(a: InventoryEntry, b: InventoryEntry): number {
-  return b.priority - a.priority || b.expires - a.expires;
+  if (a.priority !== b.priority) return b.priority - a.priority;
+  if (a.expires !== b.expires) return b.expires - a.expires;
+  for (let i = 0; i < KEY_BYTES; i++) if (a.key[i] !== b.key[i]) return a.key[i]! - b.key[i]!;
+  return 0;
 }
 
 export function encodeInventory(entries: readonly InventoryEntry[]): Uint8Array {

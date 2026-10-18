@@ -16,7 +16,8 @@
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "vectors": "tsx scripts/gen-vectors.ts"
+    "vectors": "tsx scripts/gen-vectors.ts",
+    "offers": "tsx scripts/offers.ts"
   },
   "dependencies": {
     "@noble/hashes": "2.4.0",

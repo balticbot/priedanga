@@ -52,6 +52,15 @@ const vectors: FrameVectors = {
         { key: h(k(2)), priority: 1, expires: 1_800_000_100 },
       ],
     },
+    {
+      name: 'tie broken by key',
+      hex: h(encodeInventory([{ key: k(5), priority: 2, expires: 7 }, { key: k(3), priority: 2, expires: 7 }])),
+      ok: true,
+      entries: [
+        { key: h(k(3)), priority: 2, expires: 7 },
+        { key: h(k(5)), priority: 2, expires: 7 },
+      ],
+    },
     { name: 'wrong version', hex: h(tweak(inv, 0, 2)), ok: false },
     { name: 'count larger than data', hex: h(tweak(inv, 1, 3)), ok: false },
     { name: 'trailing byte', hex: h(inv) + '00', ok: false },

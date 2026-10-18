@@ -32,7 +32,7 @@ entry = key:8 | priority:u8 | expires:u32
 
 - `count` ≤ 32, so the value is at most 418 bytes (one ATT long read; limit 512).
 - `expires` is copied from the verified alert. `priority` is derived from it so peers fetch the most urgent alerts first: **3** level Red; **2** Yellow or YellowAfterRed; **1** White (all-clear) or a Cancel; **0** anything else.
-- Entries are sorted by `priority` descending, then `expires` descending. Keys are unique. Expired alerts are not listed.
+- Entries are sorted by `priority` descending, then `expires` descending, then `key` ascending (bytewise). Keys are unique. Expired alerts are not listed.
 - A receiver MUST reject the whole frame if its length is not exactly `2 + 13 × count`, `count` > 32, a key repeats, or `priority` > 3.
 
 ### 2.2 SELECT (write)
@@ -67,7 +67,7 @@ Any failure discards the data and puts the peer in the long cool-down (§3).
 
 1. **Scan** for the service UUID. Skip peers in cool-down: 60 s after a session, 300 s after a session with a protocol failure. One session at a time.
 2. **Connect** (10 s timeout), discover the service and characteristics, read `INVENTORY`.
-3. **Plan.** Missing = entries whose key the phone does not *hold* (served set ∪ inbox ∪ rejected) and whose `expires` is in the future. Order: `priority` desc, then `expires` desc. At most 8 fetches per session.
+3. **Plan.** Missing = entries whose key the phone does not *hold* (served set ∪ inbox ∪ rejected) and whose `expires` is in the future. Same order as the inventory. At most 8 fetches per session.
 4. **Fetch** each: write `SELECT(key, 0)`, read `CHUNK` → `total`; then `SELECT(key, i)` + read for i = 1..total-1. Reassemble; apply §2.4; add to the inbox.
 5. **Disconnect.** Whole session limit 20 s.
 
