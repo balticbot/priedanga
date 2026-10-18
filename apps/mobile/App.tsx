@@ -146,7 +146,8 @@ function Main() {
     [feedState],
   );
   const feedDanger = useMemo(() => isDanger(currentAirAlert(feedAlerts, areaCode)), [feedAlerts, areaCode]);
-  const tiltas = useTiltas(pack?.ok ? pack.store : null, { online, danger: feedDanger, feedAlerts });
+  const tiltasNotification = useMemo(() => ({ title: t.tiltasTitle, text: t.tiltasHint }), [t]);
+  const tiltas = useTiltas(pack?.ok ? pack.store : null, { online, danger: feedDanger, feedAlerts, notification: tiltasNotification });
   const allAlerts = useMemo(() => mergeAlerts(feedAlerts, tiltas.alerts), [feedAlerts, tiltas.alerts]);
   const current = useMemo(() => currentAirAlert(allAlerts, areaCode), [allAlerts, areaCode]);
   // During an alert the nearest shelter goes straight under the banner, whatever the filters say.

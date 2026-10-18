@@ -1,7 +1,7 @@
 import type { TrustStore } from '@priedanga/alert-format';
 import { File, Paths } from 'expo-file-system';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AppState } from 'react-native';
+import { AppState, PermissionsAndroid, Platform, type Permission } from 'react-native';
 import { verifyEd25519 } from '../../modules/priedanga-crypto/src';
 import { Tiltas, type TiltasStatus } from '../../modules/tiltas/src';
 import { mergeAlerts, type ShownAlert } from '../alerts/alerts';
@@ -32,6 +32,18 @@ interface Saved {
 const toHex = (b: Uint8Array) => Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('');
 const nowSec = () => Math.floor(Date.now() / 1000);
 
+/** Android runtime permissions Tiltas needs; true if all were granted. */
+async function androidPermissions(): Promise<boolean> {
+  if (Platform.OS !== 'android') return true;
+  const P = PermissionsAndroid.PERMISSIONS;
+  const needed: Permission[] =
+    Number(Platform.Version) >= 31 ? [P.BLUETOOTH_SCAN, P.BLUETOOTH_CONNECT, P.BLUETOOTH_ADVERTISE] : [P.ACCESS_FINE_LOCATION];
+  // The foreground-service notification is optional: Tiltas runs without it.
+  const optional: Permission[] = Number(Platform.Version) >= 33 ? [P.POST_NOTIFICATIONS] : [];
+  const result = await PermissionsAndroid.requestMultiple([...needed, ...optional]);
+  return needed.every((p) => result[p] === PermissionsAndroid.RESULTS.GRANTED);
+}
+
 function file(): File | null {
   try {
     return new File(Paths.document, 'tiltas.json');
@@ -56,10 +68,14 @@ function save(s: Saved): void {
  * while offline. Verifies everything fetched from nearby phones before
  * showing it, and serves every live verified alert (feed or mesh) onwards.
  */
-export function useTiltas(store: TrustStore | null, opts: { online: boolean; danger: boolean; feedAlerts: readonly ShownAlert[] }): TiltasState {
+export function useTiltas(
+  store: TrustStore | null,
+  opts: { online: boolean; danger: boolean; feedAlerts: readonly ShownAlert[]; notification: { title: string; text: string } },
+): TiltasState {
   const [enabled, setEnabledState] = useState(false);
   const [alerts, setAlerts] = useState<ShownAlert[]>([]);
   const [status, setStatus] = useState<TiltasStatus | null>(() => Tiltas?.getStatus() ?? null);
+  const [denied, setDenied] = useState(false);
   const loaded = useRef(false);
   const latest = useRef({ enabled, alerts });
   latest.current = { enabled, alerts };
@@ -105,11 +121,23 @@ export function useTiltas(store: TrustStore | null, opts: { online: boolean; dan
   const reason: TiltasReason = enabled ? 'user' : opts.danger ? 'danger' : !opts.online ? 'offline' : null;
   const active = Tiltas !== null && store !== null && reason !== null;
 
+  const { title, text } = opts.notification;
   useEffect(() => {
     if (!Tiltas) return;
-    if (active) Tiltas.start();
-    else Tiltas.stop();
-  }, [active]);
+    if (!active) {
+      Tiltas.stop();
+      return;
+    }
+    let cancelled = false;
+    void androidPermissions().then((ok) => {
+      if (cancelled) return;
+      setDenied(!ok);
+      if (ok) Tiltas?.start(title, text);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [active, title, text]);
 
   const drain = useCallback(async () => {
     if (!Tiltas || !store) return;
@@ -154,5 +182,6 @@ export function useTiltas(store: TrustStore | null, opts: { online: boolean; dan
     };
   }, [store, opts.feedAlerts, alerts]);
 
-  return { available: Tiltas !== null, enabled, setEnabled, active, reason, status, alerts };
+  const shown = denied && status ? { ...status, bluetooth: 'unauthorized' } : status;
+  return { available: Tiltas !== null, enabled, setEnabled, active, reason, status: shown, alerts };
 }

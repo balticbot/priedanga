@@ -26,7 +26,7 @@ Status: early development. Not affiliated with or endorsed by any government bod
 | `packs/dev` | Current dev content pack (12k+ shelters, KAS, evacuation points, sirens), signed with a dev key |
 | `packages/relay` | Relays official PAGD warning messages as signed alerts (relay role), with a dev feed server |
 | `packages/tiltas` | Tiltas Bluetooth mesh protocol: [SPEC](packages/tiltas/SPEC.md), reference implementation, crowd simulation, frame vectors |
-| `apps/mobile/modules/tiltas` | Tiltas native engine (Swift / CoreBluetooth), also a SwiftPM package with vector tests and a macOS test peer |
+| `apps/mobile/modules/tiltas` | Tiltas native engines: Swift / CoreBluetooth (also a SwiftPM package with vector tests and a macOS test peer) and Kotlin / Android BLE with a foreground service |
 | `apps/mobile` | Expo (React Native) app: offline shelter finder, live alerts from the relay feed, LT/EN/RU/PL/UK |
 
 ## Development
@@ -48,7 +48,7 @@ npm run offers -w @priedanga/tiltas > /tmp/offers.json       # live feed alerts 
 (cd apps/mobile/modules/tiltas/ios && swift run tiltas-peer --offers /tmp/offers.json)   # Mac serves them over Bluetooth
 ```
 
-Tiltas needs real Bluetooth: the iOS Simulator has none (the app shows "not supported" there). Test with an iPhone running a dev build next to the Mac peer, or two iPhones.
+Tiltas needs real Bluetooth: the iOS Simulator has none (the app shows "not supported" there). Test with a phone (iPhone dev build or Android release APK) next to the Mac peer, or two phones. Android build: OpenJDK 17 + Android SDK, `npx expo prebuild -p android`, `cd apps/mobile/android && ./gradlew assembleRelease`, install with `adb install -r app/build/outputs/apk/release/app-release.apk`.
 
 The app reads the feed from `EXPO_PUBLIC_FEED_URL` (default `http://localhost:8787/feed.json`, reachable from the iOS Simulator).
 

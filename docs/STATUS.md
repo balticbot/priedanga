@@ -6,7 +6,7 @@ Last updated: 2026-10-18. Compact overview of what exists, how it fits together,
 
 Offline-first public warning and shelter app for Lithuania (Balticbot). Works with full, congested or no network. Signed alerts, offline shelters and maps, guidance in LT/EN/RU/PL/UK. Not affiliated with any government body; only TEST alerts and clearly labelled relayed official messages are shown.
 
-Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas backlog](ideas-backlog.md) (I-1…I-5) · [Budrus analysis](competitive/budrus.md) · [Alert format SPEC](../packages/alert-format/SPEC.md)
+Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas backlog](ideas-backlog.md) (I-1…I-5) · [Budrus analysis](competitive/budrus.md) · [Alert format SPEC](../packages/alert-format/SPEC.md) · [Tiltas SPEC](../packages/tiltas/SPEC.md) · [Tiltas field test](tiltas-field-test.md)
 
 ## Repository map
 
@@ -21,7 +21,7 @@ Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas bac
 | `packs/dev` | Current signed dev content pack (committed) |
 | `packs/regions/` | Region packs (git-ignored, built locally) |
 | `packages/tiltas` | Tiltas BLE mesh protocol v1: [SPEC](../packages/tiltas/SPEC.md), frame codecs, verify-and-relay (`accept.ts`), reference node, crowd simulation, 35 frame vectors |
-| `apps/mobile/modules/tiltas` | Tiltas native engine (Swift, CoreBluetooth peripheral + central); SwiftPM package: `swift test` (vectors), `swift run tiltas-peer` (macOS test peer) |
+| `apps/mobile/modules/tiltas` | Tiltas native engines: Swift/CoreBluetooth (iOS; SwiftPM package with `swift test` and `swift run tiltas-peer`, a macOS test peer) and Kotlin/Android BLE with a foreground service (`./gradlew :tiltas:testDebugUnitTest` runs the vectors) |
 | `apps/mobile` | Expo SDK 58 / RN 0.88 app (iOS, Android, web) |
 
 ## App features (built)
@@ -35,7 +35,7 @@ Docs: [MVP scope](mvp-scope.md) · [Architecture](architecture.md) · [Ideas bac
 - **Preparedness checklists** with household-size scaling, ticks saved on device.
 - **Offline map** (MapLibre, local PMTiles, Lithuanian labels, local glyphs) with shelters and **offline A\* walking routes**; picks the installed region containing you.
 - **Offline maps screen**: download regions on demand (Kaunas 16 MB, Vilnius 27 MB) with progress, update, delete. Install = temp folder → content-key signature + per-file SHA-256 → swap; tampered download rejected, old copy kept. Listing checks signatures/sizes; the region in use is fully hashed.
-- **Tiltas mesh (iOS, not yet tested over the air)**: home switch; auto-on while a danger alert is active or offline. Native engine serves verified alerts and fetches missing ones (content-addressed keys, chunked GATT reads); fetched envelopes wait in an inbox until JS verifies them; only verified alerts are relayed, with hops + 1 (limit 16); failures are not fetched again for 1 h. Mesh alerts are labelled "received over Tiltas". Simulator has no Bluetooth: card says "not supported".
+- **Tiltas mesh (iOS + Android, not yet tested over the air)**: Android asks for Bluetooth permissions and runs as a foreground service with a notification; home switch; auto-on while a danger alert is active or offline. Native engine serves verified alerts and fetches missing ones (content-addressed keys, chunked GATT reads); fetched envelopes wait in an inbox until JS verifies them; only verified alerts are relayed, with hops + 1 (limit 16); failures are not fetched again for 1 h. Mesh alerts are labelled "received over Tiltas". Simulator has no Bluetooth: card says "not supported".
 - **5 languages** for all UI; LT default. RU/PL/UK drafts need native review.
 
 ## Run it
@@ -77,10 +77,10 @@ Native iOS (this Mac): `export LANG=en_US.UTF-8 SSL_CERT_FILE=/etc/ssl/cert.pem 
 ## Open / next
 
 - Regions: hosting (CDN) for packs, all-Lithuania coverage, resumable downloads, map taps ignored while a large region is still loading (show a loading hint).
-- **Tiltas next:** over-the-air test (iPhone + Mac peer, then 2+ iPhones), measure time-to-spread; Android engine (Kotlin, foreground service); native verification so iPhones can relay in the background; CoreBluetooth state restoration; revocations over the mesh.
+- **Tiltas next:** over-the-air test (iPhone + Mac peer, then 2+ iPhones), measure time-to-spread; native verification so iPhones can relay in the background; CoreBluetooth state restoration; revocations over the mesh.
 - Hosting decisions: relay feed, region packs (CDN), production keys/HSM.
 - Push delivery (FCM/APNs), iOS Critical Alerts entitlement.
 - Reviews: PAGD (guidance/checklists), medical (first aid), native speakers (RU/PL/UK).
 - Relay latency vs cell broadcast (run `relay serve` during real alerts).
-- Android build never compiled here (no SDK/JDK).
+- Android: builds here (OpenJDK 17 via Homebrew, SDK in `~/Library/Android/sdk`). `JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home ANDROID_HOME=~/Library/Android/sdk`, then `npx expo prebuild -p android` and `cd android && ./gradlew assembleRelease`.
 - Backlog: I-1 community shelter info, I-2 sightings, I-4 lock reports/community shelters, I-5 AI panic plan.

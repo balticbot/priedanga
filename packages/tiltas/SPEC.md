@@ -2,7 +2,7 @@
 
 Tiltas carries signed Priedanga alerts (see `packages/alert-format/SPEC.md`) from phone to phone over Bluetooth LE when there is no network. It is a transport only: it never makes an alert trustworthy. Every receiving phone verifies every alert before it shows, stores or relays it.
 
-Status: **v1 draft**, implemented in TypeScript (`src/`, reference + simulation) and Swift (`apps/mobile/modules/tiltas/ios`). Android (Kotlin) must pass the same vectors.
+Status: **v1 draft**, implemented in TypeScript (`src/`, reference + simulation), Swift (`apps/mobile/modules/tiltas/ios`) and Kotlin (`apps/mobile/modules/tiltas/android`). All three pass the same vectors.
 
 ## 1. Principles
 
@@ -90,7 +90,7 @@ An alert whose relayed copy would exceed `hops` 16 is shown but not offered.
 
 - On while the user has Tiltas turned on, and automatically while a danger-level alert is active or the phone is offline (app decision, not protocol).
 - **iOS:** full relay while the app is open. In the background CoreBluetooth keeps running but is throttled (slow scanning, service-UUID-only advertising); iPhones are mostly receivers while closed.
-- **Android:** foreground service for continuous scanning and advertising (not built yet).
+- **Android:** a foreground service (type `connectedDevice`, persistent notification) keeps scanning, advertising and serving with the screen off. Received alerts still wait for the app's JS to verify them before they are relayed.
 
 ## 7. Out of scope for v1
 
@@ -100,4 +100,4 @@ An alert whose relayed copy would exceed `hops` 16 is shown but not offered.
 
 ## 8. Test vectors
 
-`test-vectors/frames.json` lists valid and invalid frames and envelope checks with expected results. The TypeScript and Swift implementations both run every vector; Android must too.
+`test-vectors/frames.json` lists valid and invalid frames and envelope checks with expected results. The TypeScript, Swift and Kotlin implementations all run every vector.
