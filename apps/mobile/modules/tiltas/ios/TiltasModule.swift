@@ -31,7 +31,8 @@ public class TiltasModule: Module {
     Events("onStatus", "onInbox")
 
     Function("getStatus") { Self.dictionary(self.engine.status()) }
-    Function("start") { self.engine.start() }
+    // title/text are for Android's foreground-service notification; iOS has none.
+    Function("start") { (_: String, _: String) in self.engine.start() }
     Function("stop") { self.engine.stop() }
 
     Function("setOffers") { (offers: [OfferRecord]) in

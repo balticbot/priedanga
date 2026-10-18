@@ -29,7 +29,8 @@ type Events = {
 
 declare class TiltasNative extends NativeModule<Events> {
   getStatus(): TiltasStatus;
-  start(): void;
+  /** title/text: Android foreground-service notification (ignored on iOS). */
+  start(title: string, text: string): void;
   stop(): void;
   setOffers(offers: TiltasOffer[]): void;
   /** Envelope hex strings; clears the native inbox. */
@@ -38,5 +39,5 @@ declare class TiltasNative extends NativeModule<Events> {
   markRejected(keys: string[]): void;
 }
 
-/** Null where the native module is not built (Android for now, web). */
+/** Null where the native module is not built (web). */
 export const Tiltas = requireOptionalNativeModule<TiltasNative>('Tiltas');
