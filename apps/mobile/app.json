@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Priedanga",
+    "slug": "priedanga",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.balticbot.priedanga",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Priedanga uses your location on this phone only, to find the nearest shelters. It is never sent anywhere."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.balticbot.priedanga"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Priedanga uses your location on this phone only, to find the nearest shelters. It is never sent anywhere."
+        }
+      ]
+    ]
+  }
+}

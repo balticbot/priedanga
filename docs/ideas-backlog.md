@@ -124,3 +124,23 @@ A proposed default, sorted by distance within each group: reliable official shel
 - New pack file `reliability.json`: per place ID, counts of open/locked reports over 30/90 days, during-alert counts, last confirmed open, last reported locked, and the label.
 
 **Proposed phase:** 2, together with I-1 (both need the moderation backend).
+
+---
+
+## I-5. Panic button with a personal plan (online, AI-assisted)
+
+*Added 2026-10-18. Parked in the backlog.*
+
+**Idea:** one big panic button. A short form (how many people, children, pets, mobility needs, medication) plus the user's location and the current threat level produce a personal plan: what to do now, a checklist of what to take, and, if evacuation is needed, the best route using live congestion data. AI compiles the plan; the feature needs a network.
+
+**Design constraints:**
+- **The button must work instantly, even offline.** Pressing it first shows the deterministic essentials from the device: what to do for this alert type, nearest shelter, call 112. The AI layer is an enhancement that loads afterwards, never a blocker.
+- **Prepare in quiet times, not in panic.** The same overload that breaks LT72 will hit any AI backend during a real alert. Encourage users to build their plan in advance ("Make my plan"), store it on the device, and refresh it when the threat level changes.
+- **No free-form AI advice on safety-critical points.** Checklists and actions are assembled from vetted, official guidance blocks (rules by threat type, household size, pets, children, medication). AI may select, order and phrase those blocks; it must not invent instructions. Every item traces back to a source. This keeps it consistent with the "no AI summaries during alerts" stance in the [Budrus analysis](competitive/budrus.md).
+- **Official orders win.** If authorities publish an evacuation direction or route, it overrides any computed route.
+- **Routing.** Live congestion needs a traffic provider (commercial APIs: cost and dependency). Avoid sending everyone down the same "best" road: spread recommendations across viable routes. Always provide an offline fallback route.
+- **Privacy.** Household details stay on the device. Only the minimum (threat type, coarse area, household counts) goes to the AI service. No account needed.
+- **Scale and cost.** Rate limits, caching of common plans per area and threat level, and graceful degradation to the offline plan.
+- **Provider.** Route AI traffic through OpenRouter with per-app tracking (Balticbot convention).
+
+**Proposed phase:** 3 (after the core offline features and I-1/I-4 are proven).

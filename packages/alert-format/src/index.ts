@@ -45,3 +45,4 @@ export {
   type VerifyResult,
 } from './verify.js';
 export { sha256Hex, signManifest, verifyManifest, type ManifestFailure, type ManifestResult } from './manifest.js';
+export { decodeUtf8, encodeUtf8, Utf8Error } from './utf8.js';

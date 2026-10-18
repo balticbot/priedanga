@@ -3,7 +3,7 @@
  *
  *   npm run pack -w @priedanga/content-builder -- [--out DIR] [--offline]
  *
- * --out      output directory (default: apps/mobile/assets/pack)
+ * --out      output directory (default: packs/dev)
  * --offline  use the download cache only, no network
  */
 
@@ -21,7 +21,7 @@ const arg = (name: string) => {
   return i >= 0 ? args[i + 1] : undefined;
 };
 
-const outDir = resolve(arg('--out') ?? join(repoRoot, 'apps/mobile/assets/pack'));
+const outDir = resolve(arg('--out') ?? join(repoRoot, 'packs/dev'));
 const offline = args.includes('--offline');
 const now = new Date();
 
