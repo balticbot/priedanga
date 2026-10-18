@@ -17,6 +17,17 @@ export const LANGUAGE_NAMES: Record<Lang, string> = {
 };
 
 const lt = {
+  map: 'Žemėlapis',
+  mapAndRoute: 'Žemėlapis ir maršrutas',
+  routeWalk: '{min} min pėsčiomis · {dist}',
+  routeStraight: 'Kelių tinklo duomenų čia nėra – rodoma tiesi linija.',
+  regionMissing: 'Šios vietovės žemėlapis dar neįdiegtas.',
+  regionError: 'Žemėlapio nepavyko patikrinti, jis nerodomas.',
+  regionLoading: 'Ruošiamas žemėlapis…',
+  outsideRegion: 'Jūsų vieta už įdiegto žemėlapio ribų. Bandomojoje versijoje įdiegtas tik Kauno žemėlapis.',
+  routeNeedsLocation: 'Maršrutui reikia jūsų vietos.',
+  tapShelter: 'Palieskite priedangą žemėlapyje, kad pamatytumėte maršrutą.',
+  mapWebUnavailable: 'Žemėlapis be interneto veikia tik programėlėje telefone.',
   preparedness: 'Pasiruošimas',
   householdSize: 'Žmonių namuose',
   progress: 'Atlikta {done} iš {total}',
@@ -119,6 +130,17 @@ const lt = {
 export type Strings = typeof lt;
 
 const en: Strings = {
+  map: 'Map',
+  mapAndRoute: 'Map and route',
+  routeWalk: '{min} min walk · {dist}',
+  routeStraight: 'No street data here – showing a straight line.',
+  regionMissing: 'The map for this area is not installed yet.',
+  regionError: 'The map could not be verified and is not shown.',
+  regionLoading: 'Preparing the map…',
+  outsideRegion: 'You are outside the installed map. The test build only includes Kaunas.',
+  routeNeedsLocation: 'A route needs your location.',
+  tapShelter: 'Tap a shelter on the map to see the route.',
+  mapWebUnavailable: 'The offline map works only in the phone app.',
   preparedness: 'Be prepared',
   householdSize: 'People at home',
   progress: '{done} of {total} done',
@@ -220,6 +242,17 @@ const en: Strings = {
 
 // DRAFT — needs native review
 const ru: Strings = {
+  map: 'Карта',
+  mapAndRoute: 'Карта и маршрут',
+  routeWalk: '{min} мин пешком · {dist}',
+  routeStraight: 'Данных об улицах здесь нет – показана прямая линия.',
+  regionMissing: 'Карта этой местности ещё не установлена.',
+  regionError: 'Карту не удалось проверить, она не показывается.',
+  regionLoading: 'Подготовка карты…',
+  outsideRegion: 'Вы за пределами установленной карты. Тестовая версия содержит только Каунас.',
+  routeNeedsLocation: 'Для маршрута нужно ваше местоположение.',
+  tapShelter: 'Нажмите на укрытие на карте, чтобы увидеть маршрут.',
+  mapWebUnavailable: 'Офлайн-карта работает только в приложении на телефоне.',
   preparedness: 'Подготовка',
   householdSize: 'Человек дома',
   progress: 'Выполнено {done} из {total}',
@@ -321,6 +354,17 @@ const ru: Strings = {
 
 // DRAFT — needs native review
 const pl: Strings = {
+  map: 'Mapa',
+  mapAndRoute: 'Mapa i trasa',
+  routeWalk: '{min} min pieszo · {dist}',
+  routeStraight: 'Brak danych o ulicach – pokazano linię prostą.',
+  regionMissing: 'Mapa tego obszaru nie jest jeszcze zainstalowana.',
+  regionError: 'Nie udało się zweryfikować mapy, nie jest wyświetlana.',
+  regionLoading: 'Przygotowywanie mapy…',
+  outsideRegion: 'Jesteś poza zainstalowaną mapą. Wersja testowa zawiera tylko Kowno.',
+  routeNeedsLocation: 'Do wyznaczenia trasy potrzebna jest Twoja lokalizacja.',
+  tapShelter: 'Dotknij schronu na mapie, aby zobaczyć trasę.',
+  mapWebUnavailable: 'Mapa offline działa tylko w aplikacji na telefonie.',
   preparedness: 'Przygotowanie',
   householdSize: 'Osób w domu',
   progress: 'Zrobione {done} z {total}',
@@ -422,6 +466,17 @@ const pl: Strings = {
 
 // DRAFT — needs native review
 const uk: Strings = {
+  map: 'Мапа',
+  mapAndRoute: 'Мапа й маршрут',
+  routeWalk: '{min} хв пішки · {dist}',
+  routeStraight: 'Даних про вулиці тут немає – показано пряму лінію.',
+  regionMissing: 'Мапу цієї місцевості ще не встановлено.',
+  regionError: 'Мапу не вдалося перевірити, вона не показується.',
+  regionLoading: 'Підготовка мапи…',
+  outsideRegion: 'Ви поза межами встановленої мапи. Тестова версія містить лише Каунас.',
+  routeNeedsLocation: 'Для маршруту потрібне ваше місцезнаходження.',
+  tapShelter: 'Торкніться укриття на мапі, щоб побачити маршрут.',
+  mapWebUnavailable: 'Офлайн-мапа працює лише в застосунку на телефоні.',
   preparedness: 'Підготовка',
   householdSize: 'Людей удома',
   progress: 'Виконано {done} з {total}',

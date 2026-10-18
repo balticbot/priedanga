@@ -20,6 +20,8 @@ Status: early development. Not affiliated with or endorsed by any government bod
 | `packages/alert-format` | Trust core: signed alerts, certificates, revocation, manifests ([SPEC](packages/alert-format/SPEC.md)) |
 | `packages/content-builder` | Builds signed content packs from official open data (PAGD registers, Address Register) |
 | `content/guidance` | Guidance and first-aid topics (LT/EN/RU/PL/UK) with cited official sources; bundled into the signed pack |
+| `content/checklists` | Preparedness checklists (go-bag, 72 h supplies, family plan) from PAGD guidance |
+| `packages/region-builder` | Builds offline region packs: map tiles cut from the Protomaps OpenStreetMap build + walking network, signed; A* walking routes |
 | `packs/dev` | Current dev content pack (12k+ shelters, KAS, evacuation points, sirens), signed with a dev key |
 | `packages/relay` | Relays official PAGD warning messages as signed alerts (relay role), with a dev feed server |
 | `apps/mobile` | Expo (React Native) app: offline shelter finder, live alerts from the relay feed, LT/EN/RU/PL/UK |
@@ -33,6 +35,8 @@ npm test                   # all workspaces
 npm run pack               # refresh packs/dev from data.gov.lt and content/ (creates dev keys in secrets/dev on first run)
 npm run pack -- --offline  # rebuild from the download cache, e.g. after editing content/guidance
 npm run web -w @priedanga/mobile    # run the app in a browser
+npm run region -- build kaunas      # build the Kaunas region pack (map tiles + walking network) into packs/regions/ (git-ignored)
+npm run region -- fonts             # refresh the map label glyphs in apps/mobile/assets/glyphs
 npm run relay -- serve              # serve the signed PAGD relay feed at http://localhost:8787/feed.json
 npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labelled TEST alert
 ```
@@ -40,6 +44,8 @@ npm run relay -- serve --demo red --demo-area "Kauno m."   # plus a clearly labe
 The app reads the feed from `EXPO_PUBLIC_FEED_URL` (default `http://localhost:8787/feed.json`, reachable from the iOS Simulator).
 
 Dev keys live in `secrets/dev/` and are never committed. If you rebuild the pack with new dev keys, update `apps/mobile/src/trust/root.ts` with the new root public key (`packs/dev/DEV_ROOT_PUBLIC_KEY.txt`); a test checks they match.
+
+Map data © OpenStreetMap contributors (ODbL), tiles via Protomaps. Region packs are bundled into the app when present in `packs/regions/` (the map screen says so when none is installed).
 
 Data: Priešgaisrinės apsaugos ir gelbėjimo departamentas prie VRM and Registrų centras via data.gov.lt, CC BY 4.0.
 

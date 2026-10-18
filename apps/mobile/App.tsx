@@ -1,5 +1,6 @@
 import { useNetworkState } from 'expo-network';
 import * as Location from 'expo-location';
+import type { PackPlace } from '@priedanga/content-builder/schema';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -31,6 +32,7 @@ import { TourniquetTool } from './src/ui/TourniquetTool';
 import { topicForAlert } from './src/guidance';
 import { useChecklistState } from './src/state/checklistStore';
 import { ChecklistDetail, ChecklistIndex } from './src/ui/Checklists';
+import { MapScreen } from './src/ui/MapScreen';
 import { colors, radius, space } from './src/ui/theme';
 
 type Screen =
@@ -39,6 +41,7 @@ type Screen =
   | { name: 'guides'; group: 'emergency' | 'firstaid' }
   | { name: 'guide'; id: string; from: Screen }
   | { name: 'tool'; tool: 'cpr' | 'tourniquet'; from: Screen }
+  | { name: 'map'; target: PackPlace | null; from: Screen }
   | { name: 'checklists' }
   | { name: 'checklist'; id: string };
 
@@ -154,7 +157,14 @@ function Main() {
   if (screen.name === 'place' && pack.ok) {
     return (
       <SafeAreaView style={styles.root}>
-        <PlaceDetail item={screen.item} t={t} municipalities={pack.municipalities} online={online} onBack={home} />
+        <PlaceDetail
+          item={screen.item}
+          t={t}
+          municipalities={pack.municipalities}
+          online={online}
+          onBack={home}
+          onMap={() => setScreen({ name: 'map', target: screen.item.place, from: screen })}
+        />
       </SafeAreaView>
     );
   }
@@ -188,6 +198,13 @@ function Main() {
         </SafeAreaView>
       );
     }
+  }
+  if (screen.name === 'map' && pack.ok) {
+    return (
+      <SafeAreaView style={styles.root}>
+        <MapScreen places={pack.places} store={pack.store} t={t} from={pos} target={screen.target} onBack={() => setScreen(screen.from)} />
+      </SafeAreaView>
+    );
   }
   if (screen.name === 'checklists' && pack.ok) {
     return (
@@ -284,9 +301,14 @@ function Main() {
           <Text style={[styles.guideButtonText, { color: colors.bad }]}>{t.firstAid}</Text>
         </Pressable>
       </View>
-      <Pressable style={[styles.guideButton, styles.prepButton]} onPress={() => setScreen({ name: 'checklists' })} accessibilityRole="button">
-        <Text style={[styles.guideButtonText, { color: colors.ok }]}>{t.preparedness}</Text>
-      </Pressable>
+      <View style={styles.guideButtons}>
+        <Pressable style={[styles.guideButton, { borderColor: colors.ink }]} onPress={() => setScreen({ name: 'map', target: null, from: { name: 'home' } })} accessibilityRole="button">
+          <Text style={[styles.guideButtonText, { color: colors.ink }]}>{t.map}</Text>
+        </Pressable>
+        <Pressable style={[styles.guideButton, { borderColor: colors.ok }]} onPress={() => setScreen({ name: 'checklists' })} accessibilityRole="button">
+          <Text style={[styles.guideButtonText, { color: colors.ok }]}>{t.preparedness}</Text>
+        </Pressable>
+      </View>
 
       {pack.ok ? (
         <Pressable disabled={!ROOT_IS_DEV} onPress={runConformance} accessibilityHint={ROOT_IS_DEV ? 'Runs the native Ed25519 conformance check' : undefined}>

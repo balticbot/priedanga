@@ -10,6 +10,7 @@ export function PlaceDetail(props: {
   municipalities: readonly Municipality[];
   online: boolean;
   onBack: () => void;
+  onMap: () => void;
 }) {
   const { place: p, distance, bearing } = props.item;
   const { t } = props;
@@ -76,6 +77,9 @@ export function PlaceDetail(props: {
         ))}
       </View>
 
+      <Pressable style={styles.mapButton} onPress={props.onMap} accessibilityRole="button">
+        <Text style={styles.mapButtonText}>{t.mapAndRoute}</Text>
+      </Pressable>
       <Text style={styles.coords} selectable>
         {p.lat.toFixed(6)}, {p.lon.toFixed(6)}
       </Text>
@@ -103,6 +107,8 @@ const styles = StyleSheet.create({
   label: { fontSize: 14, color: colors.muted, marginBottom: 2 },
   value: { fontSize: 18, color: colors.ink },
   unknown: { color: colors.muted, fontStyle: 'italic' },
+  mapButton: { marginTop: space(4), padding: space(4), borderRadius: radius, backgroundColor: colors.accent },
+  mapButtonText: { fontSize: 18, color: '#fff', fontWeight: '900', textAlign: 'center' },
   coords: { fontSize: 14, color: colors.muted, marginTop: space(3) },
   button: { marginTop: space(4), padding: space(4), borderRadius: radius, borderWidth: 1.5, borderColor: colors.accent },
   buttonText: { fontSize: 17, color: colors.accent, fontWeight: '700', textAlign: 'center' },
